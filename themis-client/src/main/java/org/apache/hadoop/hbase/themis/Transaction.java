@@ -198,7 +198,7 @@ public class Transaction extends Configured implements TransactionInterface {
       return;
     }
     long beginTs = System.nanoTime();
-    
+
     try {
       indexer.addIndexMutations(mutationCache);
 
@@ -211,7 +211,7 @@ public class Transaction extends Configured implements TransactionInterface {
       } else {
         prewriteSecondaries();
       }
-      
+
       // must get commitTs after doing prewrite successfully
       commitTs = timestampOracle.getCommitTs();
       commitPrimary();
@@ -222,8 +222,8 @@ public class Transaction extends Configured implements TransactionInterface {
       }
     } finally {
       // TODO : do not calculate the message if not a slow log
-      ThemisStatisticsBase.logSlowOperation("themisCommit", beginTs, "rowSize="
-          + mutationCache.getMutationsCount().getFirst() + ", columnSize=" + mutationCache.size());
+      ThemisStatisticsBase.logSlowOperation("themisCommit", beginTs,
+          "rowSize=" + mutationCache.getMutationsCount().getFirst() + ", columnSize=" + mutationCache.size());
     }
   }
   
@@ -241,55 +241,53 @@ public class Transaction extends Configured implements TransactionInterface {
       singletonThreadPool.shutdownNow();
     }
   }
-  
-  protected void asyncPrewriteRowsWithLockClean(ConcurrentRowsCallables<Void> calls,
-      final byte[] tblName, final List<RowMutation> rows, final boolean containPrimary)
-      throws IOException {
+
+  protected void asyncPrewriteRowsWithLockClean(ConcurrentRowsCallables<Void> calls, final byte[] tblName,
+      final List<RowMutation> rows, final boolean containPrimary) throws IOException {
     calls.addCallable(new RowsCallable<Void>(tblName, getRowkeys(rows)) {
       @Override
       public Void call() throws Exception {
-    	batchPrewriteSecondariesWithLockClean(tblName, rows);
+        batchPrewriteSecondariesWithLockClean(tblName, rows);
         return null;
       }
     });
   }
   
   private List<byte[]> getRowkeys(List<RowMutation> rowMs) {
-	  List<byte[]> rows = new ArrayList<byte[]>();
-	  if ( rowMs == null || rowMs.size() == 0 ) {
-		  return rows;
-	  }
-	  
-	  for (RowMutation rowM : rowMs) {
-		  rows.add(rowM.getRow());
-	  }
-	  
-	  return rows;
+    List<byte[]> rows = new ArrayList<byte[]>();
+    if (rowMs == null || rowMs.size() == 0) {
+      return rows;
+    }
+
+    for (RowMutation rowM : rowMs) {
+      rows.add(rowM.getRow());
+    }
+
+    return rows;
   }
   
-  protected void asyncRollback(ConcurrentRowsCallables<Void> calls, final byte[] tableName,
-      final List<byte[]> rows) throws IOException {
+  protected void asyncRollback(ConcurrentRowsCallables<Void> calls, final byte[] tableName, final List<byte[]> rows)
+      throws IOException {
     calls.addCallable(new RowsCallable<Void>(tableName, rows) {
       @Override
       public Void call() throws Exception {
-    	for (byte[] row : rows) {
-    		rollbackRow(tableName, mutationCache.getRowMutation(tableName, row));
-		}
-    	
-    	return null;
+        for (byte[] row : rows) {
+          rollbackRow(tableName, mutationCache.getRowMutation(tableName, row));
+        }
+
+        return null;
       }
     });
   }
   
-  protected void asyncRollback(final byte[] tableName,
-	      final RowMutation rowMutation) throws IOException {
-  	ConcurrentRowCallables<Void> calls = new ConcurrentRowCallables<Void>(getThreadPool());
-	calls.addCallable(new RowCallable<Void>(tableName, rowMutation.getRow()) {
-       @Override
-       public Void call() throws Exception {
-         rollbackRow(tableName, rowMutation);
-         return null;
-       }
+  protected void asyncRollback(final byte[] tableName, final RowMutation rowMutation) throws IOException {
+    ConcurrentRowCallables<Void> calls = new ConcurrentRowCallables<Void>(getThreadPool());
+    calls.addCallable(new RowCallable<Void>(tableName, rowMutation.getRow()) {
+      @Override
+      public Void call() throws Exception {
+        rollbackRow(tableName, rowMutation);
+        return null;
+      }
     });
   }
   
@@ -297,7 +295,7 @@ public class Transaction extends Configured implements TransactionInterface {
     ConcurrentRowsCallables<Void> calls = new ConcurrentRowsCallables<Void>(getThreadPool());
     HashMap<GroupKey, List<RowMutation>> prewriteMap = groupByRegion();
 
-    for (GroupKey key : prewriteMap.keySet() ) {
+    for (GroupKey key : prewriteMap.keySet()) {
       List<RowMutation> rows = prewriteMap.get(key);
       asyncPrewriteRowsWithLockClean(calls, key.tableName.getBytes(), rows, false);
     }
@@ -308,10 +306,10 @@ public class Transaction extends Configured implements TransactionInterface {
       byte[] tblName = null;
       ConcurrentRowsCallables<Void> rollbacks = new ConcurrentRowsCallables<Void>(getThreadPool());
       for (Entry<TableAndRows, Void> successRow : calls.getResults().entrySet()) {
-    	  tblName = successRow.getKey().getTableName();
-    	  asyncRollback(rollbacks, tblName, successRow.getKey().getRowkeys());
+        tblName = successRow.getKey().getTableName();
+        asyncRollback(rollbacks, tblName, successRow.getKey().getRowkeys());
       }
-      
+
       // throw multi-excpetions to show failed rows
       throw new MultiRowExceptions("concurrent prewrite fail", calls.getExceptions());
     }
@@ -320,35 +318,36 @@ public class Transaction extends Configured implements TransactionInterface {
   /**
    * Find the destination.
    *
-   * @param row          the row
-   * @param tryCount     try count, >=1
+   * @param row
+   *          the row
+   * @param tryCount
+   *          try count, >=1
    * @return the destination. Null if we couldn't find it.
    */
   private HRegionLocation findDestLocation(byte[] tblName, byte[] row, int tryCount) throws IOException {
-	tryCount = tryCount < 1 ? 1 : tryCount;
+    tryCount = tryCount < 1 ? 1 : tryCount;
     HRegionLocation loc = null;
     IOException locE = null;
-    for(int i=1; i<=tryCount; i++) {
-	    try {
-	    	loc = connection.locateRegion(TableName.valueOf(tblName), row);
-	    	if ( loc != null ) {
-	    		return loc;
-	    	} 
-	    } catch (IOException e) {
-	    	locE = e;
-	    }
-	    
-	    try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-		}
+    for (int i = 1; i <= tryCount; i++) {
+      try {
+        loc = connection.locateRegion(TableName.valueOf(tblName), row);
+        if (loc != null) {
+          return loc;
+        }
+      } catch (IOException e) {
+        locE = e;
+      }
+
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+      }
     }
-    
-    if ( locE == null ) {
-    	locE = new IOException("no location found, aborting submit for" +
-                " tableName=" + new String(tblName) +
-                " rowkey=" + new String(row));
-    } 
+
+    if (locE == null) {
+      locE = new IOException("no location found, aborting submit for" + " tableName=" + new String(tblName) + " rowkey="
+          + new String(row));
+    }
     throw locE;
   }
 
@@ -432,56 +431,58 @@ public class Transaction extends Configured implements TransactionInterface {
     }
   }
   
-  protected void batchPrewriteSecondariesWithLockClean(byte[] tblName, List<RowMutation> rows)
-	      throws IOException {
-	  Map<byte[], ThemisLock> lockMap = cpClient.batchPrewriteSecondaryRows(tblName, rows, startTs, secondaryLockBytesWithoutType);
-	  if (lockMap == null || lockMap.size() == 0) {
-		  return;
-	  }
-	  
-	  if (disableLockClean) {
-		  throw new LockConflictException("lockClean disabled, can't clean lock, "+toString4Locks(lockMap));
-	  }
-	  
-	  // we must do lock cleaning if encountering conflict lock. We must make sure the returned conflict column
-      // is the data column other than the corresponding write/lock columns; otherwise, fatal errors might be caused.
-      Map<byte[], RowMutation> rowMap = new HashMap<byte[], RowMutation>();
-      for(RowMutation rowM : rows) {
-    	  rowMap.put(rowM.getRow(), rowM);
+  protected void batchPrewriteSecondariesWithLockClean(byte[] tblName, List<RowMutation> rows) throws IOException {
+    Map<byte[], ThemisLock> lockMap = cpClient.batchPrewriteSecondaryRows(tblName, rows, startTs,
+        secondaryLockBytesWithoutType);
+    if (lockMap == null || lockMap.size() == 0) {
+      return;
+    }
+
+    if (disableLockClean) {
+      throw new LockConflictException("lockClean disabled, can't clean lock, " + toString4Locks(lockMap));
+    }
+
+    // we must do lock cleaning if encountering conflict lock. We must make sure
+    // the returned conflict column
+    // is the data column other than the corresponding write/lock columns;
+    // otherwise, fatal errors might be caused.
+    Map<byte[], RowMutation> rowMap = new HashMap<byte[], RowMutation>();
+    for (RowMutation rowM : rows) {
+      rowMap.put(rowM.getRow(), rowM);
+    }
+
+    ThemisLock lock = null;
+    for (byte[] row : lockMap.keySet()) {
+      lock = lockMap.get(row);
+      if (!ColumnUtil.isDataColumn(lock.getColumn())) {
+        throw new ThemisFatalException("prewrite returned non-data conflict column, tableName="
+            + Bytes.toString(tblName) + ", row=" + Bytes.toString(row) + ", returned column=" + lock.getColumn());
       }
-      
-      ThemisLock lock = null;
-      for(byte[] row : lockMap.keySet()) {
-    	  lock = lockMap.get(row);
-    	  if (!ColumnUtil.isDataColumn(lock.getColumn())) {
-  	        throw new ThemisFatalException("prewrite returned non-data conflict column, tableName="
-  	            + Bytes.toString(tblName) + ", row=" + Bytes.toString(row) + ", returned column=" + lock.getColumn());
-  	      }
-  	      // TODO : get lock expired in server side for the first time to check ttl
-  	      lockCleaner.checkLockExpiredAndTryToCleanLock(lock);
-  	      // try one more time after clean lock successfully
-  	      lock = prewriteRow(tblName, rowMap.get(row), false);
-  	      if (lock != null) {
-  	        throw new LockConflictException("can't clean lock, "+toString4Locks(lockMap));
-  	      }
+      // TODO : get lock expired in server side for the first time to check ttl
+      lockCleaner.checkLockExpiredAndTryToCleanLock(lock);
+      // try one more time after clean lock successfully
+      lock = prewriteRow(tblName, rowMap.get(row), false);
+      if (lock != null) {
+        throw new LockConflictException("can't clean lock, " + toString4Locks(lockMap));
       }
+    }
   }
-  
+
   private String toString4Locks(Map<byte[], ThemisLock> lockMap) {
-	  if ( lockMap == null || lockMap.size() == 0 ) {
-		  return "";
-	  }
-	  
-	  StringBuilder sb = new StringBuilder();
-	  ThemisLock lock = null;
-	  for (byte[] row : lockMap.keySet()) {
-		  lock = lockMap.get(row);
-		  sb.append(" row="+Bytes.toString(row));
-		  sb.append(" column="+lock.getColumn());
-		  sb.append(" conflict lock="+lock);
-	  }
-	  
-	  return sb.toString();
+    if (lockMap == null || lockMap.size() == 0) {
+      return "";
+    }
+
+    StringBuilder sb = new StringBuilder();
+    ThemisLock lock = null;
+    for (byte[] row : lockMap.keySet()) {
+      lock = lockMap.get(row);
+      sb.append(" row=" + Bytes.toString(row));
+      sb.append(" column=" + lock.getColumn());
+      sb.append(" conflict lock=" + lock);
+    }
+
+    return sb.toString();
   }
   
   // prewrite a PrimaryRow or SecondaryRow indicated by containPrimary
@@ -568,16 +569,16 @@ public class Transaction extends Configured implements TransactionInterface {
   protected void batchCommitSecondaries() throws IOException {
     ConcurrentRowsCallables<Void> calls = new ConcurrentRowsCallables<Void>(getThreadPool());
     HashMap<GroupKey, List<RowMutation>> commitMap = groupByRegion();
-    for (GroupKey key : commitMap.keySet() ) {
-    	final List<RowMutation> rows = commitMap.get(key);
-    	final byte[] tblName = key.tableName.getBytes();
-    	calls.addCallable(new RowsCallable<Void>(tblName, getRowkeys(rows)) {
-    	      @Override
-    	      public Void call() throws Exception {
-    	          cpClient.batchCommitSecondaryRows(tblName, rows, startTs, commitTs);
-    	          return null;
-    	      }
-    	 });
+    for (GroupKey key : commitMap.keySet()) {
+      final List<RowMutation> rows = commitMap.get(key);
+      final byte[] tblName = key.tableName.getBytes();
+      calls.addCallable(new RowsCallable<Void>(tblName, getRowkeys(rows)) {
+        @Override
+        public Void call() throws Exception {
+          cpClient.batchCommitSecondaryRows(tblName, rows, startTs, commitTs);
+          return null;
+        }
+      });
     }
 
     // TODO(cuijianwei) : do not need to wait for returning
@@ -586,18 +587,18 @@ public class Transaction extends Configured implements TransactionInterface {
     for (Entry<TableAndRows, IOException> failedRow : calls.getExceptions().entrySet()) {
       TableAndRows tableAndRows = failedRow.getKey();
       LOG.warn("batch commit secondary fail, tableAndRows=" + tableAndRows.toString() + ", prewriteTs=" + startTs,
-        failedRow.getValue());
+          failedRow.getValue());
     }
   }
 
   private HashMap<GroupKey, List<RowMutation>> groupByRegion() throws IOException {
     HashMap<GroupKey, List<RowMutation>> map = new HashMap<GroupKey, List<RowMutation>>();
-    //batch commit all rows in a region
+    // batch commit all rows in a region
     for (Pair<byte[], RowMutation> row : secondaryRows) {
       HRegionLocation loc = findDestLocation(row.getFirst(), row.getSecond().getRow(), 3);
       GroupKey key = getBatchGroupKey(loc, Bytes.toString(row.getFirst()));
       List<RowMutation> rows = map.get(key);
-      if ( rows == null ) {
+      if (rows == null) {
         rows = new ArrayList<RowMutation>();
         map.put(key, rows);
       }
@@ -643,20 +644,20 @@ public class Transaction extends Configured implements TransactionInterface {
 
     @Override
     public int compare(GroupKey left, GroupKey right) {
-      if ( left == null && right == null ) {
+      if (left == null && right == null) {
         return 0;
       }
 
-      if ( left != null && right == null ) {
+      if (left != null && right == null) {
         return 1;
       }
 
-      if ( left == null && right != null ) {
+      if (left == null && right != null) {
         return -1;
       }
 
-      String leftCnt = left.rs+"_"+left.tableName+"_"+left.regionName;
-      String rightCnt = right.rs+"_"+right.tableName+"_"+right.regionName;
+      String leftCnt = left.rs + "_" + left.tableName + "_" + left.regionName;
+      String rightCnt = right.rs + "_" + right.tableName + "_" + right.regionName;
       return leftCnt.compareTo(rightCnt);
     }
   }

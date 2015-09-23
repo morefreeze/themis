@@ -21,56 +21,51 @@ public class TestThemisCoprocessorBatchWrite extends TransactionTestBase {
   protected static byte[][][] secondaryQualifiers;
   protected static byte[][] secondaryTypes;
   private static Map<String, RowMutation> rowmMap = new HashMap<String, RowMutation>();
+
   static {
-	for (Pair<byte[], RowMutation> rowP : SECONDARY_ROWS) {
-		rowmMap.put(getLockMapKey4Batch(Bytes.toString(rowP.getFirst()), Bytes.toString(rowP.getSecond().getRow())), rowP.getSecond());
-	}
+    for (Pair<byte[], RowMutation> rowP : SECONDARY_ROWS) {
+      rowmMap.put(getLockMapKey4Batch(Bytes.toString(rowP.getFirst()), Bytes.toString(rowP.getSecond().getRow())),
+          rowP.getSecond());
+    }
   }
-  
+
   @Test
   public void testCheckBatchPrewriteSecondaryRowsSuccess() throws Exception {
-	Map<String, ThemisLock> lockMap = batchPrewriteSecondaryRows();
-	for (String key : lockMap.keySet()) {
-		Assert.assertNull(lockMap.get(key));
-	    checkPrewriteRowSuccess(key.split(SPLIT)[0].getBytes(), rowmMap.get(key));	
-	}
+    Map<String, ThemisLock> lockMap = batchPrewriteSecondaryRows();
+    for (String key : lockMap.keySet()) {
+      Assert.assertNull(lockMap.get(key));
+      checkPrewriteRowSuccess(key.split(SPLIT)[0].getBytes(), rowmMap.get(key));
+    }
   }
-  
-  //split key is middle of secondary rows 
-  @Test
-  public void testBatchPrewriteSecondaryRowsWhenRegionSplit() throws Exception {
-	  
-  }
-  
+
   @Test
   public void testCheckBatchCommitSecondaryRowsSuccess() throws Exception {
-	Map<String, ThemisLock> lockMap = batchPrewriteSecondaryRows();
-	batchCommitSecondaryRow();
-	for (String key : lockMap.keySet()) {
-		Assert.assertNull(lockMap.get(key));
-		checkCommitRowSuccess(key.split(SPLIT)[0].getBytes(), rowmMap.get(key));
-	}
-	  
+    Map<String, ThemisLock> lockMap = batchPrewriteSecondaryRows();
+    batchCommitSecondaryRow();
+    for (String key : lockMap.keySet()) {
+      Assert.assertNull(lockMap.get(key));
+      checkCommitRowSuccess(key.split(SPLIT)[0].getBytes(), rowmMap.get(key));
+    }
+
     // commit secondary success without lock
     nextTransactionTs();
     lockMap = batchPrewriteSecondaryRows();
     for (String key : lockMap.keySet()) {
-    	 Assert.assertNull(lockMap.get(key));
-         for (Pair<byte[], RowMutation> tableEntry : SECONDARY_ROWS) {
-           byte[] tableName = tableEntry.getFirst();
-           byte[] row = tableEntry.getSecond().getRow();
-           for (ColumnMutation columnMutation : tableEntry.getSecond().mutationList()) {
-             ColumnCoordinate columnCoordinate = new ColumnCoordinate(tableName, row, columnMutation);
-             eraseLock(columnCoordinate, prewriteTs);
-           }
-         }
+      Assert.assertNull(lockMap.get(key));
+      for (Pair<byte[], RowMutation> tableEntry : SECONDARY_ROWS) {
+        byte[] tableName = tableEntry.getFirst();
+        byte[] row = tableEntry.getSecond().getRow();
+        for (ColumnMutation columnMutation : tableEntry.getSecond().mutationList()) {
+          ColumnCoordinate columnCoordinate = new ColumnCoordinate(tableName, row, columnMutation);
+          eraseLock(columnCoordinate, prewriteTs);
+        }
+      }
     }
 
     batchCommitSecondaryRow();
     for (String key : lockMap.keySet()) {
-		checkCommitRowSuccess(key.split(SPLIT)[0].getBytes(), rowmMap.get(key));
-	}
+      checkCommitRowSuccess(key.split(SPLIT)[0].getBytes(), rowmMap.get(key));
+    }
   }
- 
-  
+
 }

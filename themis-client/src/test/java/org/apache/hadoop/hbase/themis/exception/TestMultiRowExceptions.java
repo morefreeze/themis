@@ -17,7 +17,7 @@ public class TestMultiRowExceptions extends TestBase {
     List<byte[]> rows = new ArrayList<byte[]>();
     rows.add(ROW);
     exceptions.put(new TableAndRows(TABLENAME, rows), new IOException("exceptionA"));
-    
+
     new ArrayList<byte[]>();
     rows.add(ANOTHER_ROW);
     exceptions.put(new TableAndRows(TABLENAME, rows), new IOException("exceptionB"));

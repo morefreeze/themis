@@ -1,14 +1,8 @@
 package org.apache.hadoop.hbase.themis;
 
 import java.io.IOException;
-import java.util.NavigableMap;
 
-import org.apache.hadoop.hbase.client.Get;
-import org.apache.hadoop.hbase.client.HTable;
-import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Result;
-import org.apache.hadoop.hbase.themis.ThemisGet;
-import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -47,12 +41,6 @@ public class TestTransactionRead extends ClientTestBase {
     nextTransactionTs();
     createTransactionWithMock();
     Result result = transaction.get(TABLENAME, new ThemisGet(ROW));
-    printResult(result);
-    
-    Get g = new Get(ROW);
-    HTableInterface t = getTable(TABLENAME);
-    printResult(t.get(g));
-    
     Assert.assertEquals(2, result.size());
     checkResultKvColumn(COLUMN_WITH_ANOTHER_FAMILY, result.list().get(0));
     checkResultKvColumn(COLUMN, result.list().get(1));
@@ -104,21 +92,4 @@ public class TestTransactionRead extends ClientTestBase {
     checkReadColumnResultWithTs(result, COLUMN_WITH_ANOTHER_FAMILY, prewriteTs - 2);
   }  
   
-  private void printResult(Result r) throws IOException {
-		System.out.println("---------start---------");
-		NavigableMap<byte[], NavigableMap<byte[], NavigableMap<Long, byte[]>>> rMap = r.getMap();
-		for (byte[] fm : rMap.keySet()) {
-			System.out.println("fm:" + Bytes.toString(fm));
-			NavigableMap<byte[], NavigableMap<Long, byte[]>> vMap = rMap.get(fm);
-			for (byte[] col : vMap.keySet()) {
-				System.out.println("----col:" + Bytes.toString(col));
-				NavigableMap<Long, byte[]> colMap = vMap.get(col);
-				for (long version : colMap.keySet()) {
-					System.out.println("--------version:" + version + ", value:" + Bytes.toString(colMap.get(version)));
-				}
-			}
-		}
-
-		System.out.println("---------end---------");
-}
 }

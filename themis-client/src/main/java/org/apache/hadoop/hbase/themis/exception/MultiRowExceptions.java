@@ -8,9 +8,9 @@ import org.apache.hadoop.hbase.themis.ConcurrentRowsCallables.TableAndRows;
 
 public class MultiRowExceptions extends ThemisException {
   private static final long serialVersionUID = -5300909468331086844L;
-  
+
   private Map<TableAndRows, IOException> exceptions;
-  
+
   public MultiRowExceptions(String msg, Map<TableAndRows, IOException> exceptions) {
     super(msg + "\n" + constructMessage(exceptions));
     this.exceptions = exceptions;
@@ -19,7 +19,7 @@ public class MultiRowExceptions extends ThemisException {
   public Map<TableAndRows, IOException> getExceptions() {
     return exceptions;
   }
-  
+
   public static String constructMessage(Map<TableAndRows, IOException> exceptions) {
     String message = "";
     for (Entry<TableAndRows, IOException> rowException : exceptions.entrySet()) {

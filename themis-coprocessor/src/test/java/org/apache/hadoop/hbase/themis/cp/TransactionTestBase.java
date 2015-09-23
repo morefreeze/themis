@@ -512,41 +512,40 @@ public class TransactionTestBase extends TestBase {
   }
   
   protected Map<String, ThemisLock> batchPrewriteSecondaryRows() throws IOException {
-	 Map<String, ThemisLock> lockMap = new HashMap<String, ThemisLock>();
-	 Map<byte[], List<RowMutation>> rowMap = groupByTableName(SECONDARY_ROWS);
-	 for (byte[] t : rowMap.keySet()) {
-		 List<RowMutation> list = rowMap.get(t);
-		 Map<byte[], ThemisLock> map = cpClient.batchPrewriteSecondaryRows(t, list, prewriteTs, getSecondaryLockBytes());
-		 map = map == null ? new HashMap<byte[], ThemisLock>() : map;
-		 for (RowMutation rowM : list) {
-			 lockMap.put(getLockMapKey4Batch(Bytes.toString(t), Bytes.toString(rowM.getRow())), map.get(rowM.getRow()));
-		 }
-	 }
-	 
-	 return lockMap;
+    Map<String, ThemisLock> lockMap = new HashMap<String, ThemisLock>();
+    Map<byte[], List<RowMutation>> rowMap = groupByTableName(SECONDARY_ROWS);
+    for (byte[] t : rowMap.keySet()) {
+      List<RowMutation> list = rowMap.get(t);
+      Map<byte[], ThemisLock> map = cpClient.batchPrewriteSecondaryRows(t, list, prewriteTs, getSecondaryLockBytes());
+      map = map == null ? new HashMap<byte[], ThemisLock>() : map;
+      for (RowMutation rowM : list) {
+        lockMap.put(getLockMapKey4Batch(Bytes.toString(t), Bytes.toString(rowM.getRow())), map.get(rowM.getRow()));
+      }
+    }
+
+    return lockMap;
   }
-  
+
   protected static String getLockMapKey4Batch(String tblName, String rowKey) {
-	  return tblName + SPLIT + rowKey;
+    return tblName + SPLIT + rowKey;
   }
-  
-  
+
   private Map<byte[], List<RowMutation>> groupByTableName(List<Pair<byte[], RowMutation>> rows) {
-	Map<byte[], List<RowMutation>> map = new HashMap<byte[], List<RowMutation>>();
-	List<RowMutation> list = null;
-	for (Pair<byte[], RowMutation> secondary : rows) {
-		list = map.get(secondary.getFirst());
-		if ( list == null ) {
-			list = new ArrayList<RowMutation>();
-			map.put(secondary.getFirst(), list);
-		}
-			 
-		list.add(secondary.getSecond());
-	}
-		 
-	return map;
+    Map<byte[], List<RowMutation>> map = new HashMap<byte[], List<RowMutation>>();
+    List<RowMutation> list = null;
+    for (Pair<byte[], RowMutation> secondary : rows) {
+      list = map.get(secondary.getFirst());
+      if (list == null) {
+        list = new ArrayList<RowMutation>();
+        map.put(secondary.getFirst(), list);
+      }
+
+      list.add(secondary.getSecond());
+    }
+
+    return map;
   }
-  
+
   protected void commitSecondaryRow() throws IOException {
     for (int i = 0; i < SECONDARY_ROWS.size(); ++i) {
       byte[] tableName = SECONDARY_ROWS.get(i).getFirst();
@@ -555,27 +554,27 @@ public class TransactionTestBase extends TestBase {
         mutation.mutationListWithoutValue(), prewriteTs, commitTs);
     }
   }
-  
+
   protected void batchCommitSecondaryRow() throws IOException {
-	Map<byte[], List<RowMutation>> rowMap = groupByTableName(SECONDARY_ROWS);
-	for (byte[] t : rowMap.keySet()) {
-		cpClient.batchCommitSecondaryRows(t, rowMap.get(t), prewriteTs, commitTs);
-	}
+    Map<byte[], List<RowMutation>> rowMap = groupByTableName(SECONDARY_ROWS);
+    for (byte[] t : rowMap.keySet()) {
+      cpClient.batchCommitSecondaryRows(t, rowMap.get(t), prewriteTs, commitTs);
+    }
   }
-  
+
   protected void commitTestTransaction() throws IOException {
     prewritePrimaryRow();
-    if ( isBatch ) {
-    	batchPrewriteSecondaryRows();
+    if (isBatch) {
+      batchPrewriteSecondaryRows();
     } else {
-    	prewriteSecondaryRows();
+      prewriteSecondaryRows();
     }
-    
+
     commitPrimaryRow();
-    if ( isBatch ) {
-    	
+    if (isBatch) {
+
     } else {
-    	commitSecondaryRow();
+      commitSecondaryRow();
     }
   }
   

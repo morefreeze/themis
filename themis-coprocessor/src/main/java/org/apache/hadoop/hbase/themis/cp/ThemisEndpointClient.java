@@ -118,61 +118,63 @@ public class ThemisEndpointClient {
       throws IOException {
     return prewriteRow(tableName, row, mutations, prewriteTs, null, secondaryLock, -1);
   }
-  
-  public Map<byte[], ThemisLock> batchPrewriteSecondaryRows(final byte[] tblName, final List<RowMutation> rows, final long prewriteTs, final byte[] secondaryLock)
-	      throws IOException {
-	  final Map<byte[], ThemisLock> lockMap = new HashMap<byte[], ThemisLock>();
-	  CoprocessorCallable<List<ThemisPrewriteResult>> callable = new CoprocessorCallable<List<ThemisPrewriteResult>>(
-				conn, tblName, rows.get(0).getRow()) {
-			@Override
-			public List<ThemisPrewriteResult> invokeCoprocessor(Stub instance) throws Throwable {
-				ThemisBatchPrewriteSecondaryRequest.Builder builder = ThemisBatchPrewriteSecondaryRequest.newBuilder();
-				ThemisPrewrite.Builder b = null;
 
-				for (RowMutation row : rows) {
-					b = ThemisPrewrite.newBuilder();
-					b.setRow(HBaseZeroCopyByteString.wrap(row.getRow()));
-					for (ColumnMutation mutation : row.mutationList()) {
-						b.addMutations(ColumnMutation.toCell(mutation));
-					}
-					b.setPrewriteTs(prewriteTs);
-					b.setPrimaryLock(HBaseZeroCopyByteString.wrap(HConstants.EMPTY_BYTE_ARRAY));
-					b.setSecondaryLock(HBaseZeroCopyByteString
-							.wrap(secondaryLock == null ? HConstants.EMPTY_BYTE_ARRAY : secondaryLock));
-					b.setPrimaryIndex(-1);
-					builder.addThemisPrewrite(b);
-				}
-				
-				ServerRpcController controller = new ServerRpcController();
-				BlockingRpcCallback<ThemisBatchPrewriteSecondaryResponse> rpcCallback = new BlockingRpcCallback<ThemisBatchPrewriteSecondaryResponse>();
-				instance.batchPrewriteSecondaryRows(controller, builder.build(), rpcCallback);
-				checkRpcException(controller);
-				//Perhaps, part row has not in a region, sample : when region split, then need try 
-				List<ByteString> rowsNotInRegion = rpcCallback.get().getRowsNotInRegionList();
-				if ( rowsNotInRegion != null && rowsNotInRegion.size() > 0 ) {
-					Map<byte[], List<ColumnMutation>> rowMap = list2Map4Batch(rows);
-					for (ByteString rowkey : rowsNotInRegion) {
-						ThemisLock l = prewriteRow(tblName, rowkey.toByteArray(), rowMap.get(rowkey.toByteArray()), prewriteTs, null, secondaryLock, -1);
-						if ( l != null ) {
-							lockMap.put(rowkey.toByteArray(), l);
-						}
-					}
-				}
-				return rpcCallback.get().getThemisPrewriteResultList();
-			}
-	  };
+  public Map<byte[], ThemisLock> batchPrewriteSecondaryRows(final byte[] tblName, final List<RowMutation> rows,
+      final long prewriteTs, final byte[] secondaryLock) throws IOException {
+    final Map<byte[], ThemisLock> lockMap = new HashMap<byte[], ThemisLock>();
+    CoprocessorCallable<List<ThemisPrewriteResult>> callable = new CoprocessorCallable<List<ThemisPrewriteResult>>(conn,
+        tblName, rows.get(0).getRow()) {
+      @Override
+      public List<ThemisPrewriteResult> invokeCoprocessor(Stub instance) throws Throwable {
+        ThemisBatchPrewriteSecondaryRequest.Builder builder = ThemisBatchPrewriteSecondaryRequest.newBuilder();
+        ThemisPrewrite.Builder b = null;
 
-	  batchJudgePerwriteResultRow(lockMap, tblName, rows, callable.run(), prewriteTs);
-	  return lockMap;
+        for (RowMutation row : rows) {
+          b = ThemisPrewrite.newBuilder();
+          b.setRow(HBaseZeroCopyByteString.wrap(row.getRow()));
+          for (ColumnMutation mutation : row.mutationList()) {
+            b.addMutations(ColumnMutation.toCell(mutation));
+          }
+          b.setPrewriteTs(prewriteTs);
+          b.setPrimaryLock(HBaseZeroCopyByteString.wrap(HConstants.EMPTY_BYTE_ARRAY));
+          b.setSecondaryLock(
+              HBaseZeroCopyByteString.wrap(secondaryLock == null ? HConstants.EMPTY_BYTE_ARRAY : secondaryLock));
+          b.setPrimaryIndex(-1);
+          builder.addThemisPrewrite(b);
+        }
+
+        ServerRpcController controller = new ServerRpcController();
+        BlockingRpcCallback<ThemisBatchPrewriteSecondaryResponse> rpcCallback = new BlockingRpcCallback<ThemisBatchPrewriteSecondaryResponse>();
+        instance.batchPrewriteSecondaryRows(controller, builder.build(), rpcCallback);
+        checkRpcException(controller);
+        // Perhaps, part row has not in a region, sample : when region split,
+        // then need try
+        List<ByteString> rowsNotInRegion = rpcCallback.get().getRowsNotInRegionList();
+        if (rowsNotInRegion != null && rowsNotInRegion.size() > 0) {
+          Map<byte[], List<ColumnMutation>> rowMap = list2Map4Batch(rows);
+          for (ByteString rowkey : rowsNotInRegion) {
+            ThemisLock l = prewriteRow(tblName, rowkey.toByteArray(), rowMap.get(rowkey.toByteArray()), prewriteTs,
+                null, secondaryLock, -1);
+            if (l != null) {
+              lockMap.put(rowkey.toByteArray(), l);
+            }
+          }
+        }
+        return rpcCallback.get().getThemisPrewriteResultList();
+      }
+    };
+
+    batchJudgePerwriteResultRow(lockMap, tblName, rows, callable.run(), prewriteTs);
+    return lockMap;
   }
-  
+
   private Map<byte[], List<ColumnMutation>> list2Map4Batch(List<RowMutation> rows) {
-	  Map<byte[], List<ColumnMutation>> rowMap = new HashMap<byte[], List<ColumnMutation>>();
-	  for (RowMutation rowM : rows) {
-		  rowMap.put(rowM.getRow(), rowM.mutationList());
-	  }
-	
-	  return rowMap;
+    Map<byte[], List<ColumnMutation>> rowMap = new HashMap<byte[], List<ColumnMutation>>();
+    for (RowMutation rowM : rows) {
+      rowMap.put(rowM.getRow(), rowM.mutationList());
+    }
+
+    return rowMap;
   }
 
   public ThemisLock prewriteRow(final byte[] tableName, final byte[] row,
@@ -198,7 +200,7 @@ public class ThemisEndpointClient {
         
         preBuilder.setRow(HBaseZeroCopyByteString.wrap(row));
         for (ColumnMutation mutation : mutations) {
-        	preBuilder.addMutations(ColumnMutation.toCell(mutation));
+          preBuilder.addMutations(ColumnMutation.toCell(mutation));
         }
         preBuilder.setPrewriteTs(prewriteTs);
         preBuilder.setPrimaryLock(HBaseZeroCopyByteString
@@ -220,35 +222,35 @@ public class ThemisEndpointClient {
     };
     return judgePerwriteResultRow(tableName, row, callable.run(), prewriteTs);
   }
-  
+
   protected void batchJudgePerwriteResultRow(Map<byte[], ThemisLock> lockMap, byte[] tableName, List<RowMutation> rows,
-			 List<ThemisPrewriteResult> prewriteResults, long prewriteTs) throws IOException {
-	    if (prewriteResults == null || prewriteResults.size() == 0) {
-	    	return;
-	    }
-	    
-	    byte[] row = null;
-	    ThemisLock lock = null;
-	    for (ThemisPrewriteResult result : prewriteResults) {
-	    	row = result.getRow().toByteArray();
-	    	lock = judgePerwriteResultRow(tableName, row, result, prewriteTs);
-	    	if ( lock != null ) {
-	    		lockMap.put(row, lock);
-	    	}
-		}
+      List<ThemisPrewriteResult> prewriteResults, long prewriteTs) throws IOException {
+    if (prewriteResults == null || prewriteResults.size() == 0) {
+      return;
+    }
+
+    byte[] row = null;
+    ThemisLock lock = null;
+    for (ThemisPrewriteResult result : prewriteResults) {
+      row = result.getRow().toByteArray();
+      lock = judgePerwriteResultRow(tableName, row, result, prewriteTs);
+      if (lock != null) {
+        lockMap.put(row, lock);
+      }
+    }
   }
 
-  protected ThemisLock judgePerwriteResultRow(byte[] tableName, byte[] row,
-		 ThemisPrewriteResult prewriteResult, long prewriteTs) throws IOException {
+  protected ThemisLock judgePerwriteResultRow(byte[] tableName, byte[] row, ThemisPrewriteResult prewriteResult,
+      long prewriteTs) throws IOException {
     if (prewriteResult != null && !prewriteResult.getNewerWriteTs().isEmpty()) {
       long commitTs = Bytes.toLong(prewriteResult.getNewerWriteTs().toByteArray());
       if (commitTs != 0) {
-        throw new WriteConflictException("encounter write with larger timestamp than prewriteTs="
-            + prewriteTs + ", commitTs=" + commitTs);
+        throw new WriteConflictException(
+            "encounter write with larger timestamp than prewriteTs=" + prewriteTs + ", commitTs=" + commitTs);
       } else {
         ThemisLock lock = ThemisLock.parseFromByte(prewriteResult.getExistLock().toByteArray());
         ColumnCoordinate column = new ColumnCoordinate(tableName, row, prewriteResult.getFamily().toByteArray(),
-        		prewriteResult.getQualifier().toByteArray());
+            prewriteResult.getQualifier().toByteArray());
         lock.setColumn(column);
         lock.setLockExpired(Bytes.toBoolean(prewriteResult.getLockExpired().toByteArray()));
         return lock;
@@ -256,92 +258,89 @@ public class ThemisEndpointClient {
     }
     return null;
   }
-  
 
-  public void commitSecondaryRow(final byte[] tableName, final byte[] row,
-      List<ColumnMutation> mutations, final long prewriteTs, final long commitTs)
-      throws IOException {
+  public void commitSecondaryRow(final byte[] tableName, final byte[] row, List<ColumnMutation> mutations,
+      final long prewriteTs, final long commitTs) throws IOException {
     commitRow(tableName, row, mutations, prewriteTs, commitTs, -1);
   }
-  
+
   public void batchCommitSecondaryRows(final byte[] tableName, final List<RowMutation> rows, final long prewriteTs,
-			final long commitTs) throws IOException {
-		CoprocessorCallable<List<ThemisBatchCommitSecondaryResult>> callable = new CoprocessorCallable<List<ThemisBatchCommitSecondaryResult>>(
-				conn, tableName, rows.get(0).getRow()) {
-			@Override
-			public List<ThemisBatchCommitSecondaryResult> invokeCoprocessor(Stub instance) throws Throwable {
-				ThemisBatchCommitSecondaryRequest.Builder builder = ThemisBatchCommitSecondaryRequest.newBuilder();
+      final long commitTs) throws IOException {
+    CoprocessorCallable<List<ThemisBatchCommitSecondaryResult>> callable = new CoprocessorCallable<List<ThemisBatchCommitSecondaryResult>>(
+        conn, tableName, rows.get(0).getRow()) {
+      @Override
+      public List<ThemisBatchCommitSecondaryResult> invokeCoprocessor(Stub instance) throws Throwable {
+        ThemisBatchCommitSecondaryRequest.Builder builder = ThemisBatchCommitSecondaryRequest.newBuilder();
 
-				ThemisCommit.Builder cb = null;
-				for (RowMutation rowMutation : rows) {
-					cb = ThemisCommit.newBuilder();
-					cb.setRow(HBaseZeroCopyByteString.wrap(rowMutation.getRow()));
-					for (ColumnMutation mutation : rowMutation.mutationList()) {
-						cb.addMutations(ColumnMutation.toCell(mutation));
-					}
-					cb.setPrewriteTs(prewriteTs);
-					cb.setCommitTs(commitTs);
-					cb.setPrimaryIndex(-1);
-					builder.addThemisCommit(cb);
-				}
+        ThemisCommit.Builder cb = null;
+        for (RowMutation rowMutation : rows) {
+          cb = ThemisCommit.newBuilder();
+          cb.setRow(HBaseZeroCopyByteString.wrap(rowMutation.getRow()));
+          for (ColumnMutation mutation : rowMutation.mutationList()) {
+            cb.addMutations(ColumnMutation.toCell(mutation));
+          }
+          cb.setPrewriteTs(prewriteTs);
+          cb.setCommitTs(commitTs);
+          cb.setPrimaryIndex(-1);
+          builder.addThemisCommit(cb);
+        }
 
-				ServerRpcController controller = new ServerRpcController();
-				BlockingRpcCallback<ThemisBatchCommitSecondaryResponse> rpcCallback = new BlockingRpcCallback<ThemisBatchCommitSecondaryResponse>();
-				instance.batchCommitSecondaryRows(controller, builder.build(), rpcCallback);
-				checkRpcException(controller);
-				return rpcCallback.get().getBatchCommitSecondaryResultList();
-			}
-		};
+        ServerRpcController controller = new ServerRpcController();
+        BlockingRpcCallback<ThemisBatchCommitSecondaryResponse> rpcCallback = new BlockingRpcCallback<ThemisBatchCommitSecondaryResponse>();
+        instance.batchCommitSecondaryRows(controller, builder.build(), rpcCallback);
+        checkRpcException(controller);
+        return rpcCallback.get().getBatchCommitSecondaryResultList();
+      }
+    };
 
-		List<ThemisBatchCommitSecondaryResult> results = callable.run();
-		StringBuilder failRows = new StringBuilder();
-		if (results != null && results.size() > 0) {
-			for (ThemisBatchCommitSecondaryResult r : results) {
-				if (!r.getSuccess()) {
-					failRows.append(Bytes.toString(r.getRow().toByteArray()) + ",");
-				}
-			}
-		}
+    List<ThemisBatchCommitSecondaryResult> results = callable.run();
+    StringBuilder failRows = new StringBuilder();
+    if (results != null && results.size() > 0) {
+      for (ThemisBatchCommitSecondaryResult r : results) {
+        if (!r.getSuccess()) {
+          failRows.append(Bytes.toString(r.getRow().toByteArray()) + ",");
+        }
+      }
+    }
 
-		if (failRows.length() > 0) {
-			throw new IOException("secondary row commit fail, should not happend!, fail rows:" + failRows);
-		}
+    if (failRows.length() > 0) {
+      throw new IOException("secondary row commit fail, should not happend!, fail rows:" + failRows);
+    }
   }
 
-  public void commitRow(final byte[] tableName, final byte[] row,
-	      final List<ColumnMutation> mutations, final long prewriteTs, final long commitTs,
-	      final int primaryIndex) throws IOException {
-	    CoprocessorCallable<Boolean> callable = new CoprocessorCallable<Boolean>(conn, tableName, row) {
-	      @Override
-	      public Boolean invokeCoprocessor(Stub instance) throws Throwable {
-	        ThemisCommitRequest.Builder builder = ThemisCommitRequest.newBuilder();
-	        ThemisCommit.Builder cb = ThemisCommit.newBuilder();
-	        cb.setRow(HBaseZeroCopyByteString.wrap(row));
-	        for (ColumnMutation mutation : mutations) {
-	        	cb.addMutations(ColumnMutation.toCell(mutation));
-	        }
-	        cb.setPrewriteTs(prewriteTs);
-	        cb.setCommitTs(commitTs);
-	        cb.setPrimaryIndex(primaryIndex);
-	        builder.setThemisCommit(cb);
-	        
-	        ServerRpcController controller = new ServerRpcController();
-	        BlockingRpcCallback<ThemisCommitResponse> rpcCallback = new BlockingRpcCallback<ThemisCommitResponse>();
-	        instance.commitRow(controller, builder.build(), rpcCallback);
-	        checkRpcException(controller);
-	        return rpcCallback.get().getResult();
-	      }
-	    };
-	    if (!callable.run()) {
-	      if (primaryIndex < 0) {
-	        throw new IOException("secondary row commit fail, should not happend!");
-	      } else {
-	        ColumnMutation primaryMutation = mutations.get(primaryIndex);
-	        throw new LockCleanedException("lock has been cleaned, column="
-	            + new ColumnCoordinate(tableName, row, primaryMutation.getFamily(),
-	                primaryMutation.getQualifier()) + ", prewriteTs=" + prewriteTs);
-	      }
-	    }
+  public void commitRow(final byte[] tableName, final byte[] row, final List<ColumnMutation> mutations,
+      final long prewriteTs, final long commitTs, final int primaryIndex) throws IOException {
+    CoprocessorCallable<Boolean> callable = new CoprocessorCallable<Boolean>(conn, tableName, row) {
+      @Override
+      public Boolean invokeCoprocessor(Stub instance) throws Throwable {
+        ThemisCommitRequest.Builder builder = ThemisCommitRequest.newBuilder();
+        ThemisCommit.Builder cb = ThemisCommit.newBuilder();
+        cb.setRow(HBaseZeroCopyByteString.wrap(row));
+        for (ColumnMutation mutation : mutations) {
+          cb.addMutations(ColumnMutation.toCell(mutation));
+        }
+        cb.setPrewriteTs(prewriteTs);
+        cb.setCommitTs(commitTs);
+        cb.setPrimaryIndex(primaryIndex);
+        builder.setThemisCommit(cb);
+
+        ServerRpcController controller = new ServerRpcController();
+        BlockingRpcCallback<ThemisCommitResponse> rpcCallback = new BlockingRpcCallback<ThemisCommitResponse>();
+        instance.commitRow(controller, builder.build(), rpcCallback);
+        checkRpcException(controller);
+        return rpcCallback.get().getResult();
+      }
+    };
+    if (!callable.run()) {
+      if (primaryIndex < 0) {
+        throw new IOException("secondary row commit fail, should not happend!");
+      } else {
+        ColumnMutation primaryMutation = mutations.get(primaryIndex);
+        throw new LockCleanedException("lock has been cleaned, column="
+            + new ColumnCoordinate(tableName, row, primaryMutation.getFamily(), primaryMutation.getQualifier())
+            + ", prewriteTs=" + prewriteTs);
+      }
+    }
   }
   
   public void commitSingleRow(final byte[] tableName, final byte[] row,
@@ -354,7 +353,7 @@ public class ThemisEndpointClient {
         ThemisCommit.Builder cb = ThemisCommit.newBuilder();
         cb.setRow(HBaseZeroCopyByteString.wrap(row));
         for (ColumnMutation mutation : mutations) {
-        	cb.addMutations(ColumnMutation.toCell(mutation));
+          cb.addMutations(ColumnMutation.toCell(mutation));
         }
         cb.setPrewriteTs(prewriteTs);
         cb.setCommitTs(commitTs);
