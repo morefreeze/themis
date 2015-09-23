@@ -90,7 +90,7 @@ public class RowMutation {
     String result = Bytes.toString(row) + "\n";
     List<ColumnMutation> mutationList = mutationList();
     for (ColumnMutation mutation : mutationList) {
-      result += ("columnMutation=" + mutation);
+      result += ("columnMutation=" + mutation+",");
     }
     return result;
   }

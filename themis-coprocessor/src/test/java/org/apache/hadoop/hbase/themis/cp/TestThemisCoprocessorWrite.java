@@ -2,13 +2,17 @@ package org.apache.hadoop.hbase.themis.cp;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NavigableMap;
 
 import junit.framework.Assert;
 
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue.Type;
+import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTableInterface;
+import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.themis.columns.Column;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.ColumnMutation;
@@ -36,6 +40,27 @@ public class TestThemisCoprocessorWrite extends TransactionTestBase {
     checkPrewriteRowSuccess(TABLENAME, PRIMARY_ROW);
   }
   
+  private void printResult() throws IOException {
+		System.out.println("---------start---------");
+		Get g = new Get(ANOTHER_ROW);
+		HTableInterface t = getTable(TABLENAME);
+		Result r = t.get(g);
+		NavigableMap<byte[], NavigableMap<byte[], NavigableMap<Long, byte[]>>> rMap = r.getMap();
+		for (byte[] fm : rMap.keySet()) {
+			System.out.println("fm:" + Bytes.toString(fm));
+			NavigableMap<byte[], NavigableMap<Long, byte[]>> vMap = rMap.get(fm);
+			for (byte[] col : vMap.keySet()) {
+				System.out.println("----col:" + Bytes.toString(col));
+				NavigableMap<Long, byte[]> colMap = vMap.get(col);
+				for (long version : colMap.keySet()) {
+					System.out.println("--------version:" + version + ", value:" + Bytes.toString(colMap.get(version)));
+				}
+			}
+		}
+
+		System.out.println("---------end---------");
+}
+  
   @Test
   public void testCheckPrewriteSingleRowSuccess() throws Exception {
     Assert.assertNull(prewriteSingleRow());
@@ -49,6 +74,8 @@ public class TestThemisCoprocessorWrite extends TransactionTestBase {
       Assert.assertNull(prewriteLocks.get(i));
       checkPrewriteRowSuccess(SECONDARY_ROWS.get(i).getFirst(), SECONDARY_ROWS.get(i).getSecond());
     }
+    
+    printResult();
   }
 
   @Test

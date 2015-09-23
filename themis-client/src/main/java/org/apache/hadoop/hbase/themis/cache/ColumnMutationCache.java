@@ -7,7 +7,6 @@ import java.util.TreeMap;
 
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.KeyValue.Type;
-import org.apache.hadoop.hbase.themis.ConcurrentRowCallables.TableAndRow;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.RowMutation;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -79,11 +78,7 @@ public class ColumnMutationCache {
     Pair<Type, byte[]> mutation = getMutation(columnCoordinate);
     return mutation == null ? null : mutation.getFirst();
   }
-  
-  public RowMutation getRowMutation(TableAndRow tableAndRow) {
-    return getRowMutation(tableAndRow.getTableName(), tableAndRow.getRowkey());
-  }
-  
+
   public RowMutation getRowMutation(byte[] tableName, byte[] rowkey) {
     Map<byte[], RowMutation> rowMutations = mutations.get(tableName);
     return rowMutations == null ? null : rowMutations.get(rowkey);

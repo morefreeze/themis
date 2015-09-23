@@ -2,7 +2,9 @@ package org.apache.hadoop.hbase.themis.cp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -21,6 +23,7 @@ import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Row;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.coprocessor.CoprocessorHost;
 import org.apache.hadoop.hbase.master.ThemisMasterObserver;
@@ -46,6 +49,7 @@ public class TransactionTestBase extends TestBase {
   public static final int TEST_LOCK_CLEAN_RETRY_COUNT = 2;
   public static final int TEST_LOCK_CLEAN_PAUSE = 200;
   protected static HBaseTestingUtility TEST_UTIL;
+  protected static final String SPLIT = "_______";
   
   protected HConnection connection;
   protected HTableInterface table;
@@ -58,6 +62,7 @@ public class TransactionTestBase extends TestBase {
   protected static long commitTs;
   protected static final boolean useMiniCluster = true;
   protected ThemisEndpointClient cpClient;
+  protected static boolean isBatch = false; //batch prewrite and commit secondary rows 
 
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
@@ -506,6 +511,42 @@ public class TransactionTestBase extends TestBase {
     return locks;
   }
   
+  protected Map<String, ThemisLock> batchPrewriteSecondaryRows() throws IOException {
+	 Map<String, ThemisLock> lockMap = new HashMap<String, ThemisLock>();
+	 Map<byte[], List<RowMutation>> rowMap = groupByTableName(SECONDARY_ROWS);
+	 for (byte[] t : rowMap.keySet()) {
+		 List<RowMutation> list = rowMap.get(t);
+		 Map<byte[], ThemisLock> map = cpClient.batchPrewriteSecondaryRows(t, list, prewriteTs, getSecondaryLockBytes());
+		 map = map == null ? new HashMap<byte[], ThemisLock>() : map;
+		 for (RowMutation rowM : list) {
+			 lockMap.put(getLockMapKey4Batch(Bytes.toString(t), Bytes.toString(rowM.getRow())), map.get(rowM.getRow()));
+		 }
+	 }
+	 
+	 return lockMap;
+  }
+  
+  protected static String getLockMapKey4Batch(String tblName, String rowKey) {
+	  return tblName + SPLIT + rowKey;
+  }
+  
+  
+  private Map<byte[], List<RowMutation>> groupByTableName(List<Pair<byte[], RowMutation>> rows) {
+	Map<byte[], List<RowMutation>> map = new HashMap<byte[], List<RowMutation>>();
+	List<RowMutation> list = null;
+	for (Pair<byte[], RowMutation> secondary : rows) {
+		list = map.get(secondary.getFirst());
+		if ( list == null ) {
+			list = new ArrayList<RowMutation>();
+			map.put(secondary.getFirst(), list);
+		}
+			 
+		list.add(secondary.getSecond());
+	}
+		 
+	return map;
+  }
+  
   protected void commitSecondaryRow() throws IOException {
     for (int i = 0; i < SECONDARY_ROWS.size(); ++i) {
       byte[] tableName = SECONDARY_ROWS.get(i).getFirst();
@@ -515,11 +556,27 @@ public class TransactionTestBase extends TestBase {
     }
   }
   
+  protected void batchCommitSecondaryRow() throws IOException {
+	Map<byte[], List<RowMutation>> rowMap = groupByTableName(SECONDARY_ROWS);
+	for (byte[] t : rowMap.keySet()) {
+		cpClient.batchCommitSecondaryRows(t, rowMap.get(t), prewriteTs, commitTs);
+	}
+  }
+  
   protected void commitTestTransaction() throws IOException {
     prewritePrimaryRow();
-    prewriteSecondaryRows();
+    if ( isBatch ) {
+    	batchPrewriteSecondaryRows();
+    } else {
+    	prewriteSecondaryRows();
+    }
+    
     commitPrimaryRow();
-    commitSecondaryRow();
+    if ( isBatch ) {
+    	
+    } else {
+    	commitSecondaryRow();
+    }
   }
   
   protected void deleteTable(HBaseAdmin admin, byte[] tableName) throws IOException {

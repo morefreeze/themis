@@ -4,26 +4,26 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.hadoop.hbase.themis.ConcurrentRowCallables.TableAndRow;
+import org.apache.hadoop.hbase.themis.ConcurrentRowsCallables.TableAndRows;
 
 public class MultiRowExceptions extends ThemisException {
   private static final long serialVersionUID = -5300909468331086844L;
   
-  private Map<TableAndRow, IOException> exceptions;
+  private Map<TableAndRows, IOException> exceptions;
   
-  public MultiRowExceptions(String msg, Map<TableAndRow, IOException> exceptions) {
+  public MultiRowExceptions(String msg, Map<TableAndRows, IOException> exceptions) {
     super(msg + "\n" + constructMessage(exceptions));
     this.exceptions = exceptions;
   }
 
-  public Map<TableAndRow, IOException> getExceptions() {
+  public Map<TableAndRows, IOException> getExceptions() {
     return exceptions;
   }
   
-  public static String constructMessage(Map<TableAndRow, IOException> exceptions) {
+  public static String constructMessage(Map<TableAndRows, IOException> exceptions) {
     String message = "";
-    for (Entry<TableAndRow, IOException> rowException : exceptions.entrySet()) {
-      message += ("tableAndRow=" + rowException.getKey() + ", exception=" + rowException.getValue() + "\n");
+    for (Entry<TableAndRows, IOException> rowException : exceptions.entrySet()) {
+      message += ("tableAndRows=" + rowException.getKey() + ", exception=" + rowException.getValue() + "\n");
     }
     return message;
   }
