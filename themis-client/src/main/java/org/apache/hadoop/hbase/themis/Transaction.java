@@ -21,6 +21,8 @@ import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HConnection;
 import org.apache.hadoop.hbase.client.Mutation;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.KeyOnlyFilter;
 import org.apache.hadoop.hbase.themis.ConcurrentRowsCallables.TableAndRows;
 import org.apache.hadoop.hbase.themis.cache.ColumnMutationCache;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
@@ -587,7 +589,7 @@ public class Transaction extends Configured implements TransactionInterface {
     for (Entry<TableAndRows, IOException> failedRow : calls.getExceptions().entrySet()) {
       TableAndRows tableAndRows = failedRow.getKey();
       LOG.warn("batch commit secondary fail, tableAndRows=" + tableAndRows.toString() + ", prewriteTs=" + startTs,
-          failedRow.getValue());
+              failedRow.getValue());
     }
   }
 
@@ -661,4 +663,24 @@ public class Transaction extends Configured implements TransactionInterface {
       return leftCnt.compareTo(rightCnt);
     }
   }
+
+  // lock a row
+  public void lockRow(byte[] tableName, byte[] row) throws IOException {
+    Get g = new Get(row);
+    Filter filter = new KeyOnlyFilter();
+    g.setFilter(filter);
+
+    ThemisGet tg = new ThemisGet(g);
+    Result r = get(tableName, tg);
+    if ( r == null || r.isEmpty() ) {
+      LOG.warn("has not data to lock");
+      return;
+    }
+
+    for(KeyValue kv : r.list()) {
+      //if cache has data, then don't replace
+      mutationCache.addMutation(tableName, kv, true);
+    }
+  }
+
 }

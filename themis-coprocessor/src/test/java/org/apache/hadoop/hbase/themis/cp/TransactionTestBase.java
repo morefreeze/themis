@@ -368,7 +368,7 @@ public class TransactionTestBase extends TestBase {
       Assert.assertArrayEquals(VALUE, readDataValue(c, prewriteTs));
       Assert.assertEquals(prewriteTs, readPut(c).longValue());
       Assert.assertNull(readDelete(c));
-    } else {
+    } else if (getColumnType(c).equals(Type.DeleteColumn)) {
       Assert.assertNull(readLockBytes(c));
       Assert.assertNull(readPut(c));
       Assert.assertEquals(prewriteTs, readDelete(c).longValue());

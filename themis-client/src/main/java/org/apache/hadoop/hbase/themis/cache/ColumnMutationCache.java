@@ -19,6 +19,10 @@ public class ColumnMutationCache {
       Bytes.BYTES_COMPARATOR);
 
   public boolean addMutation(byte[] tableName, KeyValue kv) {
+    return addMutation(tableName, kv, false);
+  }
+
+  public boolean addMutation(byte[] tableName, KeyValue kv, boolean onlyLock) {
     Map<byte[], RowMutation> rowMutations = mutations.get(tableName);
     if (rowMutations == null) {
       rowMutations = new TreeMap<byte[], RowMutation>(Bytes.BYTES_COMPARATOR);
@@ -29,7 +33,7 @@ public class ColumnMutationCache {
       rowMutation = new RowMutation(kv.getRow());
       rowMutations.put(kv.getRow(), rowMutation);
     }
-    return rowMutation.addMutation(kv.getFamily(), kv.getQualifier(), kv.getType(), kv.getValue());
+    return rowMutation.addMutation(kv.getFamily(), kv.getQualifier(), kv.getType(), kv.getValue(), onlyLock);
   }
 
   public Set<Entry<byte[], Map<byte[], RowMutation>>> getMutations() {

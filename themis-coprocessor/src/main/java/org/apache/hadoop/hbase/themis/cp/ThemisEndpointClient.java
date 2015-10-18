@@ -202,6 +202,7 @@ public class ThemisEndpointClient {
         for (ColumnMutation mutation : mutations) {
           preBuilder.addMutations(ColumnMutation.toCell(mutation));
         }
+
         preBuilder.setPrewriteTs(prewriteTs);
         preBuilder.setPrimaryLock(HBaseZeroCopyByteString
             .wrap(primaryLock == null ? HConstants.EMPTY_BYTE_ARRAY : primaryLock));

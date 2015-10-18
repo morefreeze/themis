@@ -610,13 +610,17 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
           writePut.add(mutation.getFamily(), mutation.getQualifier(), prewriteTs,
             mutation.getValue());
         }
-      } else {
+      } else if (mutation.getType() == Type.DeleteColumn) {
         writeColumn = ColumnUtil.getDeleteColumn(mutation);
       }
-      writePut.add(writeColumn.getFamily(), writeColumn.getQualifier(), commitTs,
-        Bytes.toBytes(prewriteTs));
-      rowMutations.add(writePut);
-      
+
+      // if is not put or delete, then it is only a lock, has not data change
+      if ( writeColumn != null ) {
+        writePut.add(writeColumn.getFamily(), writeColumn.getQualifier(), commitTs,
+                Bytes.toBytes(prewriteTs));
+        rowMutations.add(writePut);
+      }
+
       Column lockColumn = ColumnUtil.getLockColumn(mutation);
       Delete lockDelete = new Delete(row).deleteColumn(lockColumn.getFamily(),
         lockColumn.getQualifier(), prewriteTs);
