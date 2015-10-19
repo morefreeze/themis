@@ -70,10 +70,12 @@ public class ColumnMutation extends Column {
     Builder builder = Cell.newBuilder();
     builder.setFamily(HBaseZeroCopyByteString.wrap(mutation.getFamily()));
     builder.setQualifier(HBaseZeroCopyByteString.wrap(mutation.getQualifier()));
-    CellType type = CellType.MINIMUM; // only lock, has not data change
+    CellType type = null;
     if ( mutation.getType() == Type.Put ) {
       type = CellType.PUT;
-    } else if ( mutation.getType() == Type.DeleteColumn ) {
+    } else if ( mutation.getType() == Type.Minimum ) {  // only lock, has not data change
+      type = CellType.MINIMUM;
+    } else {
       type = CellType.DELETE_COLUMN;
     }
     builder.setCellType(type);
@@ -87,10 +89,12 @@ public class ColumnMutation extends Column {
   
   public static ColumnMutation toColumnMutation(Cell cell) {
     CellType type = cell.getCellType();
-    Type kvType = Type.Minimum; // only lock, has not data change
+    Type kvType = null;
     if ( type == CellType.PUT ) {
       kvType = Type.Put;
-    } else if ( type == CellType.DELETE_COLUMN ) {
+    } else if ( type == CellType.MINIMUM ) {  // only lock, has not data change
+      kvType = Type.Minimum;
+    } else {
       kvType = Type.DeleteColumn;
     }
     ColumnMutation mutation = new ColumnMutation(new Column(cell.getFamily().toByteArray(), cell
