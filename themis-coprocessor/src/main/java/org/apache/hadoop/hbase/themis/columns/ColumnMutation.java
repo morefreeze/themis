@@ -90,7 +90,7 @@ public class ColumnMutation extends Column {
     Type kvType = Type.Minimum; // only lock, has not data change
     if ( type == CellType.PUT ) {
       kvType = Type.Put;
-    } else if ( type == CellType.PUT ) {
+    } else if ( type == CellType.DELETE_COLUMN ) {
       kvType = Type.DeleteColumn;
     }
     ColumnMutation mutation = new ColumnMutation(new Column(cell.getFamily().toByteArray(), cell
