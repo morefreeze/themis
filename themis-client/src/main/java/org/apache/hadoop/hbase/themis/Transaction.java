@@ -87,7 +87,7 @@ public class Transaction extends Configured implements TransactionInterface {
   public Transaction(Configuration conf, HConnection connection)
       throws IOException {
     this(conf, connection, TimestampOracleFactory.getTimestampOracle(conf), WorkerRegister
-        .getWorkerRegister(conf));
+            .getWorkerRegister(conf));
   }
   
   protected Transaction(Configuration conf, HConnection connection,
@@ -245,11 +245,11 @@ public class Transaction extends Configured implements TransactionInterface {
   }
 
   protected void asyncPrewriteRowsWithLockClean(ConcurrentRowsCallables<Void> calls, final byte[] tblName,
-      final List<RowMutation> rows, final boolean containPrimary) throws IOException {
-    calls.addCallable(new RowsCallable<Void>(tblName, getRowkeys(rows)) {
+      final List<RowMutation> rowMs, final boolean containPrimary) throws IOException {
+    calls.addCallable(new RowsCallable<Void>(tblName, getRowkeys(rowMs)) {
       @Override
       public Void call() throws Exception {
-        batchPrewriteSecondariesWithLockClean(tblName, rows);
+        batchPrewriteSecondariesWithLockClean(tblName, rowMs);
         return null;
       }
     });
@@ -316,6 +316,58 @@ public class Transaction extends Configured implements TransactionInterface {
       throw new MultiRowExceptions("concurrent prewrite fail", calls.getExceptions());
     }
   }
+
+  private HashMap<GroupKey, List<RowMutation>> groupByRegion() throws IOException {
+    HashMap<GroupKey, List<RowMutation>> map = new HashMap<GroupKey, List<RowMutation>>();
+    // batch commit all rows in a region
+    for (Pair<byte[], RowMutation> row : secondaryRows) {
+      HRegionLocation loc = findDestLocation(row.getFirst(), row.getSecond().getRow(), 3);
+      GroupKey key = getBatchGroupKey(loc, Bytes.toString(row.getFirst()));
+      List<RowMutation> rows = map.get(key);
+      if (rows == null) {
+        rows = new ArrayList<RowMutation>();
+        map.put(key, rows);
+      }
+
+      rows.add(row.getSecond());
+    }
+
+    return map;
+  }
+
+  private GroupKey getBatchGroupKey(HRegionLocation loc, String tblName) {
+    GroupKey key = new GroupKey();
+    key.regionName = loc.getHostname();
+    key.tableName = tblName;
+    key.regionName = loc.getRegionInfo().getRegionNameAsString();
+
+    return key;
+  }
+
+  class GroupKey implements Comparator<GroupKey> {
+    private String rs;
+    private String tableName;
+    private String regionName;
+
+    @Override
+    public int compare(GroupKey left, GroupKey right) {
+      if (left == null && right == null) {
+        return 0;
+      }
+
+      if (left != null && right == null) {
+        return 1;
+      }
+
+      if (left == null && right != null) {
+        return -1;
+      }
+
+      String leftCnt = left.rs + "_" + left.tableName + "_" + left.regionName;
+      String rightCnt = right.rs + "_" + right.tableName + "_" + right.regionName;
+      return leftCnt.compareTo(rightCnt);
+    }
+  }
   
   /**
    * Find the destination.
@@ -347,8 +399,7 @@ public class Transaction extends Configured implements TransactionInterface {
     }
 
     if (locE == null) {
-      locE = new IOException("no location found, aborting submit for" + " tableName=" + new String(tblName) + " rowkey="
-          + new String(row));
+      locE = new IOException("no location found, tableName=" + new String(tblName) + " rowkey=" + new String(row));
     }
     throw locE;
   }
@@ -592,33 +643,6 @@ public class Transaction extends Configured implements TransactionInterface {
               failedRow.getValue());
     }
   }
-
-  private HashMap<GroupKey, List<RowMutation>> groupByRegion() throws IOException {
-    HashMap<GroupKey, List<RowMutation>> map = new HashMap<GroupKey, List<RowMutation>>();
-    // batch commit all rows in a region
-    for (Pair<byte[], RowMutation> row : secondaryRows) {
-      HRegionLocation loc = findDestLocation(row.getFirst(), row.getSecond().getRow(), 3);
-      GroupKey key = getBatchGroupKey(loc, Bytes.toString(row.getFirst()));
-      List<RowMutation> rows = map.get(key);
-      if (rows == null) {
-        rows = new ArrayList<RowMutation>();
-        map.put(key, rows);
-      }
-
-      rows.add(row.getSecond());
-    }
-
-    return map;
-  }
-
-  private GroupKey getBatchGroupKey(HRegionLocation loc, String tblName) {
-    GroupKey key = new GroupKey();
-    key.regionName = loc.getHostname();
-    key.tableName = tblName;
-    key.regionName = loc.getRegionInfo().getRegionNameAsString();
-
-    return key;
-  }
   
   public void commitSecondaries() throws IOException {
     for (int i = 0; i < secondaryRows.size(); ++i) {
@@ -637,31 +661,6 @@ public class Transaction extends Configured implements TransactionInterface {
   
   public ColumnMutationCache getMutations() {
     return this.mutationCache;
-  }
-
-  class GroupKey implements Comparator<GroupKey> {
-    private String rs;
-    private String tableName;
-    private String regionName;
-
-    @Override
-    public int compare(GroupKey left, GroupKey right) {
-      if (left == null && right == null) {
-        return 0;
-      }
-
-      if (left != null && right == null) {
-        return 1;
-      }
-
-      if (left == null && right != null) {
-        return -1;
-      }
-
-      String leftCnt = left.rs + "_" + left.tableName + "_" + left.regionName;
-      String rightCnt = right.rs + "_" + right.tableName + "_" + right.regionName;
-      return leftCnt.compareTo(rightCnt);
-    }
   }
 
   // lock a row

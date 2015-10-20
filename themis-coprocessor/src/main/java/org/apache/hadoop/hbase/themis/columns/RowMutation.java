@@ -29,12 +29,12 @@ public class RowMutation {
   }
   
   public boolean addMutation(Column column, Type type, byte[] value, boolean onlyLock) {
-    // 3 scene: put, delete, onlyLock, Type.Minimum:onlyLock
+    // 3 scene: put, delete, lockRow, Type.Minimum:lockRow
     if ( onlyLock ) {
       type = Type.Minimum;
     }
     boolean contained = mutations.containsKey(column);
-    // onlyLock, has not data modify, if contained, then not replace, also can lock
+    // lockRow, only lock row, has not data modify, if contained, then not replace, also can lock
     if ( !contained || !onlyLock ) {
       mutations.put(column, new Pair<Type, byte[]>(type, value));
     }

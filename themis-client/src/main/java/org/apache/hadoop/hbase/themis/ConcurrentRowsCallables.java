@@ -97,17 +97,21 @@ public class ConcurrentRowsCallables<R> {
 
     @Override
     public boolean equals(Object other) {
+      if (other == null) {
+        return false;
+      }
+
       if (!(other instanceof TableAndRows)) {
         return false;
       }
 
       TableAndRows tableAndRows = (TableAndRows) other;
-      if (!Bytes.equals(this.getTableName(), tableAndRows.getTableName())) {
-        return false;
-      }
-
       if (rows == tableAndRows) {
         return true;
+      }
+
+      if (!Bytes.equals(this.getTableName(), tableAndRows.getTableName())) {
+        return false;
       }
 
       int size = rows.size();

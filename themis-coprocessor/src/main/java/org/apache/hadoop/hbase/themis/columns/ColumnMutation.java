@@ -73,7 +73,7 @@ public class ColumnMutation extends Column {
     CellType type = null;
     if ( mutation.getType() == Type.Put ) {
       type = CellType.PUT;
-    } else if ( mutation.getType() == Type.Minimum ) {  // only lock, has not data change
+    } else if ( mutation.getType() == Type.Minimum ) {  // lockRow scene, only lock, has not data change
       type = CellType.MINIMUM;
     } else {
       type = CellType.DELETE_COLUMN;
@@ -92,7 +92,7 @@ public class ColumnMutation extends Column {
     Type kvType = null;
     if ( type == CellType.PUT ) {
       kvType = Type.Put;
-    } else if ( type == CellType.MINIMUM ) {  // only lock, has not data change
+    } else if ( type == CellType.MINIMUM ) {  // lockRow scene, only lock, has not data change
       kvType = Type.Minimum;
     } else {
       kvType = Type.DeleteColumn;

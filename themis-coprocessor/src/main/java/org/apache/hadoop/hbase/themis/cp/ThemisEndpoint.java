@@ -119,13 +119,13 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
       hasConfigBatchThreadCount = true;
       int newBatchPreCount = env.getConfiguration().getInt(THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT,
           DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT);
-      if (newBatchPreCount > DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT) {
+      if (newBatchPreCount > 0 && newBatchPreCount != DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT) {
         batchPrewriteSecPool.setCorePoolSize(newBatchPreCount);
       }
 
       int newBatchCommitCount = env.getConfiguration().getInt(THEMIS_BATCH_COMMIT_SECONDARY_THREAD_COUNT,
           DEFAULT_THEMIS_BATCH_COMMIT_SECONDARY_THREAD_COUNT);
-      if (newBatchCommitCount > DEFAULT_THEMIS_BATCH_COMMIT_SECONDARY_THREAD_COUNT) {
+      if (newBatchCommitCount > 0 && newBatchCommitCount > DEFAULT_THEMIS_BATCH_COMMIT_SECONDARY_THREAD_COUNT) {
         batchCommitSecPool.setCorePoolSize(newBatchCommitCount);
       }
       LOG.info("themis batch prewrite secondary thread count : " + newBatchPreCount);
@@ -291,6 +291,7 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
       List<Future<ThemisPrewriteResult>> list = new ArrayList<Future<ThemisPrewriteResult>>();
       for (ThemisPrewrite prewrite : prews) {
         if (!HRegion.rowIsInRange(env.getRegion().getRegionInfo(), prewrite.getRow().toByteArray())) {
+          // row can transfer to other region, then client will try
           builder.addRowsNotInRegion(prewrite.getRow());
           LOG.warn("row not in region, rowkey:" + prewrite.getRow().toString());
           continue;
@@ -614,7 +615,7 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
         writeColumn = ColumnUtil.getDeleteColumn(mutation);
       }
 
-      // if is not put or delete, then it is only a lock, has not data change
+      // if is not put or delete, then it is lockRow, only lock, has not data change
       if ( writeColumn != null ) {
         writePut.add(writeColumn.getFamily(), writeColumn.getQualifier(), commitTs,
                 Bytes.toBytes(prewriteTs));
