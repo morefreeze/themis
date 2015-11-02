@@ -1,10 +1,13 @@
 package org.apache.hadoop.hbase.themis.cp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HConnection;
@@ -18,7 +21,6 @@ import org.apache.hadoop.hbase.protobuf.generated.ClientProtos;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.ColumnMutation;
 import org.apache.hadoop.hbase.themis.columns.RowMutation;
-import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest;
@@ -46,9 +48,12 @@ import org.apache.hadoop.hbase.util.Bytes;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.HBaseZeroCopyByteString;
 
+import static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.*;
+
 // coprocessor client for ThemisProtocol
 public class ThemisEndpointClient {
   private final HConnection conn;
+  private static final Log LOG = LogFactory.getLog(ThemisEndpointClient.class);
 
   public ThemisEndpointClient(HConnection connection) {
     this.conn = connection;
@@ -70,7 +75,7 @@ public class ThemisEndpointClient {
       try {
         table = conn.getTable(tableName);
         CoprocessorRpcChannel channel = table.coprocessorService(row);
-        Stub stub = (Stub) ProtobufUtil.newServiceStub(ThemisProtos.ThemisService.class, channel);
+        Stub stub = (Stub) ProtobufUtil.newServiceStub(ThemisService.class, channel);
         return invokeCoprocessor(stub);
       } catch (Throwable e) {
         throw new IOException(e);
@@ -111,6 +116,38 @@ public class ThemisEndpointClient {
         return ProtobufUtil.toResult(rpcCallback.get());
       }
     }.run();
+  }
+
+  public List<Result> themisBatchGet(final byte[] tableName, final List<Get> gets, final long startTs,
+                                     final boolean ignoreLock) throws IOException {
+    if (gets.size() == 0) {
+      return null;
+    }
+    ThemisBatchGetResponse batchGetResponse = new CoprocessorCallable<ThemisBatchGetResponse>(conn, tableName, gets.get(0).getRow()){
+      @Override
+      public ThemisBatchGetResponse invokeCoprocessor(Stub instance) throws Throwable {
+        ThemisBatchGetRequest.Builder builder = ThemisBatchGetRequest.newBuilder();
+        for (Get g : gets) {
+          builder.addGets(ProtobufUtil.toGet(g));
+        }
+        builder.setStartTs(startTs);
+        builder.setIgnoreLock(ignoreLock);
+        ServerRpcController controller = new ServerRpcController();
+        BlockingRpcCallback<ThemisBatchGetResponse> rpcCallback = new BlockingRpcCallback<ThemisBatchGetResponse>();
+        instance.themisBatchGet(controller, builder.build(), rpcCallback);
+        checkRpcException(controller);
+        return rpcCallback.get();
+      }
+    }.run();
+    // if contain results
+    if (batchGetResponse.getRsCount() > 0) {
+      List<Result> results = new ArrayList<Result>();
+      for (ClientProtos.Result r : batchGetResponse.getRsList()) {
+        results.add(ProtobufUtil.toResult(r));
+      }
+      return results;
+    }
+    return null;
   }
 
   public ThemisLock prewriteSecondaryRow(final byte[] tableName, final byte[] row,

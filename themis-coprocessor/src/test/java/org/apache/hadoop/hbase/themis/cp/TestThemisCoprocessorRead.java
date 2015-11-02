@@ -1,8 +1,12 @@
 package org.apache.hadoop.hbase.themis.cp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue;
@@ -24,8 +28,10 @@ import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.filter.ValueFilter;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.ColumnUtil;
+import org.apache.hadoop.hbase.themis.columns.RowMutation;
 import org.apache.hadoop.hbase.themis.lock.ThemisLock;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.hbase.util.Pair;
 import org.apache.hadoop.hbase.util.Threads;
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,7 +64,38 @@ public class TestThemisCoprocessorRead extends TransactionTestBase {
       Assert.assertEquals(0, internalResult.size());
     }
   }
-  
+
+  @Test
+  public void testThemisBatchGetSuccess() throws IOException {
+    commitTestTransaction();
+
+    List<Get> gets = new ArrayList<Get>();
+    for (ColumnCoordinate columnCoordinate : TRANSACTION_COLUMNS) {
+      Get get = new Get(columnCoordinate.getRow()).addColumn(columnCoordinate.getFamily(), columnCoordinate.getQualifier());
+      gets.add(get);
+    }
+    List<Result> results = cpClient.themisBatchGet(TABLENAME, gets, commitTs + 1, false);
+    Assert.assertNotNull(results);
+    Assert.assertTrue(results.size() > 0);
+  }
+
+  @Test
+  public void testThemisBatchGetFailed() throws IOException {
+    commitTestTransaction();
+
+    List<Get> gets = new ArrayList<Get>();
+    List<Result> results = cpClient.themisBatchGet(TABLENAME, gets, commitTs + 1, false);
+    Assert.assertNull(results);
+
+    gets = new ArrayList<Get>();
+    for (ColumnCoordinate columnCoordinate : TRANSACTION_COLUMNS) {
+      Get get = new Get("no such row".getBytes()).addColumn(columnCoordinate.getFamily(), columnCoordinate.getQualifier());
+      gets.add(get);
+    }
+    results = cpClient.themisBatchGet(TABLENAME, gets, commitTs + 1, false);
+    Assert.assertNull(results);
+  }
+
   @Test
   public void testThemisGetSuccess() throws IOException {
     commitTestTransaction();
