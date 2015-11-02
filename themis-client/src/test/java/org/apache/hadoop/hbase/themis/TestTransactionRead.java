@@ -3,7 +3,6 @@ package org.apache.hadoop.hbase.themis;
 import java.io.IOException;
 
 import org.apache.hadoop.hbase.client.Result;
-import org.apache.hadoop.hbase.themis.ThemisGet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -92,4 +91,5 @@ public class TestTransactionRead extends ClientTestBase {
     result = transaction.get(TABLENAME, constructGetWithMultiColumns());
     checkReadColumnResultWithTs(result, COLUMN_WITH_ANOTHER_FAMILY, prewriteTs - 2);
   }  
+  
 }

@@ -107,7 +107,7 @@ public class TestBase {
   
   public static void addToRowMutation(RowMutation rowMutation, ColumnCoordinate column) {
     Type type = getColumnType(column);
-    rowMutation.addMutation(column, type, VALUE);
+    rowMutation.addMutation(column, type, VALUE, false);
   }
   
   // construct primary and secondary lock

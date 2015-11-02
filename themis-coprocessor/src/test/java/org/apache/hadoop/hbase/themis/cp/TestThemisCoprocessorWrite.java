@@ -2,13 +2,17 @@ package org.apache.hadoop.hbase.themis.cp;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NavigableMap;
 
 import junit.framework.Assert;
 
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue.Type;
+import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.client.HTableInterface;
+import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.themis.columns.Column;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.ColumnMutation;

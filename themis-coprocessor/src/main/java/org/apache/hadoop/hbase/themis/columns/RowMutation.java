@@ -20,17 +20,24 @@ public class RowMutation {
     this.row = row;
   }
   
-  public boolean addMutation(byte[] family, byte[] qualifier, Type type, byte[] value) {
-    return addMutation(new Column(family, qualifier), type, value);
+  public boolean addMutation(byte[] family, byte[] qualifier, Type type, byte[] value, boolean onlyLock) {
+    return addMutation(new Column(family, qualifier), type, value, onlyLock);
   }
   
-  public boolean addMutation(byte[] family, byte[] qualifier, byte type, byte[] value) {
-    return addMutation(family, qualifier, Type.codeToType(type), value);
+  public boolean addMutation(byte[] family, byte[] qualifier, byte type, byte[] value, boolean onlyLock) {
+    return addMutation(family, qualifier, Type.codeToType(type), value, onlyLock);
   }
   
-  public boolean addMutation(Column column, Type type, byte[] value) {
+  public boolean addMutation(Column column, Type type, byte[] value, boolean onlyLock) {
+    // 3 scene: put, delete, lockRow, Type.Minimum:lockRow
+    if ( onlyLock ) {
+      type = Type.Minimum;
+    }
     boolean contained = mutations.containsKey(column);
-    mutations.put(column, new Pair<Type, byte[]>(type, value));
+    // lockRow, only lock row, has not data modify, if contained, then not replace, also can lock
+    if ( !contained || !onlyLock ) {
+      mutations.put(column, new Pair<Type, byte[]>(type, value));
+    }
     return !contained;
   }
   
@@ -90,7 +97,7 @@ public class RowMutation {
     String result = Bytes.toString(row) + "\n";
     List<ColumnMutation> mutationList = mutationList();
     for (ColumnMutation mutation : mutationList) {
-      result += ("columnMutation=" + mutation);
+      result += ("columnMutation=" + mutation+",");
     }
     return result;
   }

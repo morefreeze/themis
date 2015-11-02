@@ -7,7 +7,6 @@ import java.util.TreeMap;
 
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.KeyValue.Type;
-import org.apache.hadoop.hbase.themis.ConcurrentRowCallables.TableAndRow;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.RowMutation;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -16,10 +15,14 @@ import org.apache.hadoop.hbase.util.Pair;
 // local cache themis transaction
 public class ColumnMutationCache {
   // index mutations by table and row
-  private Map<byte[], Map<byte[], RowMutation>> mutations =
-      new TreeMap<byte[], Map<byte[], RowMutation>>(Bytes.BYTES_COMPARATOR); 
-  
+  private Map<byte[], Map<byte[], RowMutation>> mutations = new TreeMap<byte[], Map<byte[], RowMutation>>(
+      Bytes.BYTES_COMPARATOR);
+
   public boolean addMutation(byte[] tableName, KeyValue kv) {
+    return addMutation(tableName, kv, false);
+  }
+
+  public boolean addMutation(byte[] tableName, KeyValue kv, boolean onlyLock) {
     Map<byte[], RowMutation> rowMutations = mutations.get(tableName);
     if (rowMutations == null) {
       rowMutations = new TreeMap<byte[], RowMutation>(Bytes.BYTES_COMPARATOR);
@@ -30,13 +33,13 @@ public class ColumnMutationCache {
       rowMutation = new RowMutation(kv.getRow());
       rowMutations.put(kv.getRow(), rowMutation);
     }
-    return rowMutation.addMutation(kv.getFamily(), kv.getQualifier(), kv.getType(), kv.getValue());
+    return rowMutation.addMutation(kv.getFamily(), kv.getQualifier(), kv.getType(), kv.getValue(), onlyLock);
   }
-  
+
   public Set<Entry<byte[], Map<byte[], RowMutation>>> getMutations() {
     return mutations.entrySet();
   }
-  
+
   // return <rowCount, columnCount>
   public Pair<Integer, Integer> getMutationsCount() {
     int rowCount = 0;
@@ -49,7 +52,7 @@ public class ColumnMutationCache {
     }
     return new Pair<Integer, Integer>(rowCount, columnCount);
   }
-  
+
   public int size() {
     int size = 0;
     for (Entry<byte[], Map<byte[], RowMutation>> tableEntry : mutations.entrySet()) {
@@ -59,11 +62,11 @@ public class ColumnMutationCache {
     }
     return size;
   }
-  
+
   public boolean hasMutation(ColumnCoordinate columnCoordinate) {
     return getMutation(columnCoordinate) != null;
   }
-  
+
   public Pair<Type, byte[]> getMutation(ColumnCoordinate column) {
     Map<byte[], RowMutation> tableMutation = mutations.get(column.getTableName());
     if (tableMutation != null) {
@@ -74,16 +77,12 @@ public class ColumnMutationCache {
     }
     return null;
   }
-  
+
   public Type getType(ColumnCoordinate columnCoordinate) {
     Pair<Type, byte[]> mutation = getMutation(columnCoordinate);
     return mutation == null ? null : mutation.getFirst();
   }
-  
-  public RowMutation getRowMutation(TableAndRow tableAndRow) {
-    return getRowMutation(tableAndRow.getTableName(), tableAndRow.getRowkey());
-  }
-  
+
   public RowMutation getRowMutation(byte[] tableName, byte[] rowkey) {
     Map<byte[], RowMutation> rowMutations = mutations.get(tableName);
     return rowMutations == null ? null : rowMutations.get(rowkey);

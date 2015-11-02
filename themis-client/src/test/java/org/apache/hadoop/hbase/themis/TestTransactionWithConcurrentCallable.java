@@ -1,6 +1,8 @@
 package org.apache.hadoop.hbase.themis;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.RejectedExecutionException;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.themis.ConcurrentRowCallables.TableAndRow;
+import org.apache.hadoop.hbase.themis.ConcurrentRowsCallables.TableAndRows;
 import org.apache.hadoop.hbase.themis.columns.Column;
 import org.apache.hadoop.hbase.themis.columns.ColumnCoordinate;
 import org.apache.hadoop.hbase.themis.columns.RowMutation;
@@ -47,7 +50,7 @@ public class TestTransactionWithConcurrentCallable extends ClientTestBase {
   @Test
   public void testConcurrentPrewriteSuccess() throws IOException {
     preparePrewrite();
-    transaction.concurrentPrewriteSecondaries();
+    transaction.batchPrewriteSecondaries();
     checkPrewriteSecondariesSuccess();
   }
   
@@ -68,13 +71,15 @@ public class TestTransactionWithConcurrentCallable extends ClientTestBase {
     preparePrewrite();
     writePutColumn(conflictColumn, prewriteTs + 1, commitTs + 1);
     try {
-      transaction.concurrentPrewriteSecondaries();
+      transaction.batchPrewriteSecondaries();
       Assert.fail();
     } catch (MultiRowExceptions e) {
       waitForThreadPoolTerminated();
       checkTransactionRollback();
       Assert.assertEquals(1, e.getExceptions().size());
-      TableAndRow tableAndRow = new TableAndRow(conflictColumn.getTableName(), conflictColumn.getRow());
+      List<byte[]> rows = new ArrayList<byte[]>();
+      rows.add(conflictColumn.getRow());
+      TableAndRows tableAndRow = new TableAndRows(conflictColumn.getTableName(), rows);
       IOException exception = e.getExceptions().get(tableAndRow);
       Assert.assertTrue(exception.getCause().getCause() instanceof WriteConflictException);
     }
@@ -87,7 +92,7 @@ public class TestTransactionWithConcurrentCallable extends ClientTestBase {
     conf.setInt(TransactionConstant.THEMIS_RETRY_COUNT, 0);
     preparePrewrite();
     try {
-      transaction.concurrentPrewriteSecondaries();
+      transaction.batchPrewriteSecondaries();
       Assert.fail();
     } catch (MultiRowExceptions e) {
       waitForThreadPoolTerminated();
@@ -105,7 +110,7 @@ public class TestTransactionWithConcurrentCallable extends ClientTestBase {
     createThreadPoolForToRejectRequest();
     Transaction.setThreadPool(this.threadPool);
     try {
-      transaction.concurrentPrewriteSecondaries();
+      transaction.batchPrewriteSecondaries();
       Assert.fail();
     } catch (MultiRowExceptions e) {
       waitForThreadPoolTerminated();
@@ -120,13 +125,13 @@ public class TestTransactionWithConcurrentCallable extends ClientTestBase {
   public void testConcurrentCommitSecondaries() throws IOException {
     // commit secondary success
     prepareCommit();
-    transaction.concurrentCommitSecondaries();
+    transaction.batchCommitSecondaries();
     checkCommitSecondaryRowsSuccess();
     // secondary lock has been removed by commit
     deleteOldDataAndUpdateTs();
     prepareCommit();
     eraseLock(COLUMN_WITH_ANOTHER_TABLE, prewriteTs);
-    transaction.concurrentCommitSecondaries();
+    transaction.batchCommitSecondaries();
     checkCommitSecondaryRowsSuccess();
     // commit one secondary lock fail
     deleteOldDataAndUpdateTs();
@@ -155,7 +160,7 @@ public class TestTransactionWithConcurrentCallable extends ClientTestBase {
     createThreadPoolForToRejectRequest();
     Transaction.setThreadPool(this.threadPool);
     try {
-      transaction.concurrentCommitSecondaries();
+      transaction.batchCommitSecondaries();
     } catch (MultiRowExceptions e) {
       waitForThreadPoolTerminated();
       Assert.assertEquals(1, e.getExceptions().size());

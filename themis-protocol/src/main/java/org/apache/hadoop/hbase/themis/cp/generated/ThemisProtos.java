@@ -765,7 +765,1636 @@ public final class ThemisProtos {
     // @@protoc_insertion_point(class_scope:ThemisGetRequest)
   }
 
-  public interface ThemisPrewriteRequestOrBuilder
+  public interface ThemisBatchGetRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .Get gets = 1;
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get> 
+        getGetsList();
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get getGets(int index);
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    int getGetsCount();
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder> 
+        getGetsOrBuilderList();
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder getGetsOrBuilder(
+        int index);
+
+    // required uint64 startTs = 2;
+    /**
+     * <code>required uint64 startTs = 2;</code>
+     */
+    boolean hasStartTs();
+    /**
+     * <code>required uint64 startTs = 2;</code>
+     */
+    long getStartTs();
+
+    // required bool ignoreLock = 3;
+    /**
+     * <code>required bool ignoreLock = 3;</code>
+     */
+    boolean hasIgnoreLock();
+    /**
+     * <code>required bool ignoreLock = 3;</code>
+     */
+    boolean getIgnoreLock();
+  }
+  /**
+   * Protobuf type {@code ThemisBatchGetRequest}
+   */
+  public static final class ThemisBatchGetRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchGetRequestOrBuilder {
+    // Use ThemisBatchGetRequest.newBuilder() to construct.
+    private ThemisBatchGetRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchGetRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchGetRequest defaultInstance;
+    public static ThemisBatchGetRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchGetRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchGetRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                gets_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              gets_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.PARSER, extensionRegistry));
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000001;
+              startTs_ = input.readUInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              ignoreLock_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          gets_ = java.util.Collections.unmodifiableList(gets_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchGetRequest> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchGetRequest>() {
+      public ThemisBatchGetRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchGetRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchGetRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // repeated .Get gets = 1;
+    public static final int GETS_FIELD_NUMBER = 1;
+    private java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get> gets_;
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get> getGetsList() {
+      return gets_;
+    }
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder> 
+        getGetsOrBuilderList() {
+      return gets_;
+    }
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    public int getGetsCount() {
+      return gets_.size();
+    }
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get getGets(int index) {
+      return gets_.get(index);
+    }
+    /**
+     * <code>repeated .Get gets = 1;</code>
+     */
+    public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder getGetsOrBuilder(
+        int index) {
+      return gets_.get(index);
+    }
+
+    // required uint64 startTs = 2;
+    public static final int STARTTS_FIELD_NUMBER = 2;
+    private long startTs_;
+    /**
+     * <code>required uint64 startTs = 2;</code>
+     */
+    public boolean hasStartTs() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint64 startTs = 2;</code>
+     */
+    public long getStartTs() {
+      return startTs_;
+    }
+
+    // required bool ignoreLock = 3;
+    public static final int IGNORELOCK_FIELD_NUMBER = 3;
+    private boolean ignoreLock_;
+    /**
+     * <code>required bool ignoreLock = 3;</code>
+     */
+    public boolean hasIgnoreLock() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bool ignoreLock = 3;</code>
+     */
+    public boolean getIgnoreLock() {
+      return ignoreLock_;
+    }
+
+    private void initFields() {
+      gets_ = java.util.Collections.emptyList();
+      startTs_ = 0L;
+      ignoreLock_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasStartTs()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIgnoreLock()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getGetsCount(); i++) {
+        if (!getGets(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < gets_.size(); i++) {
+        output.writeMessage(1, gets_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(2, startTs_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(3, ignoreLock_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < gets_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, gets_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, startTs_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, ignoreLock_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest) obj;
+
+      boolean result = true;
+      result = result && getGetsList()
+          .equals(other.getGetsList());
+      result = result && (hasStartTs() == other.hasStartTs());
+      if (hasStartTs()) {
+        result = result && (getStartTs()
+            == other.getStartTs());
+      }
+      result = result && (hasIgnoreLock() == other.hasIgnoreLock());
+      if (hasIgnoreLock()) {
+        result = result && (getIgnoreLock()
+            == other.getIgnoreLock());
+      }
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getGetsCount() > 0) {
+        hash = (37 * hash) + GETS_FIELD_NUMBER;
+        hash = (53 * hash) + getGetsList().hashCode();
+      }
+      if (hasStartTs()) {
+        hash = (37 * hash) + STARTTS_FIELD_NUMBER;
+        hash = (53 * hash) + hashLong(getStartTs());
+      }
+      if (hasIgnoreLock()) {
+        hash = (37 * hash) + IGNORELOCK_FIELD_NUMBER;
+        hash = (53 * hash) + hashBoolean(getIgnoreLock());
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchGetRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getGetsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (getsBuilder_ == null) {
+          gets_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          getsBuilder_.clear();
+        }
+        startTs_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        ignoreLock_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetRequest_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (getsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            gets_ = java.util.Collections.unmodifiableList(gets_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.gets_ = gets_;
+        } else {
+          result.gets_ = getsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.startTs_ = startTs_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.ignoreLock_ = ignoreLock_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.getDefaultInstance()) return this;
+        if (getsBuilder_ == null) {
+          if (!other.gets_.isEmpty()) {
+            if (gets_.isEmpty()) {
+              gets_ = other.gets_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureGetsIsMutable();
+              gets_.addAll(other.gets_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.gets_.isEmpty()) {
+            if (getsBuilder_.isEmpty()) {
+              getsBuilder_.dispose();
+              getsBuilder_ = null;
+              gets_ = other.gets_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              getsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getGetsFieldBuilder() : null;
+            } else {
+              getsBuilder_.addAllMessages(other.gets_);
+            }
+          }
+        }
+        if (other.hasStartTs()) {
+          setStartTs(other.getStartTs());
+        }
+        if (other.hasIgnoreLock()) {
+          setIgnoreLock(other.getIgnoreLock());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasStartTs()) {
+          
+          return false;
+        }
+        if (!hasIgnoreLock()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getGetsCount(); i++) {
+          if (!getGets(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .Get gets = 1;
+      private java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get> gets_ =
+        java.util.Collections.emptyList();
+      private void ensureGetsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          gets_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get>(gets_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder> getsBuilder_;
+
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get> getGetsList() {
+        if (getsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(gets_);
+        } else {
+          return getsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public int getGetsCount() {
+        if (getsBuilder_ == null) {
+          return gets_.size();
+        } else {
+          return getsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get getGets(int index) {
+        if (getsBuilder_ == null) {
+          return gets_.get(index);
+        } else {
+          return getsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder setGets(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get value) {
+        if (getsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGetsIsMutable();
+          gets_.set(index, value);
+          onChanged();
+        } else {
+          getsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder setGets(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder builderForValue) {
+        if (getsBuilder_ == null) {
+          ensureGetsIsMutable();
+          gets_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          getsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder addGets(org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get value) {
+        if (getsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGetsIsMutable();
+          gets_.add(value);
+          onChanged();
+        } else {
+          getsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder addGets(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get value) {
+        if (getsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGetsIsMutable();
+          gets_.add(index, value);
+          onChanged();
+        } else {
+          getsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder addGets(
+          org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder builderForValue) {
+        if (getsBuilder_ == null) {
+          ensureGetsIsMutable();
+          gets_.add(builderForValue.build());
+          onChanged();
+        } else {
+          getsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder addGets(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder builderForValue) {
+        if (getsBuilder_ == null) {
+          ensureGetsIsMutable();
+          gets_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          getsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder addAllGets(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get> values) {
+        if (getsBuilder_ == null) {
+          ensureGetsIsMutable();
+          super.addAll(values, gets_);
+          onChanged();
+        } else {
+          getsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder clearGets() {
+        if (getsBuilder_ == null) {
+          gets_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          getsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public Builder removeGets(int index) {
+        if (getsBuilder_ == null) {
+          ensureGetsIsMutable();
+          gets_.remove(index);
+          onChanged();
+        } else {
+          getsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder getGetsBuilder(
+          int index) {
+        return getGetsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder getGetsOrBuilder(
+          int index) {
+        if (getsBuilder_ == null) {
+          return gets_.get(index);  } else {
+          return getsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder> 
+           getGetsOrBuilderList() {
+        if (getsBuilder_ != null) {
+          return getsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(gets_);
+        }
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder addGetsBuilder() {
+        return getGetsFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder addGetsBuilder(
+          int index) {
+        return getGetsFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Get gets = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder> 
+           getGetsBuilderList() {
+        return getGetsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder> 
+          getGetsFieldBuilder() {
+        if (getsBuilder_ == null) {
+          getsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Get.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.GetOrBuilder>(
+                  gets_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          gets_ = null;
+        }
+        return getsBuilder_;
+      }
+
+      // required uint64 startTs = 2;
+      private long startTs_ ;
+      /**
+       * <code>required uint64 startTs = 2;</code>
+       */
+      public boolean hasStartTs() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required uint64 startTs = 2;</code>
+       */
+      public long getStartTs() {
+        return startTs_;
+      }
+      /**
+       * <code>required uint64 startTs = 2;</code>
+       */
+      public Builder setStartTs(long value) {
+        bitField0_ |= 0x00000002;
+        startTs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 startTs = 2;</code>
+       */
+      public Builder clearStartTs() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        startTs_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required bool ignoreLock = 3;
+      private boolean ignoreLock_ ;
+      /**
+       * <code>required bool ignoreLock = 3;</code>
+       */
+      public boolean hasIgnoreLock() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bool ignoreLock = 3;</code>
+       */
+      public boolean getIgnoreLock() {
+        return ignoreLock_;
+      }
+      /**
+       * <code>required bool ignoreLock = 3;</code>
+       */
+      public Builder setIgnoreLock(boolean value) {
+        bitField0_ |= 0x00000004;
+        ignoreLock_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool ignoreLock = 3;</code>
+       */
+      public Builder clearIgnoreLock() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        ignoreLock_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchGetRequest)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchGetRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchGetRequest)
+  }
+
+  public interface ThemisBatchGetResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .Result rs = 1;
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> 
+        getRsList();
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result getRs(int index);
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    int getRsCount();
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder> 
+        getRsOrBuilderList();
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder getRsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ThemisBatchGetResponse}
+   */
+  public static final class ThemisBatchGetResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchGetResponseOrBuilder {
+    // Use ThemisBatchGetResponse.newBuilder() to construct.
+    private ThemisBatchGetResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchGetResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchGetResponse defaultInstance;
+    public static ThemisBatchGetResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchGetResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchGetResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                rs_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              rs_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          rs_ = java.util.Collections.unmodifiableList(rs_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchGetResponse> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchGetResponse>() {
+      public ThemisBatchGetResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchGetResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchGetResponse> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .Result rs = 1;
+    public static final int RS_FIELD_NUMBER = 1;
+    private java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> rs_;
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> getRsList() {
+      return rs_;
+    }
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder> 
+        getRsOrBuilderList() {
+      return rs_;
+    }
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    public int getRsCount() {
+      return rs_.size();
+    }
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result getRs(int index) {
+      return rs_.get(index);
+    }
+    /**
+     * <code>repeated .Result rs = 1;</code>
+     */
+    public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder getRsOrBuilder(
+        int index) {
+      return rs_.get(index);
+    }
+
+    private void initFields() {
+      rs_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < rs_.size(); i++) {
+        output.writeMessage(1, rs_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < rs_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, rs_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse) obj;
+
+      boolean result = true;
+      result = result && getRsList()
+          .equals(other.getRsList());
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getRsCount() > 0) {
+        hash = (37 * hash) + RS_FIELD_NUMBER;
+        hash = (53 * hash) + getRsList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchGetResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getRsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (rsBuilder_ == null) {
+          rs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          rsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchGetResponse_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse(this);
+        int from_bitField0_ = bitField0_;
+        if (rsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            rs_ = java.util.Collections.unmodifiableList(rs_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.rs_ = rs_;
+        } else {
+          result.rs_ = rsBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance()) return this;
+        if (rsBuilder_ == null) {
+          if (!other.rs_.isEmpty()) {
+            if (rs_.isEmpty()) {
+              rs_ = other.rs_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureRsIsMutable();
+              rs_.addAll(other.rs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.rs_.isEmpty()) {
+            if (rsBuilder_.isEmpty()) {
+              rsBuilder_.dispose();
+              rsBuilder_ = null;
+              rs_ = other.rs_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              rsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRsFieldBuilder() : null;
+            } else {
+              rsBuilder_.addAllMessages(other.rs_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .Result rs = 1;
+      private java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> rs_ =
+        java.util.Collections.emptyList();
+      private void ensureRsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          rs_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result>(rs_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder> rsBuilder_;
+
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> getRsList() {
+        if (rsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(rs_);
+        } else {
+          return rsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public int getRsCount() {
+        if (rsBuilder_ == null) {
+          return rs_.size();
+        } else {
+          return rsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result getRs(int index) {
+        if (rsBuilder_ == null) {
+          return rs_.get(index);
+        } else {
+          return rsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder setRs(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result value) {
+        if (rsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRsIsMutable();
+          rs_.set(index, value);
+          onChanged();
+        } else {
+          rsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder setRs(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder builderForValue) {
+        if (rsBuilder_ == null) {
+          ensureRsIsMutable();
+          rs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          rsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder addRs(org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result value) {
+        if (rsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRsIsMutable();
+          rs_.add(value);
+          onChanged();
+        } else {
+          rsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder addRs(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result value) {
+        if (rsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRsIsMutable();
+          rs_.add(index, value);
+          onChanged();
+        } else {
+          rsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder addRs(
+          org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder builderForValue) {
+        if (rsBuilder_ == null) {
+          ensureRsIsMutable();
+          rs_.add(builderForValue.build());
+          onChanged();
+        } else {
+          rsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder addRs(
+          int index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder builderForValue) {
+        if (rsBuilder_ == null) {
+          ensureRsIsMutable();
+          rs_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          rsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder addAllRs(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> values) {
+        if (rsBuilder_ == null) {
+          ensureRsIsMutable();
+          super.addAll(values, rs_);
+          onChanged();
+        } else {
+          rsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder clearRs() {
+        if (rsBuilder_ == null) {
+          rs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          rsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public Builder removeRs(int index) {
+        if (rsBuilder_ == null) {
+          ensureRsIsMutable();
+          rs_.remove(index);
+          onChanged();
+        } else {
+          rsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder getRsBuilder(
+          int index) {
+        return getRsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder getRsOrBuilder(
+          int index) {
+        if (rsBuilder_ == null) {
+          return rs_.get(index);  } else {
+          return rsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder> 
+           getRsOrBuilderList() {
+        if (rsBuilder_ != null) {
+          return rsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(rs_);
+        }
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder addRsBuilder() {
+        return getRsFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder addRsBuilder(
+          int index) {
+        return getRsFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Result rs = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder> 
+           getRsBuilderList() {
+        return getRsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder> 
+          getRsFieldBuilder() {
+        if (rsBuilder_ == null) {
+          rsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.Builder, org.apache.hadoop.hbase.protobuf.generated.ClientProtos.ResultOrBuilder>(
+                  rs_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          rs_ = null;
+        }
+        return rsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchGetResponse)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchGetResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchGetResponse)
+  }
+
+  public interface ThemisPrewriteOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // required bytes row = 1;
@@ -844,24 +2473,24 @@ public final class ThemisProtos {
     int getPrimaryIndex();
   }
   /**
-   * Protobuf type {@code ThemisPrewriteRequest}
+   * Protobuf type {@code ThemisPrewrite}
    */
-  public static final class ThemisPrewriteRequest extends
+  public static final class ThemisPrewrite extends
       com.google.protobuf.GeneratedMessage
-      implements ThemisPrewriteRequestOrBuilder {
-    // Use ThemisPrewriteRequest.newBuilder() to construct.
-    private ThemisPrewriteRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements ThemisPrewriteOrBuilder {
+    // Use ThemisPrewrite.newBuilder() to construct.
+    private ThemisPrewrite(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private ThemisPrewriteRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private ThemisPrewrite(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final ThemisPrewriteRequest defaultInstance;
-    public static ThemisPrewriteRequest getDefaultInstance() {
+    private static final ThemisPrewrite defaultInstance;
+    public static ThemisPrewrite getDefaultInstance() {
       return defaultInstance;
     }
 
-    public ThemisPrewriteRequest getDefaultInstanceForType() {
+    public ThemisPrewrite getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -871,7 +2500,7 @@ public final class ThemisProtos {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private ThemisPrewriteRequest(
+    private ThemisPrewrite(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -944,28 +2573,28 @@ public final class ThemisProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_descriptor;
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewrite_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_fieldAccessorTable
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewrite_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.Builder.class);
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ThemisPrewriteRequest> PARSER =
-        new com.google.protobuf.AbstractParser<ThemisPrewriteRequest>() {
-      public ThemisPrewriteRequest parsePartialFrom(
+    public static com.google.protobuf.Parser<ThemisPrewrite> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisPrewrite>() {
+      public ThemisPrewrite parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ThemisPrewriteRequest(input, extensionRegistry);
+        return new ThemisPrewrite(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ThemisPrewriteRequest> getParserForType() {
+    public com.google.protobuf.Parser<ThemisPrewrite> getParserForType() {
       return PARSER;
     }
 
@@ -1194,10 +2823,10 @@ public final class ThemisProtos {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)) {
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite)) {
         return super.equals(obj);
       }
-      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest) obj;
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite) obj;
 
       boolean result = true;
       result = result && (hasRow() == other.hasRow());
@@ -1269,53 +2898,53 @@ public final class ThemisProtos {
       return hash;
     }
 
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(byte[] data)
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(java.io.InputStream input)
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseDelimitedFrom(java.io.InputStream input)
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseDelimitedFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1324,7 +2953,7 @@ public final class ThemisProtos {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest prototype) {
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -1336,24 +2965,24 @@ public final class ThemisProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code ThemisPrewriteRequest}
+     * Protobuf type {@code ThemisPrewrite}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequestOrBuilder {
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_descriptor;
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewrite_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_fieldAccessorTable
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewrite_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.Builder.class);
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder.class);
       }
 
-      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.newBuilder()
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1399,23 +3028,23 @@ public final class ThemisProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_descriptor;
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewrite_descriptor;
       }
 
-      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest getDefaultInstanceForType() {
-        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance();
       }
 
-      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest build() {
-        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest result = buildPartial();
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest buildPartial() {
-        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest(this);
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1453,16 +3082,16 @@ public final class ThemisProtos {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest) {
-          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)other);
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest other) {
-        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance()) return this;
         if (other.hasRow()) {
           setRow(other.getRow());
         }
@@ -1536,11 +3165,11 @@ public final class ThemisProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parsedMessage = null;
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest) e.getUnfinishedMessage();
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1965,6 +3594,567 @@ public final class ThemisProtos {
         return this;
       }
 
+      // @@protoc_insertion_point(builder_scope:ThemisPrewrite)
+    }
+
+    static {
+      defaultInstance = new ThemisPrewrite(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisPrewrite)
+  }
+
+  public interface ThemisPrewriteRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required .ThemisPrewrite themisPrewrite = 1;
+    /**
+     * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    boolean hasThemisPrewrite();
+    /**
+     * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getThemisPrewrite();
+    /**
+     * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder getThemisPrewriteOrBuilder();
+  }
+  /**
+   * Protobuf type {@code ThemisPrewriteRequest}
+   */
+  public static final class ThemisPrewriteRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisPrewriteRequestOrBuilder {
+    // Use ThemisPrewriteRequest.newBuilder() to construct.
+    private ThemisPrewriteRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisPrewriteRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisPrewriteRequest defaultInstance;
+    public static ThemisPrewriteRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisPrewriteRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisPrewriteRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = themisPrewrite_.toBuilder();
+              }
+              themisPrewrite_ = input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(themisPrewrite_);
+                themisPrewrite_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisPrewriteRequest> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisPrewriteRequest>() {
+      public ThemisPrewriteRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisPrewriteRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisPrewriteRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required .ThemisPrewrite themisPrewrite = 1;
+    public static final int THEMISPREWRITE_FIELD_NUMBER = 1;
+    private org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite themisPrewrite_;
+    /**
+     * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public boolean hasThemisPrewrite() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getThemisPrewrite() {
+      return themisPrewrite_;
+    }
+    /**
+     * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder getThemisPrewriteOrBuilder() {
+      return themisPrewrite_;
+    }
+
+    private void initFields() {
+      themisPrewrite_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasThemisPrewrite()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getThemisPrewrite().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, themisPrewrite_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, themisPrewrite_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest) obj;
+
+      boolean result = true;
+      result = result && (hasThemisPrewrite() == other.hasThemisPrewrite());
+      if (hasThemisPrewrite()) {
+        result = result && getThemisPrewrite()
+            .equals(other.getThemisPrewrite());
+      }
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasThemisPrewrite()) {
+        hash = (37 * hash) + THEMISPREWRITE_FIELD_NUMBER;
+        hash = (53 * hash) + getThemisPrewrite().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisPrewriteRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getThemisPrewriteFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewrite_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance();
+        } else {
+          themisPrewriteBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteRequest_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (themisPrewriteBuilder_ == null) {
+          result.themisPrewrite_ = themisPrewrite_;
+        } else {
+          result.themisPrewrite_ = themisPrewriteBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance()) return this;
+        if (other.hasThemisPrewrite()) {
+          mergeThemisPrewrite(other.getThemisPrewrite());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasThemisPrewrite()) {
+          
+          return false;
+        }
+        if (!getThemisPrewrite().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required .ThemisPrewrite themisPrewrite = 1;
+      private org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite themisPrewrite_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> themisPrewriteBuilder_;
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public boolean hasThemisPrewrite() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getThemisPrewrite() {
+        if (themisPrewriteBuilder_ == null) {
+          return themisPrewrite_;
+        } else {
+          return themisPrewriteBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder setThemisPrewrite(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite value) {
+        if (themisPrewriteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          themisPrewrite_ = value;
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder setThemisPrewrite(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder builderForValue) {
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewrite_ = builderForValue.build();
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder mergeThemisPrewrite(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite value) {
+        if (themisPrewriteBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              themisPrewrite_ != org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance()) {
+            themisPrewrite_ =
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.newBuilder(themisPrewrite_).mergeFrom(value).buildPartial();
+          } else {
+            themisPrewrite_ = value;
+          }
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder clearThemisPrewrite() {
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewrite_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance();
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder getThemisPrewriteBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getThemisPrewriteFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder getThemisPrewriteOrBuilder() {
+        if (themisPrewriteBuilder_ != null) {
+          return themisPrewriteBuilder_.getMessageOrBuilder();
+        } else {
+          return themisPrewrite_;
+        }
+      }
+      /**
+       * <code>required .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> 
+          getThemisPrewriteFieldBuilder() {
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewriteBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder>(
+                  themisPrewrite_,
+                  getParentForChildren(),
+                  isClean());
+          themisPrewrite_ = null;
+        }
+        return themisPrewriteBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:ThemisPrewriteRequest)
     }
 
@@ -1979,19 +4169,19 @@ public final class ThemisProtos {
   public interface ThemisPrewriteResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated bytes result = 1;
+    // optional .ThemisPrewriteResult themisPrewriteResult = 1;
     /**
-     * <code>repeated bytes result = 1;</code>
+     * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
      */
-    java.util.List<com.google.protobuf.ByteString> getResultList();
+    boolean hasThemisPrewriteResult();
     /**
-     * <code>repeated bytes result = 1;</code>
+     * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
      */
-    int getResultCount();
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getThemisPrewriteResult();
     /**
-     * <code>repeated bytes result = 1;</code>
+     * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
      */
-    com.google.protobuf.ByteString getResult(int index);
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder getThemisPrewriteResultOrBuilder();
   }
   /**
    * Protobuf type {@code ThemisPrewriteResponse}
@@ -2045,11 +4235,16 @@ public final class ThemisProtos {
               break;
             }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                result_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-                mutable_bitField0_ |= 0x00000001;
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = themisPrewriteResult_.toBuilder();
               }
-              result_.add(input.readBytes());
+              themisPrewriteResult_ = input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(themisPrewriteResult_);
+                themisPrewriteResult_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
               break;
             }
           }
@@ -2060,9 +4255,6 @@ public final class ThemisProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          result_ = java.util.Collections.unmodifiableList(result_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2094,37 +4286,43 @@ public final class ThemisProtos {
       return PARSER;
     }
 
-    // repeated bytes result = 1;
-    public static final int RESULT_FIELD_NUMBER = 1;
-    private java.util.List<com.google.protobuf.ByteString> result_;
+    private int bitField0_;
+    // optional .ThemisPrewriteResult themisPrewriteResult = 1;
+    public static final int THEMISPREWRITERESULT_FIELD_NUMBER = 1;
+    private org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult themisPrewriteResult_;
     /**
-     * <code>repeated bytes result = 1;</code>
+     * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
      */
-    public java.util.List<com.google.protobuf.ByteString>
-        getResultList() {
-      return result_;
+    public boolean hasThemisPrewriteResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>repeated bytes result = 1;</code>
+     * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
      */
-    public int getResultCount() {
-      return result_.size();
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getThemisPrewriteResult() {
+      return themisPrewriteResult_;
     }
     /**
-     * <code>repeated bytes result = 1;</code>
+     * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
      */
-    public com.google.protobuf.ByteString getResult(int index) {
-      return result_.get(index);
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder getThemisPrewriteResultOrBuilder() {
+      return themisPrewriteResult_;
     }
 
     private void initFields() {
-      result_ = java.util.Collections.emptyList();
+      themisPrewriteResult_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (hasThemisPrewriteResult()) {
+        if (!getThemisPrewriteResult().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2132,8 +4330,8 @@ public final class ThemisProtos {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < result_.size(); i++) {
-        output.writeBytes(1, result_.get(i));
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, themisPrewriteResult_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2144,14 +4342,9 @@ public final class ThemisProtos {
       if (size != -1) return size;
 
       size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < result_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(result_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getResultList().size();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, themisPrewriteResult_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2176,8 +4369,11 @@ public final class ThemisProtos {
       org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse) obj;
 
       boolean result = true;
-      result = result && getResultList()
-          .equals(other.getResultList());
+      result = result && (hasThemisPrewriteResult() == other.hasThemisPrewriteResult());
+      if (hasThemisPrewriteResult()) {
+        result = result && getThemisPrewriteResult()
+            .equals(other.getThemisPrewriteResult());
+      }
       result = result &&
           getUnknownFields().equals(other.getUnknownFields());
       return result;
@@ -2191,9 +4387,9 @@ public final class ThemisProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      if (getResultCount() > 0) {
-        hash = (37 * hash) + RESULT_FIELD_NUMBER;
-        hash = (53 * hash) + getResultList().hashCode();
+      if (hasThemisPrewriteResult()) {
+        hash = (37 * hash) + THEMISPREWRITERESULT_FIELD_NUMBER;
+        hash = (53 * hash) + getThemisPrewriteResult().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -2296,6 +4492,7 @@ public final class ThemisProtos {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getThemisPrewriteResultFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2304,7 +4501,11 @@ public final class ThemisProtos {
 
       public Builder clear() {
         super.clear();
-        result_ = java.util.Collections.emptyList();
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResult_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance();
+        } else {
+          themisPrewriteResultBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -2333,11 +4534,16 @@ public final class ThemisProtos {
       public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse buildPartial() {
         org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse(this);
         int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          result_ = java.util.Collections.unmodifiableList(result_);
-          bitField0_ = (bitField0_ & ~0x00000001);
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        result.result_ = result_;
+        if (themisPrewriteResultBuilder_ == null) {
+          result.themisPrewriteResult_ = themisPrewriteResult_;
+        } else {
+          result.themisPrewriteResult_ = themisPrewriteResultBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -2353,21 +4559,20 @@ public final class ThemisProtos {
 
       public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse other) {
         if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance()) return this;
-        if (!other.result_.isEmpty()) {
-          if (result_.isEmpty()) {
-            result_ = other.result_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureResultIsMutable();
-            result_.addAll(other.result_);
-          }
-          onChanged();
+        if (other.hasThemisPrewriteResult()) {
+          mergeThemisPrewriteResult(other.getThemisPrewriteResult());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (hasThemisPrewriteResult()) {
+          if (!getThemisPrewriteResult().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -2390,76 +4595,121 @@ public final class ThemisProtos {
       }
       private int bitField0_;
 
-      // repeated bytes result = 1;
-      private java.util.List<com.google.protobuf.ByteString> result_ = java.util.Collections.emptyList();
-      private void ensureResultIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          result_ = new java.util.ArrayList<com.google.protobuf.ByteString>(result_);
-          bitField0_ |= 0x00000001;
-         }
+      // optional .ThemisPrewriteResult themisPrewriteResult = 1;
+      private org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult themisPrewriteResult_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> themisPrewriteResultBuilder_;
+      /**
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public boolean hasThemisPrewriteResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>repeated bytes result = 1;</code>
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
        */
-      public java.util.List<com.google.protobuf.ByteString>
-          getResultList() {
-        return java.util.Collections.unmodifiableList(result_);
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getThemisPrewriteResult() {
+        if (themisPrewriteResultBuilder_ == null) {
+          return themisPrewriteResult_;
+        } else {
+          return themisPrewriteResultBuilder_.getMessage();
+        }
       }
       /**
-       * <code>repeated bytes result = 1;</code>
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
        */
-      public int getResultCount() {
-        return result_.size();
-      }
-      /**
-       * <code>repeated bytes result = 1;</code>
-       */
-      public com.google.protobuf.ByteString getResult(int index) {
-        return result_.get(index);
-      }
-      /**
-       * <code>repeated bytes result = 1;</code>
-       */
-      public Builder setResult(
-          int index, com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultIsMutable();
-        result_.set(index, value);
-        onChanged();
+      public Builder setThemisPrewriteResult(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult value) {
+        if (themisPrewriteResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          themisPrewriteResult_ = value;
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>repeated bytes result = 1;</code>
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
        */
-      public Builder addResult(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultIsMutable();
-        result_.add(value);
-        onChanged();
+      public Builder setThemisPrewriteResult(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder builderForValue) {
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResult_ = builderForValue.build();
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>repeated bytes result = 1;</code>
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
        */
-      public Builder addAllResult(
-          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
-        ensureResultIsMutable();
-        super.addAll(values, result_);
-        onChanged();
+      public Builder mergeThemisPrewriteResult(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult value) {
+        if (themisPrewriteResultBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              themisPrewriteResult_ != org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance()) {
+            themisPrewriteResult_ =
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.newBuilder(themisPrewriteResult_).mergeFrom(value).buildPartial();
+          } else {
+            themisPrewriteResult_ = value;
+          }
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>repeated bytes result = 1;</code>
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
        */
-      public Builder clearResult() {
-        result_ = java.util.Collections.emptyList();
+      public Builder clearThemisPrewriteResult() {
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResult_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance();
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
         return this;
+      }
+      /**
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder getThemisPrewriteResultBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getThemisPrewriteResultFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder getThemisPrewriteResultOrBuilder() {
+        if (themisPrewriteResultBuilder_ != null) {
+          return themisPrewriteResultBuilder_.getMessageOrBuilder();
+        } else {
+          return themisPrewriteResult_;
+        }
+      }
+      /**
+       * <code>optional .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> 
+          getThemisPrewriteResultFieldBuilder() {
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResultBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder>(
+                  themisPrewriteResult_,
+                  getParentForChildren(),
+                  isClean());
+          themisPrewriteResult_ = null;
+        }
+        return themisPrewriteResultBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:ThemisPrewriteResponse)
@@ -2473,73 +4723,2570 @@ public final class ThemisProtos {
     // @@protoc_insertion_point(class_scope:ThemisPrewriteResponse)
   }
 
-  public interface ThemisCommitRequestOrBuilder
+  public interface ThemisBatchPrewriteSecondaryRequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bytes row = 1;
+    // repeated .ThemisPrewrite themisPrewrite = 1;
     /**
-     * <code>required bytes row = 1;</code>
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite> 
+        getThemisPrewriteList();
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getThemisPrewrite(int index);
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    int getThemisPrewriteCount();
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> 
+        getThemisPrewriteOrBuilderList();
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder getThemisPrewriteOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ThemisBatchPrewriteSecondaryRequest}
+   */
+  public static final class ThemisBatchPrewriteSecondaryRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchPrewriteSecondaryRequestOrBuilder {
+    // Use ThemisBatchPrewriteSecondaryRequest.newBuilder() to construct.
+    private ThemisBatchPrewriteSecondaryRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchPrewriteSecondaryRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchPrewriteSecondaryRequest defaultInstance;
+    public static ThemisBatchPrewriteSecondaryRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchPrewriteSecondaryRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchPrewriteSecondaryRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                themisPrewrite_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              themisPrewrite_.add(input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          themisPrewrite_ = java.util.Collections.unmodifiableList(themisPrewrite_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchPrewriteSecondaryRequest> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchPrewriteSecondaryRequest>() {
+      public ThemisBatchPrewriteSecondaryRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchPrewriteSecondaryRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchPrewriteSecondaryRequest> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .ThemisPrewrite themisPrewrite = 1;
+    public static final int THEMISPREWRITE_FIELD_NUMBER = 1;
+    private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite> themisPrewrite_;
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite> getThemisPrewriteList() {
+      return themisPrewrite_;
+    }
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> 
+        getThemisPrewriteOrBuilderList() {
+      return themisPrewrite_;
+    }
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public int getThemisPrewriteCount() {
+      return themisPrewrite_.size();
+    }
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getThemisPrewrite(int index) {
+      return themisPrewrite_.get(index);
+    }
+    /**
+     * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder getThemisPrewriteOrBuilder(
+        int index) {
+      return themisPrewrite_.get(index);
+    }
+
+    private void initFields() {
+      themisPrewrite_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getThemisPrewriteCount(); i++) {
+        if (!getThemisPrewrite(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < themisPrewrite_.size(); i++) {
+        output.writeMessage(1, themisPrewrite_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < themisPrewrite_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, themisPrewrite_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest) obj;
+
+      boolean result = true;
+      result = result && getThemisPrewriteList()
+          .equals(other.getThemisPrewriteList());
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getThemisPrewriteCount() > 0) {
+        hash = (37 * hash) + THEMISPREWRITE_FIELD_NUMBER;
+        hash = (53 * hash) + getThemisPrewriteList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchPrewriteSecondaryRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getThemisPrewriteFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewrite_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          themisPrewriteBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryRequest_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest(this);
+        int from_bitField0_ = bitField0_;
+        if (themisPrewriteBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            themisPrewrite_ = java.util.Collections.unmodifiableList(themisPrewrite_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.themisPrewrite_ = themisPrewrite_;
+        } else {
+          result.themisPrewrite_ = themisPrewriteBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.getDefaultInstance()) return this;
+        if (themisPrewriteBuilder_ == null) {
+          if (!other.themisPrewrite_.isEmpty()) {
+            if (themisPrewrite_.isEmpty()) {
+              themisPrewrite_ = other.themisPrewrite_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureThemisPrewriteIsMutable();
+              themisPrewrite_.addAll(other.themisPrewrite_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.themisPrewrite_.isEmpty()) {
+            if (themisPrewriteBuilder_.isEmpty()) {
+              themisPrewriteBuilder_.dispose();
+              themisPrewriteBuilder_ = null;
+              themisPrewrite_ = other.themisPrewrite_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              themisPrewriteBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getThemisPrewriteFieldBuilder() : null;
+            } else {
+              themisPrewriteBuilder_.addAllMessages(other.themisPrewrite_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getThemisPrewriteCount(); i++) {
+          if (!getThemisPrewrite(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .ThemisPrewrite themisPrewrite = 1;
+      private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite> themisPrewrite_ =
+        java.util.Collections.emptyList();
+      private void ensureThemisPrewriteIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          themisPrewrite_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite>(themisPrewrite_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> themisPrewriteBuilder_;
+
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite> getThemisPrewriteList() {
+        if (themisPrewriteBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(themisPrewrite_);
+        } else {
+          return themisPrewriteBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public int getThemisPrewriteCount() {
+        if (themisPrewriteBuilder_ == null) {
+          return themisPrewrite_.size();
+        } else {
+          return themisPrewriteBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite getThemisPrewrite(int index) {
+        if (themisPrewriteBuilder_ == null) {
+          return themisPrewrite_.get(index);
+        } else {
+          return themisPrewriteBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder setThemisPrewrite(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite value) {
+        if (themisPrewriteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.set(index, value);
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder setThemisPrewrite(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder builderForValue) {
+        if (themisPrewriteBuilder_ == null) {
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder addThemisPrewrite(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite value) {
+        if (themisPrewriteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.add(value);
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder addThemisPrewrite(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite value) {
+        if (themisPrewriteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.add(index, value);
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder addThemisPrewrite(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder builderForValue) {
+        if (themisPrewriteBuilder_ == null) {
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.add(builderForValue.build());
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder addThemisPrewrite(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder builderForValue) {
+        if (themisPrewriteBuilder_ == null) {
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder addAllThemisPrewrite(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite> values) {
+        if (themisPrewriteBuilder_ == null) {
+          ensureThemisPrewriteIsMutable();
+          super.addAll(values, themisPrewrite_);
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder clearThemisPrewrite() {
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewrite_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public Builder removeThemisPrewrite(int index) {
+        if (themisPrewriteBuilder_ == null) {
+          ensureThemisPrewriteIsMutable();
+          themisPrewrite_.remove(index);
+          onChanged();
+        } else {
+          themisPrewriteBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder getThemisPrewriteBuilder(
+          int index) {
+        return getThemisPrewriteFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder getThemisPrewriteOrBuilder(
+          int index) {
+        if (themisPrewriteBuilder_ == null) {
+          return themisPrewrite_.get(index);  } else {
+          return themisPrewriteBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> 
+           getThemisPrewriteOrBuilderList() {
+        if (themisPrewriteBuilder_ != null) {
+          return themisPrewriteBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(themisPrewrite_);
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder addThemisPrewriteBuilder() {
+        return getThemisPrewriteFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder addThemisPrewriteBuilder(
+          int index) {
+        return getThemisPrewriteFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisPrewrite themisPrewrite = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder> 
+           getThemisPrewriteBuilderList() {
+        return getThemisPrewriteFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder> 
+          getThemisPrewriteFieldBuilder() {
+        if (themisPrewriteBuilder_ == null) {
+          themisPrewriteBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewrite.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteOrBuilder>(
+                  themisPrewrite_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          themisPrewrite_ = null;
+        }
+        return themisPrewriteBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchPrewriteSecondaryRequest)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchPrewriteSecondaryRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchPrewriteSecondaryRequest)
+  }
+
+  public interface ThemisBatchPrewriteSecondaryResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .ThemisPrewriteResult themisPrewriteResult = 1;
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult> 
+        getThemisPrewriteResultList();
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getThemisPrewriteResult(int index);
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    int getThemisPrewriteResultCount();
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> 
+        getThemisPrewriteResultOrBuilderList();
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder getThemisPrewriteResultOrBuilder(
+        int index);
+
+    // repeated bytes rowsNotInRegion = 2;
+    /**
+     * <code>repeated bytes rowsNotInRegion = 2;</code>
+     */
+    java.util.List<com.google.protobuf.ByteString> getRowsNotInRegionList();
+    /**
+     * <code>repeated bytes rowsNotInRegion = 2;</code>
+     */
+    int getRowsNotInRegionCount();
+    /**
+     * <code>repeated bytes rowsNotInRegion = 2;</code>
+     */
+    com.google.protobuf.ByteString getRowsNotInRegion(int index);
+  }
+  /**
+   * Protobuf type {@code ThemisBatchPrewriteSecondaryResponse}
+   */
+  public static final class ThemisBatchPrewriteSecondaryResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchPrewriteSecondaryResponseOrBuilder {
+    // Use ThemisBatchPrewriteSecondaryResponse.newBuilder() to construct.
+    private ThemisBatchPrewriteSecondaryResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchPrewriteSecondaryResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchPrewriteSecondaryResponse defaultInstance;
+    public static ThemisBatchPrewriteSecondaryResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchPrewriteSecondaryResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchPrewriteSecondaryResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                themisPrewriteResult_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              themisPrewriteResult_.add(input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                rowsNotInRegion_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              rowsNotInRegion_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          themisPrewriteResult_ = java.util.Collections.unmodifiableList(themisPrewriteResult_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          rowsNotInRegion_ = java.util.Collections.unmodifiableList(rowsNotInRegion_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchPrewriteSecondaryResponse> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchPrewriteSecondaryResponse>() {
+      public ThemisBatchPrewriteSecondaryResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchPrewriteSecondaryResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchPrewriteSecondaryResponse> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .ThemisPrewriteResult themisPrewriteResult = 1;
+    public static final int THEMISPREWRITERESULT_FIELD_NUMBER = 1;
+    private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult> themisPrewriteResult_;
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult> getThemisPrewriteResultList() {
+      return themisPrewriteResult_;
+    }
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> 
+        getThemisPrewriteResultOrBuilderList() {
+      return themisPrewriteResult_;
+    }
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    public int getThemisPrewriteResultCount() {
+      return themisPrewriteResult_.size();
+    }
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getThemisPrewriteResult(int index) {
+      return themisPrewriteResult_.get(index);
+    }
+    /**
+     * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder getThemisPrewriteResultOrBuilder(
+        int index) {
+      return themisPrewriteResult_.get(index);
+    }
+
+    // repeated bytes rowsNotInRegion = 2;
+    public static final int ROWSNOTINREGION_FIELD_NUMBER = 2;
+    private java.util.List<com.google.protobuf.ByteString> rowsNotInRegion_;
+    /**
+     * <code>repeated bytes rowsNotInRegion = 2;</code>
+     */
+    public java.util.List<com.google.protobuf.ByteString>
+        getRowsNotInRegionList() {
+      return rowsNotInRegion_;
+    }
+    /**
+     * <code>repeated bytes rowsNotInRegion = 2;</code>
+     */
+    public int getRowsNotInRegionCount() {
+      return rowsNotInRegion_.size();
+    }
+    /**
+     * <code>repeated bytes rowsNotInRegion = 2;</code>
+     */
+    public com.google.protobuf.ByteString getRowsNotInRegion(int index) {
+      return rowsNotInRegion_.get(index);
+    }
+
+    private void initFields() {
+      themisPrewriteResult_ = java.util.Collections.emptyList();
+      rowsNotInRegion_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getThemisPrewriteResultCount(); i++) {
+        if (!getThemisPrewriteResult(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < themisPrewriteResult_.size(); i++) {
+        output.writeMessage(1, themisPrewriteResult_.get(i));
+      }
+      for (int i = 0; i < rowsNotInRegion_.size(); i++) {
+        output.writeBytes(2, rowsNotInRegion_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < themisPrewriteResult_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, themisPrewriteResult_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < rowsNotInRegion_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(rowsNotInRegion_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getRowsNotInRegionList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse) obj;
+
+      boolean result = true;
+      result = result && getThemisPrewriteResultList()
+          .equals(other.getThemisPrewriteResultList());
+      result = result && getRowsNotInRegionList()
+          .equals(other.getRowsNotInRegionList());
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getThemisPrewriteResultCount() > 0) {
+        hash = (37 * hash) + THEMISPREWRITERESULT_FIELD_NUMBER;
+        hash = (53 * hash) + getThemisPrewriteResultList().hashCode();
+      }
+      if (getRowsNotInRegionCount() > 0) {
+        hash = (37 * hash) + ROWSNOTINREGION_FIELD_NUMBER;
+        hash = (53 * hash) + getRowsNotInRegionList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchPrewriteSecondaryResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getThemisPrewriteResultFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResult_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          themisPrewriteResultBuilder_.clear();
+        }
+        rowsNotInRegion_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchPrewriteSecondaryResponse_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse(this);
+        int from_bitField0_ = bitField0_;
+        if (themisPrewriteResultBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            themisPrewriteResult_ = java.util.Collections.unmodifiableList(themisPrewriteResult_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.themisPrewriteResult_ = themisPrewriteResult_;
+        } else {
+          result.themisPrewriteResult_ = themisPrewriteResultBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          rowsNotInRegion_ = java.util.Collections.unmodifiableList(rowsNotInRegion_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.rowsNotInRegion_ = rowsNotInRegion_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance()) return this;
+        if (themisPrewriteResultBuilder_ == null) {
+          if (!other.themisPrewriteResult_.isEmpty()) {
+            if (themisPrewriteResult_.isEmpty()) {
+              themisPrewriteResult_ = other.themisPrewriteResult_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureThemisPrewriteResultIsMutable();
+              themisPrewriteResult_.addAll(other.themisPrewriteResult_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.themisPrewriteResult_.isEmpty()) {
+            if (themisPrewriteResultBuilder_.isEmpty()) {
+              themisPrewriteResultBuilder_.dispose();
+              themisPrewriteResultBuilder_ = null;
+              themisPrewriteResult_ = other.themisPrewriteResult_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              themisPrewriteResultBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getThemisPrewriteResultFieldBuilder() : null;
+            } else {
+              themisPrewriteResultBuilder_.addAllMessages(other.themisPrewriteResult_);
+            }
+          }
+        }
+        if (!other.rowsNotInRegion_.isEmpty()) {
+          if (rowsNotInRegion_.isEmpty()) {
+            rowsNotInRegion_ = other.rowsNotInRegion_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureRowsNotInRegionIsMutable();
+            rowsNotInRegion_.addAll(other.rowsNotInRegion_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getThemisPrewriteResultCount(); i++) {
+          if (!getThemisPrewriteResult(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .ThemisPrewriteResult themisPrewriteResult = 1;
+      private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult> themisPrewriteResult_ =
+        java.util.Collections.emptyList();
+      private void ensureThemisPrewriteResultIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          themisPrewriteResult_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult>(themisPrewriteResult_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> themisPrewriteResultBuilder_;
+
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult> getThemisPrewriteResultList() {
+        if (themisPrewriteResultBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(themisPrewriteResult_);
+        } else {
+          return themisPrewriteResultBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public int getThemisPrewriteResultCount() {
+        if (themisPrewriteResultBuilder_ == null) {
+          return themisPrewriteResult_.size();
+        } else {
+          return themisPrewriteResultBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getThemisPrewriteResult(int index) {
+        if (themisPrewriteResultBuilder_ == null) {
+          return themisPrewriteResult_.get(index);
+        } else {
+          return themisPrewriteResultBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder setThemisPrewriteResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult value) {
+        if (themisPrewriteResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.set(index, value);
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder setThemisPrewriteResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder builderForValue) {
+        if (themisPrewriteResultBuilder_ == null) {
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder addThemisPrewriteResult(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult value) {
+        if (themisPrewriteResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.add(value);
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder addThemisPrewriteResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult value) {
+        if (themisPrewriteResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.add(index, value);
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder addThemisPrewriteResult(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder builderForValue) {
+        if (themisPrewriteResultBuilder_ == null) {
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.add(builderForValue.build());
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder addThemisPrewriteResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder builderForValue) {
+        if (themisPrewriteResultBuilder_ == null) {
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder addAllThemisPrewriteResult(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult> values) {
+        if (themisPrewriteResultBuilder_ == null) {
+          ensureThemisPrewriteResultIsMutable();
+          super.addAll(values, themisPrewriteResult_);
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder clearThemisPrewriteResult() {
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResult_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public Builder removeThemisPrewriteResult(int index) {
+        if (themisPrewriteResultBuilder_ == null) {
+          ensureThemisPrewriteResultIsMutable();
+          themisPrewriteResult_.remove(index);
+          onChanged();
+        } else {
+          themisPrewriteResultBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder getThemisPrewriteResultBuilder(
+          int index) {
+        return getThemisPrewriteResultFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder getThemisPrewriteResultOrBuilder(
+          int index) {
+        if (themisPrewriteResultBuilder_ == null) {
+          return themisPrewriteResult_.get(index);  } else {
+          return themisPrewriteResultBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> 
+           getThemisPrewriteResultOrBuilderList() {
+        if (themisPrewriteResultBuilder_ != null) {
+          return themisPrewriteResultBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(themisPrewriteResult_);
+        }
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder addThemisPrewriteResultBuilder() {
+        return getThemisPrewriteResultFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder addThemisPrewriteResultBuilder(
+          int index) {
+        return getThemisPrewriteResultFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisPrewriteResult themisPrewriteResult = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder> 
+           getThemisPrewriteResultBuilderList() {
+        return getThemisPrewriteResultFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder> 
+          getThemisPrewriteResultFieldBuilder() {
+        if (themisPrewriteResultBuilder_ == null) {
+          themisPrewriteResultBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder>(
+                  themisPrewriteResult_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          themisPrewriteResult_ = null;
+        }
+        return themisPrewriteResultBuilder_;
+      }
+
+      // repeated bytes rowsNotInRegion = 2;
+      private java.util.List<com.google.protobuf.ByteString> rowsNotInRegion_ = java.util.Collections.emptyList();
+      private void ensureRowsNotInRegionIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          rowsNotInRegion_ = new java.util.ArrayList<com.google.protobuf.ByteString>(rowsNotInRegion_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public java.util.List<com.google.protobuf.ByteString>
+          getRowsNotInRegionList() {
+        return java.util.Collections.unmodifiableList(rowsNotInRegion_);
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public int getRowsNotInRegionCount() {
+        return rowsNotInRegion_.size();
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public com.google.protobuf.ByteString getRowsNotInRegion(int index) {
+        return rowsNotInRegion_.get(index);
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public Builder setRowsNotInRegion(
+          int index, com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRowsNotInRegionIsMutable();
+        rowsNotInRegion_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public Builder addRowsNotInRegion(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureRowsNotInRegionIsMutable();
+        rowsNotInRegion_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public Builder addAllRowsNotInRegion(
+          java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
+        ensureRowsNotInRegionIsMutable();
+        super.addAll(values, rowsNotInRegion_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated bytes rowsNotInRegion = 2;</code>
+       */
+      public Builder clearRowsNotInRegion() {
+        rowsNotInRegion_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchPrewriteSecondaryResponse)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchPrewriteSecondaryResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchPrewriteSecondaryResponse)
+  }
+
+  public interface ThemisPrewriteResultOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes newerWriteTs = 1;
+    /**
+     * <code>required bytes newerWriteTs = 1;</code>
+     */
+    boolean hasNewerWriteTs();
+    /**
+     * <code>required bytes newerWriteTs = 1;</code>
+     */
+    com.google.protobuf.ByteString getNewerWriteTs();
+
+    // required bytes existLock = 2;
+    /**
+     * <code>required bytes existLock = 2;</code>
+     */
+    boolean hasExistLock();
+    /**
+     * <code>required bytes existLock = 2;</code>
+     */
+    com.google.protobuf.ByteString getExistLock();
+
+    // required bytes family = 3;
+    /**
+     * <code>required bytes family = 3;</code>
+     */
+    boolean hasFamily();
+    /**
+     * <code>required bytes family = 3;</code>
+     */
+    com.google.protobuf.ByteString getFamily();
+
+    // required bytes qualifier = 4;
+    /**
+     * <code>required bytes qualifier = 4;</code>
+     */
+    boolean hasQualifier();
+    /**
+     * <code>required bytes qualifier = 4;</code>
+     */
+    com.google.protobuf.ByteString getQualifier();
+
+    // required bytes lockExpired = 5;
+    /**
+     * <code>required bytes lockExpired = 5;</code>
+     */
+    boolean hasLockExpired();
+    /**
+     * <code>required bytes lockExpired = 5;</code>
+     */
+    com.google.protobuf.ByteString getLockExpired();
+
+    // required bytes row = 6;
+    /**
+     * <code>required bytes row = 6;</code>
      */
     boolean hasRow();
     /**
-     * <code>required bytes row = 1;</code>
+     * <code>required bytes row = 6;</code>
      */
     com.google.protobuf.ByteString getRow();
+  }
+  /**
+   * Protobuf type {@code ThemisPrewriteResult}
+   */
+  public static final class ThemisPrewriteResult extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisPrewriteResultOrBuilder {
+    // Use ThemisPrewriteResult.newBuilder() to construct.
+    private ThemisPrewriteResult(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisPrewriteResult(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    // repeated .Cell mutations = 2;
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> 
-        getMutationsList();
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell getMutations(int index);
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    int getMutationsCount();
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
-        getMutationsOrBuilderList();
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder getMutationsOrBuilder(
-        int index);
+    private static final ThemisPrewriteResult defaultInstance;
+    public static ThemisPrewriteResult getDefaultInstance() {
+      return defaultInstance;
+    }
 
-    // required uint64 prewriteTs = 3;
-    /**
-     * <code>required uint64 prewriteTs = 3;</code>
-     */
-    boolean hasPrewriteTs();
-    /**
-     * <code>required uint64 prewriteTs = 3;</code>
-     */
-    long getPrewriteTs();
+    public ThemisPrewriteResult getDefaultInstanceForType() {
+      return defaultInstance;
+    }
 
-    // required uint64 commitTs = 4;
-    /**
-     * <code>required uint64 commitTs = 4;</code>
-     */
-    boolean hasCommitTs();
-    /**
-     * <code>required uint64 commitTs = 4;</code>
-     */
-    long getCommitTs();
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisPrewriteResult(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              newerWriteTs_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              existLock_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              family_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              qualifier_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              lockExpired_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              row_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteResult_descriptor;
+    }
 
-    // required int32 primaryIndex = 5;
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteResult_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisPrewriteResult> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisPrewriteResult>() {
+      public ThemisPrewriteResult parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisPrewriteResult(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisPrewriteResult> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required bytes newerWriteTs = 1;
+    public static final int NEWERWRITETS_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString newerWriteTs_;
     /**
-     * <code>required int32 primaryIndex = 5;</code>
+     * <code>required bytes newerWriteTs = 1;</code>
      */
-    boolean hasPrimaryIndex();
+    public boolean hasNewerWriteTs() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
     /**
-     * <code>required int32 primaryIndex = 5;</code>
+     * <code>required bytes newerWriteTs = 1;</code>
      */
-    int getPrimaryIndex();
+    public com.google.protobuf.ByteString getNewerWriteTs() {
+      return newerWriteTs_;
+    }
+
+    // required bytes existLock = 2;
+    public static final int EXISTLOCK_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString existLock_;
+    /**
+     * <code>required bytes existLock = 2;</code>
+     */
+    public boolean hasExistLock() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes existLock = 2;</code>
+     */
+    public com.google.protobuf.ByteString getExistLock() {
+      return existLock_;
+    }
+
+    // required bytes family = 3;
+    public static final int FAMILY_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString family_;
+    /**
+     * <code>required bytes family = 3;</code>
+     */
+    public boolean hasFamily() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bytes family = 3;</code>
+     */
+    public com.google.protobuf.ByteString getFamily() {
+      return family_;
+    }
+
+    // required bytes qualifier = 4;
+    public static final int QUALIFIER_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString qualifier_;
+    /**
+     * <code>required bytes qualifier = 4;</code>
+     */
+    public boolean hasQualifier() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes qualifier = 4;</code>
+     */
+    public com.google.protobuf.ByteString getQualifier() {
+      return qualifier_;
+    }
+
+    // required bytes lockExpired = 5;
+    public static final int LOCKEXPIRED_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString lockExpired_;
+    /**
+     * <code>required bytes lockExpired = 5;</code>
+     */
+    public boolean hasLockExpired() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required bytes lockExpired = 5;</code>
+     */
+    public com.google.protobuf.ByteString getLockExpired() {
+      return lockExpired_;
+    }
+
+    // required bytes row = 6;
+    public static final int ROW_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString row_;
+    /**
+     * <code>required bytes row = 6;</code>
+     */
+    public boolean hasRow() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required bytes row = 6;</code>
+     */
+    public com.google.protobuf.ByteString getRow() {
+      return row_;
+    }
+
+    private void initFields() {
+      newerWriteTs_ = com.google.protobuf.ByteString.EMPTY;
+      existLock_ = com.google.protobuf.ByteString.EMPTY;
+      family_ = com.google.protobuf.ByteString.EMPTY;
+      qualifier_ = com.google.protobuf.ByteString.EMPTY;
+      lockExpired_ = com.google.protobuf.ByteString.EMPTY;
+      row_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasNewerWriteTs()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasExistLock()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFamily()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasQualifier()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLockExpired()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRow()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, newerWriteTs_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, existLock_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, family_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, qualifier_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, lockExpired_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, row_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, newerWriteTs_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, existLock_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, family_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, qualifier_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, lockExpired_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, row_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult) obj;
+
+      boolean result = true;
+      result = result && (hasNewerWriteTs() == other.hasNewerWriteTs());
+      if (hasNewerWriteTs()) {
+        result = result && getNewerWriteTs()
+            .equals(other.getNewerWriteTs());
+      }
+      result = result && (hasExistLock() == other.hasExistLock());
+      if (hasExistLock()) {
+        result = result && getExistLock()
+            .equals(other.getExistLock());
+      }
+      result = result && (hasFamily() == other.hasFamily());
+      if (hasFamily()) {
+        result = result && getFamily()
+            .equals(other.getFamily());
+      }
+      result = result && (hasQualifier() == other.hasQualifier());
+      if (hasQualifier()) {
+        result = result && getQualifier()
+            .equals(other.getQualifier());
+      }
+      result = result && (hasLockExpired() == other.hasLockExpired());
+      if (hasLockExpired()) {
+        result = result && getLockExpired()
+            .equals(other.getLockExpired());
+      }
+      result = result && (hasRow() == other.hasRow());
+      if (hasRow()) {
+        result = result && getRow()
+            .equals(other.getRow());
+      }
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasNewerWriteTs()) {
+        hash = (37 * hash) + NEWERWRITETS_FIELD_NUMBER;
+        hash = (53 * hash) + getNewerWriteTs().hashCode();
+      }
+      if (hasExistLock()) {
+        hash = (37 * hash) + EXISTLOCK_FIELD_NUMBER;
+        hash = (53 * hash) + getExistLock().hashCode();
+      }
+      if (hasFamily()) {
+        hash = (37 * hash) + FAMILY_FIELD_NUMBER;
+        hash = (53 * hash) + getFamily().hashCode();
+      }
+      if (hasQualifier()) {
+        hash = (37 * hash) + QUALIFIER_FIELD_NUMBER;
+        hash = (53 * hash) + getQualifier().hashCode();
+      }
+      if (hasLockExpired()) {
+        hash = (37 * hash) + LOCKEXPIRED_FIELD_NUMBER;
+        hash = (53 * hash) + getLockExpired().hashCode();
+      }
+      if (hasRow()) {
+        hash = (37 * hash) + ROW_FIELD_NUMBER;
+        hash = (53 * hash) + getRow().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisPrewriteResult}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResultOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteResult_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteResult_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        newerWriteTs_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        existLock_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        family_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        qualifier_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        lockExpired_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        row_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisPrewriteResult_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.newerWriteTs_ = newerWriteTs_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.existLock_ = existLock_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.family_ = family_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.qualifier_ = qualifier_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.lockExpired_ = lockExpired_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.row_ = row_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult.getDefaultInstance()) return this;
+        if (other.hasNewerWriteTs()) {
+          setNewerWriteTs(other.getNewerWriteTs());
+        }
+        if (other.hasExistLock()) {
+          setExistLock(other.getExistLock());
+        }
+        if (other.hasFamily()) {
+          setFamily(other.getFamily());
+        }
+        if (other.hasQualifier()) {
+          setQualifier(other.getQualifier());
+        }
+        if (other.hasLockExpired()) {
+          setLockExpired(other.getLockExpired());
+        }
+        if (other.hasRow()) {
+          setRow(other.getRow());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNewerWriteTs()) {
+          
+          return false;
+        }
+        if (!hasExistLock()) {
+          
+          return false;
+        }
+        if (!hasFamily()) {
+          
+          return false;
+        }
+        if (!hasQualifier()) {
+          
+          return false;
+        }
+        if (!hasLockExpired()) {
+          
+          return false;
+        }
+        if (!hasRow()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResult) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required bytes newerWriteTs = 1;
+      private com.google.protobuf.ByteString newerWriteTs_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes newerWriteTs = 1;</code>
+       */
+      public boolean hasNewerWriteTs() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes newerWriteTs = 1;</code>
+       */
+      public com.google.protobuf.ByteString getNewerWriteTs() {
+        return newerWriteTs_;
+      }
+      /**
+       * <code>required bytes newerWriteTs = 1;</code>
+       */
+      public Builder setNewerWriteTs(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        newerWriteTs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes newerWriteTs = 1;</code>
+       */
+      public Builder clearNewerWriteTs() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        newerWriteTs_ = getDefaultInstance().getNewerWriteTs();
+        onChanged();
+        return this;
+      }
+
+      // required bytes existLock = 2;
+      private com.google.protobuf.ByteString existLock_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes existLock = 2;</code>
+       */
+      public boolean hasExistLock() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes existLock = 2;</code>
+       */
+      public com.google.protobuf.ByteString getExistLock() {
+        return existLock_;
+      }
+      /**
+       * <code>required bytes existLock = 2;</code>
+       */
+      public Builder setExistLock(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        existLock_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes existLock = 2;</code>
+       */
+      public Builder clearExistLock() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        existLock_ = getDefaultInstance().getExistLock();
+        onChanged();
+        return this;
+      }
+
+      // required bytes family = 3;
+      private com.google.protobuf.ByteString family_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes family = 3;</code>
+       */
+      public boolean hasFamily() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bytes family = 3;</code>
+       */
+      public com.google.protobuf.ByteString getFamily() {
+        return family_;
+      }
+      /**
+       * <code>required bytes family = 3;</code>
+       */
+      public Builder setFamily(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        family_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes family = 3;</code>
+       */
+      public Builder clearFamily() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        family_ = getDefaultInstance().getFamily();
+        onChanged();
+        return this;
+      }
+
+      // required bytes qualifier = 4;
+      private com.google.protobuf.ByteString qualifier_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes qualifier = 4;</code>
+       */
+      public boolean hasQualifier() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes qualifier = 4;</code>
+       */
+      public com.google.protobuf.ByteString getQualifier() {
+        return qualifier_;
+      }
+      /**
+       * <code>required bytes qualifier = 4;</code>
+       */
+      public Builder setQualifier(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        qualifier_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes qualifier = 4;</code>
+       */
+      public Builder clearQualifier() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        qualifier_ = getDefaultInstance().getQualifier();
+        onChanged();
+        return this;
+      }
+
+      // required bytes lockExpired = 5;
+      private com.google.protobuf.ByteString lockExpired_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes lockExpired = 5;</code>
+       */
+      public boolean hasLockExpired() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required bytes lockExpired = 5;</code>
+       */
+      public com.google.protobuf.ByteString getLockExpired() {
+        return lockExpired_;
+      }
+      /**
+       * <code>required bytes lockExpired = 5;</code>
+       */
+      public Builder setLockExpired(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        lockExpired_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes lockExpired = 5;</code>
+       */
+      public Builder clearLockExpired() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        lockExpired_ = getDefaultInstance().getLockExpired();
+        onChanged();
+        return this;
+      }
+
+      // required bytes row = 6;
+      private com.google.protobuf.ByteString row_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes row = 6;</code>
+       */
+      public boolean hasRow() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>required bytes row = 6;</code>
+       */
+      public com.google.protobuf.ByteString getRow() {
+        return row_;
+      }
+      /**
+       * <code>required bytes row = 6;</code>
+       */
+      public Builder setRow(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        row_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes row = 6;</code>
+       */
+      public Builder clearRow() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        row_ = getDefaultInstance().getRow();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisPrewriteResult)
+    }
+
+    static {
+      defaultInstance = new ThemisPrewriteResult(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisPrewriteResult)
+  }
+
+  public interface ThemisCommitRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required .ThemisCommit themisCommit = 1;
+    /**
+     * <code>required .ThemisCommit themisCommit = 1;</code>
+     */
+    boolean hasThemisCommit();
+    /**
+     * <code>required .ThemisCommit themisCommit = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getThemisCommit();
+    /**
+     * <code>required .ThemisCommit themisCommit = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder getThemisCommitOrBuilder();
   }
   /**
    * Protobuf type {@code ThemisCommitRequest}
@@ -2593,31 +7340,16 @@ public final class ThemisProtos {
               break;
             }
             case 10: {
-              bitField0_ |= 0x00000001;
-              row_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                mutations_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell>();
-                mutable_bitField0_ |= 0x00000002;
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = themisCommit_.toBuilder();
               }
-              mutations_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.PARSER, extensionRegistry));
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000002;
-              prewriteTs_ = input.readUInt64();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000004;
-              commitTs_ = input.readUInt64();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000008;
-              primaryIndex_ = input.readInt32();
+              themisCommit_ = input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(themisCommit_);
+                themisCommit_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
               break;
             }
           }
@@ -2628,9 +7360,6 @@ public final class ThemisProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          mutations_ = java.util.Collections.unmodifiableList(mutations_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2663,131 +7392,41 @@ public final class ThemisProtos {
     }
 
     private int bitField0_;
-    // required bytes row = 1;
-    public static final int ROW_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString row_;
+    // required .ThemisCommit themisCommit = 1;
+    public static final int THEMISCOMMIT_FIELD_NUMBER = 1;
+    private org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit themisCommit_;
     /**
-     * <code>required bytes row = 1;</code>
+     * <code>required .ThemisCommit themisCommit = 1;</code>
      */
-    public boolean hasRow() {
+    public boolean hasThemisCommit() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes row = 1;</code>
+     * <code>required .ThemisCommit themisCommit = 1;</code>
      */
-    public com.google.protobuf.ByteString getRow() {
-      return row_;
-    }
-
-    // repeated .Cell mutations = 2;
-    public static final int MUTATIONS_FIELD_NUMBER = 2;
-    private java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> mutations_;
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    public java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> getMutationsList() {
-      return mutations_;
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getThemisCommit() {
+      return themisCommit_;
     }
     /**
-     * <code>repeated .Cell mutations = 2;</code>
+     * <code>required .ThemisCommit themisCommit = 1;</code>
      */
-    public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
-        getMutationsOrBuilderList() {
-      return mutations_;
-    }
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    public int getMutationsCount() {
-      return mutations_.size();
-    }
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell getMutations(int index) {
-      return mutations_.get(index);
-    }
-    /**
-     * <code>repeated .Cell mutations = 2;</code>
-     */
-    public org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder getMutationsOrBuilder(
-        int index) {
-      return mutations_.get(index);
-    }
-
-    // required uint64 prewriteTs = 3;
-    public static final int PREWRITETS_FIELD_NUMBER = 3;
-    private long prewriteTs_;
-    /**
-     * <code>required uint64 prewriteTs = 3;</code>
-     */
-    public boolean hasPrewriteTs() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint64 prewriteTs = 3;</code>
-     */
-    public long getPrewriteTs() {
-      return prewriteTs_;
-    }
-
-    // required uint64 commitTs = 4;
-    public static final int COMMITTS_FIELD_NUMBER = 4;
-    private long commitTs_;
-    /**
-     * <code>required uint64 commitTs = 4;</code>
-     */
-    public boolean hasCommitTs() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required uint64 commitTs = 4;</code>
-     */
-    public long getCommitTs() {
-      return commitTs_;
-    }
-
-    // required int32 primaryIndex = 5;
-    public static final int PRIMARYINDEX_FIELD_NUMBER = 5;
-    private int primaryIndex_;
-    /**
-     * <code>required int32 primaryIndex = 5;</code>
-     */
-    public boolean hasPrimaryIndex() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required int32 primaryIndex = 5;</code>
-     */
-    public int getPrimaryIndex() {
-      return primaryIndex_;
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder getThemisCommitOrBuilder() {
+      return themisCommit_;
     }
 
     private void initFields() {
-      row_ = com.google.protobuf.ByteString.EMPTY;
-      mutations_ = java.util.Collections.emptyList();
-      prewriteTs_ = 0L;
-      commitTs_ = 0L;
-      primaryIndex_ = 0;
+      themisCommit_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasRow()) {
+      if (!hasThemisCommit()) {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasPrewriteTs()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasCommitTs()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPrimaryIndex()) {
+      if (!getThemisCommit().isInitialized()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2799,19 +7438,7 @@ public final class ThemisProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, row_);
-      }
-      for (int i = 0; i < mutations_.size(); i++) {
-        output.writeMessage(2, mutations_.get(i));
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt64(3, prewriteTs_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt64(4, commitTs_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(5, primaryIndex_);
+        output.writeMessage(1, themisCommit_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2824,23 +7451,7 @@ public final class ThemisProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, row_);
-      }
-      for (int i = 0; i < mutations_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, mutations_.get(i));
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(3, prewriteTs_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(4, commitTs_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, primaryIndex_);
+          .computeMessageSize(1, themisCommit_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2865,27 +7476,10 @@ public final class ThemisProtos {
       org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest) obj;
 
       boolean result = true;
-      result = result && (hasRow() == other.hasRow());
-      if (hasRow()) {
-        result = result && getRow()
-            .equals(other.getRow());
-      }
-      result = result && getMutationsList()
-          .equals(other.getMutationsList());
-      result = result && (hasPrewriteTs() == other.hasPrewriteTs());
-      if (hasPrewriteTs()) {
-        result = result && (getPrewriteTs()
-            == other.getPrewriteTs());
-      }
-      result = result && (hasCommitTs() == other.hasCommitTs());
-      if (hasCommitTs()) {
-        result = result && (getCommitTs()
-            == other.getCommitTs());
-      }
-      result = result && (hasPrimaryIndex() == other.hasPrimaryIndex());
-      if (hasPrimaryIndex()) {
-        result = result && (getPrimaryIndex()
-            == other.getPrimaryIndex());
+      result = result && (hasThemisCommit() == other.hasThemisCommit());
+      if (hasThemisCommit()) {
+        result = result && getThemisCommit()
+            .equals(other.getThemisCommit());
       }
       result = result &&
           getUnknownFields().equals(other.getUnknownFields());
@@ -2900,25 +7494,9 @@ public final class ThemisProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      if (hasRow()) {
-        hash = (37 * hash) + ROW_FIELD_NUMBER;
-        hash = (53 * hash) + getRow().hashCode();
-      }
-      if (getMutationsCount() > 0) {
-        hash = (37 * hash) + MUTATIONS_FIELD_NUMBER;
-        hash = (53 * hash) + getMutationsList().hashCode();
-      }
-      if (hasPrewriteTs()) {
-        hash = (37 * hash) + PREWRITETS_FIELD_NUMBER;
-        hash = (53 * hash) + hashLong(getPrewriteTs());
-      }
-      if (hasCommitTs()) {
-        hash = (37 * hash) + COMMITTS_FIELD_NUMBER;
-        hash = (53 * hash) + hashLong(getCommitTs());
-      }
-      if (hasPrimaryIndex()) {
-        hash = (37 * hash) + PRIMARYINDEX_FIELD_NUMBER;
-        hash = (53 * hash) + getPrimaryIndex();
+      if (hasThemisCommit()) {
+        hash = (37 * hash) + THEMISCOMMIT_FIELD_NUMBER;
+        hash = (53 * hash) + getThemisCommit().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -3021,7 +7599,7 @@ public final class ThemisProtos {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMutationsFieldBuilder();
+          getThemisCommitFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3030,20 +7608,12 @@ public final class ThemisProtos {
 
       public Builder clear() {
         super.clear();
-        row_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (mutationsBuilder_ == null) {
-          mutations_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (themisCommitBuilder_ == null) {
+          themisCommit_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance();
         } else {
-          mutationsBuilder_.clear();
+          themisCommitBuilder_.clear();
         }
-        prewriteTs_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        commitTs_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        primaryIndex_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -3075,28 +7645,11 @@ public final class ThemisProtos {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.row_ = row_;
-        if (mutationsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            mutations_ = java.util.Collections.unmodifiableList(mutations_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.mutations_ = mutations_;
+        if (themisCommitBuilder_ == null) {
+          result.themisCommit_ = themisCommit_;
         } else {
-          result.mutations_ = mutationsBuilder_.build();
+          result.themisCommit_ = themisCommitBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.prewriteTs_ = prewriteTs_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.commitTs_ = commitTs_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.primaryIndex_ = primaryIndex_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3113,62 +7666,19 @@ public final class ThemisProtos {
 
       public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest other) {
         if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance()) return this;
-        if (other.hasRow()) {
-          setRow(other.getRow());
-        }
-        if (mutationsBuilder_ == null) {
-          if (!other.mutations_.isEmpty()) {
-            if (mutations_.isEmpty()) {
-              mutations_ = other.mutations_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureMutationsIsMutable();
-              mutations_.addAll(other.mutations_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.mutations_.isEmpty()) {
-            if (mutationsBuilder_.isEmpty()) {
-              mutationsBuilder_.dispose();
-              mutationsBuilder_ = null;
-              mutations_ = other.mutations_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              mutationsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getMutationsFieldBuilder() : null;
-            } else {
-              mutationsBuilder_.addAllMessages(other.mutations_);
-            }
-          }
-        }
-        if (other.hasPrewriteTs()) {
-          setPrewriteTs(other.getPrewriteTs());
-        }
-        if (other.hasCommitTs()) {
-          setCommitTs(other.getCommitTs());
-        }
-        if (other.hasPrimaryIndex()) {
-          setPrimaryIndex(other.getPrimaryIndex());
+        if (other.hasThemisCommit()) {
+          mergeThemisCommit(other.getThemisCommit());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasRow()) {
+        if (!hasThemisCommit()) {
           
           return false;
         }
-        if (!hasPrewriteTs()) {
-          
-          return false;
-        }
-        if (!hasCommitTs()) {
-          
-          return false;
-        }
-        if (!hasPrimaryIndex()) {
+        if (!getThemisCommit().isInitialized()) {
           
           return false;
         }
@@ -3194,379 +7704,121 @@ public final class ThemisProtos {
       }
       private int bitField0_;
 
-      // required bytes row = 1;
-      private com.google.protobuf.ByteString row_ = com.google.protobuf.ByteString.EMPTY;
+      // required .ThemisCommit themisCommit = 1;
+      private org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit themisCommit_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> themisCommitBuilder_;
       /**
-       * <code>required bytes row = 1;</code>
+       * <code>required .ThemisCommit themisCommit = 1;</code>
        */
-      public boolean hasRow() {
+      public boolean hasThemisCommit() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes row = 1;</code>
+       * <code>required .ThemisCommit themisCommit = 1;</code>
        */
-      public com.google.protobuf.ByteString getRow() {
-        return row_;
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getThemisCommit() {
+        if (themisCommitBuilder_ == null) {
+          return themisCommit_;
+        } else {
+          return themisCommitBuilder_.getMessage();
+        }
       }
       /**
-       * <code>required bytes row = 1;</code>
+       * <code>required .ThemisCommit themisCommit = 1;</code>
        */
-      public Builder setRow(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        row_ = value;
-        onChanged();
+      public Builder setThemisCommit(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit value) {
+        if (themisCommitBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          themisCommit_ = value;
+          onChanged();
+        } else {
+          themisCommitBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>required bytes row = 1;</code>
+       * <code>required .ThemisCommit themisCommit = 1;</code>
        */
-      public Builder clearRow() {
+      public Builder setThemisCommit(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder builderForValue) {
+        if (themisCommitBuilder_ == null) {
+          themisCommit_ = builderForValue.build();
+          onChanged();
+        } else {
+          themisCommitBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder mergeThemisCommit(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit value) {
+        if (themisCommitBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              themisCommit_ != org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance()) {
+            themisCommit_ =
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.newBuilder(themisCommit_).mergeFrom(value).buildPartial();
+          } else {
+            themisCommit_ = value;
+          }
+          onChanged();
+        } else {
+          themisCommitBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder clearThemisCommit() {
+        if (themisCommitBuilder_ == null) {
+          themisCommit_ = org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance();
+          onChanged();
+        } else {
+          themisCommitBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
-        row_ = getDefaultInstance().getRow();
+        return this;
+      }
+      /**
+       * <code>required .ThemisCommit themisCommit = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder getThemisCommitBuilder() {
+        bitField0_ |= 0x00000001;
         onChanged();
-        return this;
+        return getThemisCommitFieldBuilder().getBuilder();
       }
-
-      // repeated .Cell mutations = 2;
-      private java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> mutations_ =
-        java.util.Collections.emptyList();
-      private void ensureMutationsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          mutations_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell>(mutations_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder, org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> mutationsBuilder_;
-
       /**
-       * <code>repeated .Cell mutations = 2;</code>
+       * <code>required .ThemisCommit themisCommit = 1;</code>
        */
-      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> getMutationsList() {
-        if (mutationsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(mutations_);
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder getThemisCommitOrBuilder() {
+        if (themisCommitBuilder_ != null) {
+          return themisCommitBuilder_.getMessageOrBuilder();
         } else {
-          return mutationsBuilder_.getMessageList();
+          return themisCommit_;
         }
       }
       /**
-       * <code>repeated .Cell mutations = 2;</code>
+       * <code>required .ThemisCommit themisCommit = 1;</code>
        */
-      public int getMutationsCount() {
-        if (mutationsBuilder_ == null) {
-          return mutations_.size();
-        } else {
-          return mutationsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell getMutations(int index) {
-        if (mutationsBuilder_ == null) {
-          return mutations_.get(index);
-        } else {
-          return mutationsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder setMutations(
-          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell value) {
-        if (mutationsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureMutationsIsMutable();
-          mutations_.set(index, value);
-          onChanged();
-        } else {
-          mutationsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder setMutations(
-          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder builderForValue) {
-        if (mutationsBuilder_ == null) {
-          ensureMutationsIsMutable();
-          mutations_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          mutationsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder addMutations(org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell value) {
-        if (mutationsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureMutationsIsMutable();
-          mutations_.add(value);
-          onChanged();
-        } else {
-          mutationsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder addMutations(
-          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell value) {
-        if (mutationsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureMutationsIsMutable();
-          mutations_.add(index, value);
-          onChanged();
-        } else {
-          mutationsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder addMutations(
-          org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder builderForValue) {
-        if (mutationsBuilder_ == null) {
-          ensureMutationsIsMutable();
-          mutations_.add(builderForValue.build());
-          onChanged();
-        } else {
-          mutationsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder addMutations(
-          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder builderForValue) {
-        if (mutationsBuilder_ == null) {
-          ensureMutationsIsMutable();
-          mutations_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          mutationsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder addAllMutations(
-          java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> values) {
-        if (mutationsBuilder_ == null) {
-          ensureMutationsIsMutable();
-          super.addAll(values, mutations_);
-          onChanged();
-        } else {
-          mutationsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder clearMutations() {
-        if (mutationsBuilder_ == null) {
-          mutations_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          mutationsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public Builder removeMutations(int index) {
-        if (mutationsBuilder_ == null) {
-          ensureMutationsIsMutable();
-          mutations_.remove(index);
-          onChanged();
-        } else {
-          mutationsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder getMutationsBuilder(
-          int index) {
-        return getMutationsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder getMutationsOrBuilder(
-          int index) {
-        if (mutationsBuilder_ == null) {
-          return mutations_.get(index);  } else {
-          return mutationsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
-           getMutationsOrBuilderList() {
-        if (mutationsBuilder_ != null) {
-          return mutationsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(mutations_);
-        }
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder addMutationsBuilder() {
-        return getMutationsFieldBuilder().addBuilder(
-            org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder addMutationsBuilder(
-          int index) {
-        return getMutationsFieldBuilder().addBuilder(
-            index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Cell mutations = 2;</code>
-       */
-      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder> 
-           getMutationsBuilderList() {
-        return getMutationsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder, org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
-          getMutationsFieldBuilder() {
-        if (mutationsBuilder_ == null) {
-          mutationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder, org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder>(
-                  mutations_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+      private com.google.protobuf.SingleFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> 
+          getThemisCommitFieldBuilder() {
+        if (themisCommitBuilder_ == null) {
+          themisCommitBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder>(
+                  themisCommit_,
                   getParentForChildren(),
                   isClean());
-          mutations_ = null;
+          themisCommit_ = null;
         }
-        return mutationsBuilder_;
-      }
-
-      // required uint64 prewriteTs = 3;
-      private long prewriteTs_ ;
-      /**
-       * <code>required uint64 prewriteTs = 3;</code>
-       */
-      public boolean hasPrewriteTs() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required uint64 prewriteTs = 3;</code>
-       */
-      public long getPrewriteTs() {
-        return prewriteTs_;
-      }
-      /**
-       * <code>required uint64 prewriteTs = 3;</code>
-       */
-      public Builder setPrewriteTs(long value) {
-        bitField0_ |= 0x00000004;
-        prewriteTs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint64 prewriteTs = 3;</code>
-       */
-      public Builder clearPrewriteTs() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        prewriteTs_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // required uint64 commitTs = 4;
-      private long commitTs_ ;
-      /**
-       * <code>required uint64 commitTs = 4;</code>
-       */
-      public boolean hasCommitTs() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>required uint64 commitTs = 4;</code>
-       */
-      public long getCommitTs() {
-        return commitTs_;
-      }
-      /**
-       * <code>required uint64 commitTs = 4;</code>
-       */
-      public Builder setCommitTs(long value) {
-        bitField0_ |= 0x00000008;
-        commitTs_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint64 commitTs = 4;</code>
-       */
-      public Builder clearCommitTs() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        commitTs_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // required int32 primaryIndex = 5;
-      private int primaryIndex_ ;
-      /**
-       * <code>required int32 primaryIndex = 5;</code>
-       */
-      public boolean hasPrimaryIndex() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>required int32 primaryIndex = 5;</code>
-       */
-      public int getPrimaryIndex() {
-        return primaryIndex_;
-      }
-      /**
-       * <code>required int32 primaryIndex = 5;</code>
-       */
-      public Builder setPrimaryIndex(int value) {
-        bitField0_ |= 0x00000010;
-        primaryIndex_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 primaryIndex = 5;</code>
-       */
-      public Builder clearPrimaryIndex() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        primaryIndex_ = 0;
-        onChanged();
-        return this;
+        return themisCommitBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:ThemisCommitRequest)
@@ -4020,6 +8272,3098 @@ public final class ThemisProtos {
     }
 
     // @@protoc_insertion_point(class_scope:ThemisCommitResponse)
+  }
+
+  public interface ThemisBatchCommitSecondaryRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .ThemisCommit themisCommit = 1;
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit> 
+        getThemisCommitList();
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getThemisCommit(int index);
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    int getThemisCommitCount();
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> 
+        getThemisCommitOrBuilderList();
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder getThemisCommitOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ThemisBatchCommitSecondaryRequest}
+   */
+  public static final class ThemisBatchCommitSecondaryRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchCommitSecondaryRequestOrBuilder {
+    // Use ThemisBatchCommitSecondaryRequest.newBuilder() to construct.
+    private ThemisBatchCommitSecondaryRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchCommitSecondaryRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchCommitSecondaryRequest defaultInstance;
+    public static ThemisBatchCommitSecondaryRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchCommitSecondaryRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchCommitSecondaryRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                themisCommit_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              themisCommit_.add(input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          themisCommit_ = java.util.Collections.unmodifiableList(themisCommit_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchCommitSecondaryRequest> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchCommitSecondaryRequest>() {
+      public ThemisBatchCommitSecondaryRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchCommitSecondaryRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchCommitSecondaryRequest> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .ThemisCommit themisCommit = 1;
+    public static final int THEMISCOMMIT_FIELD_NUMBER = 1;
+    private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit> themisCommit_;
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit> getThemisCommitList() {
+      return themisCommit_;
+    }
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> 
+        getThemisCommitOrBuilderList() {
+      return themisCommit_;
+    }
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    public int getThemisCommitCount() {
+      return themisCommit_.size();
+    }
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getThemisCommit(int index) {
+      return themisCommit_.get(index);
+    }
+    /**
+     * <code>repeated .ThemisCommit themisCommit = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder getThemisCommitOrBuilder(
+        int index) {
+      return themisCommit_.get(index);
+    }
+
+    private void initFields() {
+      themisCommit_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getThemisCommitCount(); i++) {
+        if (!getThemisCommit(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < themisCommit_.size(); i++) {
+        output.writeMessage(1, themisCommit_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < themisCommit_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, themisCommit_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest) obj;
+
+      boolean result = true;
+      result = result && getThemisCommitList()
+          .equals(other.getThemisCommitList());
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getThemisCommitCount() > 0) {
+        hash = (37 * hash) + THEMISCOMMIT_FIELD_NUMBER;
+        hash = (53 * hash) + getThemisCommitList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchCommitSecondaryRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getThemisCommitFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (themisCommitBuilder_ == null) {
+          themisCommit_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          themisCommitBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryRequest_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest(this);
+        int from_bitField0_ = bitField0_;
+        if (themisCommitBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            themisCommit_ = java.util.Collections.unmodifiableList(themisCommit_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.themisCommit_ = themisCommit_;
+        } else {
+          result.themisCommit_ = themisCommitBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.getDefaultInstance()) return this;
+        if (themisCommitBuilder_ == null) {
+          if (!other.themisCommit_.isEmpty()) {
+            if (themisCommit_.isEmpty()) {
+              themisCommit_ = other.themisCommit_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureThemisCommitIsMutable();
+              themisCommit_.addAll(other.themisCommit_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.themisCommit_.isEmpty()) {
+            if (themisCommitBuilder_.isEmpty()) {
+              themisCommitBuilder_.dispose();
+              themisCommitBuilder_ = null;
+              themisCommit_ = other.themisCommit_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              themisCommitBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getThemisCommitFieldBuilder() : null;
+            } else {
+              themisCommitBuilder_.addAllMessages(other.themisCommit_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getThemisCommitCount(); i++) {
+          if (!getThemisCommit(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .ThemisCommit themisCommit = 1;
+      private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit> themisCommit_ =
+        java.util.Collections.emptyList();
+      private void ensureThemisCommitIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          themisCommit_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit>(themisCommit_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> themisCommitBuilder_;
+
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit> getThemisCommitList() {
+        if (themisCommitBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(themisCommit_);
+        } else {
+          return themisCommitBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public int getThemisCommitCount() {
+        if (themisCommitBuilder_ == null) {
+          return themisCommit_.size();
+        } else {
+          return themisCommitBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getThemisCommit(int index) {
+        if (themisCommitBuilder_ == null) {
+          return themisCommit_.get(index);
+        } else {
+          return themisCommitBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder setThemisCommit(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit value) {
+        if (themisCommitBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisCommitIsMutable();
+          themisCommit_.set(index, value);
+          onChanged();
+        } else {
+          themisCommitBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder setThemisCommit(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder builderForValue) {
+        if (themisCommitBuilder_ == null) {
+          ensureThemisCommitIsMutable();
+          themisCommit_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          themisCommitBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder addThemisCommit(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit value) {
+        if (themisCommitBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisCommitIsMutable();
+          themisCommit_.add(value);
+          onChanged();
+        } else {
+          themisCommitBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder addThemisCommit(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit value) {
+        if (themisCommitBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureThemisCommitIsMutable();
+          themisCommit_.add(index, value);
+          onChanged();
+        } else {
+          themisCommitBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder addThemisCommit(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder builderForValue) {
+        if (themisCommitBuilder_ == null) {
+          ensureThemisCommitIsMutable();
+          themisCommit_.add(builderForValue.build());
+          onChanged();
+        } else {
+          themisCommitBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder addThemisCommit(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder builderForValue) {
+        if (themisCommitBuilder_ == null) {
+          ensureThemisCommitIsMutable();
+          themisCommit_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          themisCommitBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder addAllThemisCommit(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit> values) {
+        if (themisCommitBuilder_ == null) {
+          ensureThemisCommitIsMutable();
+          super.addAll(values, themisCommit_);
+          onChanged();
+        } else {
+          themisCommitBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder clearThemisCommit() {
+        if (themisCommitBuilder_ == null) {
+          themisCommit_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          themisCommitBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public Builder removeThemisCommit(int index) {
+        if (themisCommitBuilder_ == null) {
+          ensureThemisCommitIsMutable();
+          themisCommit_.remove(index);
+          onChanged();
+        } else {
+          themisCommitBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder getThemisCommitBuilder(
+          int index) {
+        return getThemisCommitFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder getThemisCommitOrBuilder(
+          int index) {
+        if (themisCommitBuilder_ == null) {
+          return themisCommit_.get(index);  } else {
+          return themisCommitBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> 
+           getThemisCommitOrBuilderList() {
+        if (themisCommitBuilder_ != null) {
+          return themisCommitBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(themisCommit_);
+        }
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder addThemisCommitBuilder() {
+        return getThemisCommitFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder addThemisCommitBuilder(
+          int index) {
+        return getThemisCommitFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisCommit themisCommit = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder> 
+           getThemisCommitBuilderList() {
+        return getThemisCommitFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder> 
+          getThemisCommitFieldBuilder() {
+        if (themisCommitBuilder_ == null) {
+          themisCommitBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder>(
+                  themisCommit_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          themisCommit_ = null;
+        }
+        return themisCommitBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchCommitSecondaryRequest)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchCommitSecondaryRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchCommitSecondaryRequest)
+  }
+
+  public interface ThemisBatchCommitSecondaryResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult> 
+        getBatchCommitSecondaryResultList();
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult getBatchCommitSecondaryResult(int index);
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    int getBatchCommitSecondaryResultCount();
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder> 
+        getBatchCommitSecondaryResultOrBuilderList();
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder getBatchCommitSecondaryResultOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ThemisBatchCommitSecondaryResponse}
+   */
+  public static final class ThemisBatchCommitSecondaryResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchCommitSecondaryResponseOrBuilder {
+    // Use ThemisBatchCommitSecondaryResponse.newBuilder() to construct.
+    private ThemisBatchCommitSecondaryResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchCommitSecondaryResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchCommitSecondaryResponse defaultInstance;
+    public static ThemisBatchCommitSecondaryResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchCommitSecondaryResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchCommitSecondaryResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                batchCommitSecondaryResult_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              batchCommitSecondaryResult_.add(input.readMessage(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          batchCommitSecondaryResult_ = java.util.Collections.unmodifiableList(batchCommitSecondaryResult_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchCommitSecondaryResponse> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchCommitSecondaryResponse>() {
+      public ThemisBatchCommitSecondaryResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchCommitSecondaryResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchCommitSecondaryResponse> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;
+    public static final int BATCHCOMMITSECONDARYRESULT_FIELD_NUMBER = 1;
+    private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult> batchCommitSecondaryResult_;
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult> getBatchCommitSecondaryResultList() {
+      return batchCommitSecondaryResult_;
+    }
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder> 
+        getBatchCommitSecondaryResultOrBuilderList() {
+      return batchCommitSecondaryResult_;
+    }
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    public int getBatchCommitSecondaryResultCount() {
+      return batchCommitSecondaryResult_.size();
+    }
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult getBatchCommitSecondaryResult(int index) {
+      return batchCommitSecondaryResult_.get(index);
+    }
+    /**
+     * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+     */
+    public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder getBatchCommitSecondaryResultOrBuilder(
+        int index) {
+      return batchCommitSecondaryResult_.get(index);
+    }
+
+    private void initFields() {
+      batchCommitSecondaryResult_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      for (int i = 0; i < getBatchCommitSecondaryResultCount(); i++) {
+        if (!getBatchCommitSecondaryResult(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < batchCommitSecondaryResult_.size(); i++) {
+        output.writeMessage(1, batchCommitSecondaryResult_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < batchCommitSecondaryResult_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, batchCommitSecondaryResult_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse) obj;
+
+      boolean result = true;
+      result = result && getBatchCommitSecondaryResultList()
+          .equals(other.getBatchCommitSecondaryResultList());
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getBatchCommitSecondaryResultCount() > 0) {
+        hash = (37 * hash) + BATCHCOMMITSECONDARYRESULT_FIELD_NUMBER;
+        hash = (53 * hash) + getBatchCommitSecondaryResultList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchCommitSecondaryResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getBatchCommitSecondaryResultFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          batchCommitSecondaryResult_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          batchCommitSecondaryResultBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResponse_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse(this);
+        int from_bitField0_ = bitField0_;
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            batchCommitSecondaryResult_ = java.util.Collections.unmodifiableList(batchCommitSecondaryResult_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.batchCommitSecondaryResult_ = batchCommitSecondaryResult_;
+        } else {
+          result.batchCommitSecondaryResult_ = batchCommitSecondaryResultBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance()) return this;
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          if (!other.batchCommitSecondaryResult_.isEmpty()) {
+            if (batchCommitSecondaryResult_.isEmpty()) {
+              batchCommitSecondaryResult_ = other.batchCommitSecondaryResult_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureBatchCommitSecondaryResultIsMutable();
+              batchCommitSecondaryResult_.addAll(other.batchCommitSecondaryResult_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.batchCommitSecondaryResult_.isEmpty()) {
+            if (batchCommitSecondaryResultBuilder_.isEmpty()) {
+              batchCommitSecondaryResultBuilder_.dispose();
+              batchCommitSecondaryResultBuilder_ = null;
+              batchCommitSecondaryResult_ = other.batchCommitSecondaryResult_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              batchCommitSecondaryResultBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getBatchCommitSecondaryResultFieldBuilder() : null;
+            } else {
+              batchCommitSecondaryResultBuilder_.addAllMessages(other.batchCommitSecondaryResult_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getBatchCommitSecondaryResultCount(); i++) {
+          if (!getBatchCommitSecondaryResult(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;
+      private java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult> batchCommitSecondaryResult_ =
+        java.util.Collections.emptyList();
+      private void ensureBatchCommitSecondaryResultIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          batchCommitSecondaryResult_ = new java.util.ArrayList<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult>(batchCommitSecondaryResult_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder> batchCommitSecondaryResultBuilder_;
+
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult> getBatchCommitSecondaryResultList() {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(batchCommitSecondaryResult_);
+        } else {
+          return batchCommitSecondaryResultBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public int getBatchCommitSecondaryResultCount() {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          return batchCommitSecondaryResult_.size();
+        } else {
+          return batchCommitSecondaryResultBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult getBatchCommitSecondaryResult(int index) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          return batchCommitSecondaryResult_.get(index);
+        } else {
+          return batchCommitSecondaryResultBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder setBatchCommitSecondaryResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult value) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.set(index, value);
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder setBatchCommitSecondaryResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder builderForValue) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder addBatchCommitSecondaryResult(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult value) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.add(value);
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder addBatchCommitSecondaryResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult value) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.add(index, value);
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder addBatchCommitSecondaryResult(
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder builderForValue) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.add(builderForValue.build());
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder addBatchCommitSecondaryResult(
+          int index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder builderForValue) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder addAllBatchCommitSecondaryResult(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult> values) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          ensureBatchCommitSecondaryResultIsMutable();
+          super.addAll(values, batchCommitSecondaryResult_);
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder clearBatchCommitSecondaryResult() {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          batchCommitSecondaryResult_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public Builder removeBatchCommitSecondaryResult(int index) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          ensureBatchCommitSecondaryResultIsMutable();
+          batchCommitSecondaryResult_.remove(index);
+          onChanged();
+        } else {
+          batchCommitSecondaryResultBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder getBatchCommitSecondaryResultBuilder(
+          int index) {
+        return getBatchCommitSecondaryResultFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder getBatchCommitSecondaryResultOrBuilder(
+          int index) {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          return batchCommitSecondaryResult_.get(index);  } else {
+          return batchCommitSecondaryResultBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder> 
+           getBatchCommitSecondaryResultOrBuilderList() {
+        if (batchCommitSecondaryResultBuilder_ != null) {
+          return batchCommitSecondaryResultBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(batchCommitSecondaryResult_);
+        }
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder addBatchCommitSecondaryResultBuilder() {
+        return getBatchCommitSecondaryResultFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder addBatchCommitSecondaryResultBuilder(
+          int index) {
+        return getBatchCommitSecondaryResultFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .ThemisBatchCommitSecondaryResult batchCommitSecondaryResult = 1;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder> 
+           getBatchCommitSecondaryResultBuilderList() {
+        return getBatchCommitSecondaryResultFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder> 
+          getBatchCommitSecondaryResultFieldBuilder() {
+        if (batchCommitSecondaryResultBuilder_ == null) {
+          batchCommitSecondaryResultBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder>(
+                  batchCommitSecondaryResult_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          batchCommitSecondaryResult_ = null;
+        }
+        return batchCommitSecondaryResultBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchCommitSecondaryResponse)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchCommitSecondaryResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchCommitSecondaryResponse)
+  }
+
+  public interface ThemisBatchCommitSecondaryResultOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes row = 1;
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    boolean hasRow();
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    com.google.protobuf.ByteString getRow();
+
+    // required bool success = 2;
+    /**
+     * <code>required bool success = 2;</code>
+     */
+    boolean hasSuccess();
+    /**
+     * <code>required bool success = 2;</code>
+     */
+    boolean getSuccess();
+  }
+  /**
+   * Protobuf type {@code ThemisBatchCommitSecondaryResult}
+   */
+  public static final class ThemisBatchCommitSecondaryResult extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisBatchCommitSecondaryResultOrBuilder {
+    // Use ThemisBatchCommitSecondaryResult.newBuilder() to construct.
+    private ThemisBatchCommitSecondaryResult(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisBatchCommitSecondaryResult(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisBatchCommitSecondaryResult defaultInstance;
+    public static ThemisBatchCommitSecondaryResult getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisBatchCommitSecondaryResult getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisBatchCommitSecondaryResult(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              row_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              success_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResult_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResult_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisBatchCommitSecondaryResult> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisBatchCommitSecondaryResult>() {
+      public ThemisBatchCommitSecondaryResult parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisBatchCommitSecondaryResult(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisBatchCommitSecondaryResult> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required bytes row = 1;
+    public static final int ROW_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString row_;
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    public boolean hasRow() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    public com.google.protobuf.ByteString getRow() {
+      return row_;
+    }
+
+    // required bool success = 2;
+    public static final int SUCCESS_FIELD_NUMBER = 2;
+    private boolean success_;
+    /**
+     * <code>required bool success = 2;</code>
+     */
+    public boolean hasSuccess() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bool success = 2;</code>
+     */
+    public boolean getSuccess() {
+      return success_;
+    }
+
+    private void initFields() {
+      row_ = com.google.protobuf.ByteString.EMPTY;
+      success_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasRow()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSuccess()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, row_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, success_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, row_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, success_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult) obj;
+
+      boolean result = true;
+      result = result && (hasRow() == other.hasRow());
+      if (hasRow()) {
+        result = result && getRow()
+            .equals(other.getRow());
+      }
+      result = result && (hasSuccess() == other.hasSuccess());
+      if (hasSuccess()) {
+        result = result && (getSuccess()
+            == other.getSuccess());
+      }
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasRow()) {
+        hash = (37 * hash) + ROW_FIELD_NUMBER;
+        hash = (53 * hash) + getRow().hashCode();
+      }
+      if (hasSuccess()) {
+        hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
+        hash = (53 * hash) + hashBoolean(getSuccess());
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisBatchCommitSecondaryResult}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResultOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResult_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResult_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        row_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        success_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisBatchCommitSecondaryResult_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.row_ = row_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.success_ = success_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult.getDefaultInstance()) return this;
+        if (other.hasRow()) {
+          setRow(other.getRow());
+        }
+        if (other.hasSuccess()) {
+          setSuccess(other.getSuccess());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasRow()) {
+          
+          return false;
+        }
+        if (!hasSuccess()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResult) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required bytes row = 1;
+      private com.google.protobuf.ByteString row_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public boolean hasRow() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public com.google.protobuf.ByteString getRow() {
+        return row_;
+      }
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public Builder setRow(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        row_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public Builder clearRow() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        row_ = getDefaultInstance().getRow();
+        onChanged();
+        return this;
+      }
+
+      // required bool success = 2;
+      private boolean success_ ;
+      /**
+       * <code>required bool success = 2;</code>
+       */
+      public boolean hasSuccess() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bool success = 2;</code>
+       */
+      public boolean getSuccess() {
+        return success_;
+      }
+      /**
+       * <code>required bool success = 2;</code>
+       */
+      public Builder setSuccess(boolean value) {
+        bitField0_ |= 0x00000002;
+        success_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool success = 2;</code>
+       */
+      public Builder clearSuccess() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        success_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisBatchCommitSecondaryResult)
+    }
+
+    static {
+      defaultInstance = new ThemisBatchCommitSecondaryResult(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisBatchCommitSecondaryResult)
+  }
+
+  public interface ThemisCommitOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes row = 1;
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    boolean hasRow();
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    com.google.protobuf.ByteString getRow();
+
+    // repeated .Cell mutations = 2;
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> 
+        getMutationsList();
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell getMutations(int index);
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    int getMutationsCount();
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
+        getMutationsOrBuilderList();
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder getMutationsOrBuilder(
+        int index);
+
+    // required uint64 prewriteTs = 3;
+    /**
+     * <code>required uint64 prewriteTs = 3;</code>
+     */
+    boolean hasPrewriteTs();
+    /**
+     * <code>required uint64 prewriteTs = 3;</code>
+     */
+    long getPrewriteTs();
+
+    // required uint64 commitTs = 4;
+    /**
+     * <code>required uint64 commitTs = 4;</code>
+     */
+    boolean hasCommitTs();
+    /**
+     * <code>required uint64 commitTs = 4;</code>
+     */
+    long getCommitTs();
+
+    // required int32 primaryIndex = 5;
+    /**
+     * <code>required int32 primaryIndex = 5;</code>
+     */
+    boolean hasPrimaryIndex();
+    /**
+     * <code>required int32 primaryIndex = 5;</code>
+     */
+    int getPrimaryIndex();
+  }
+  /**
+   * Protobuf type {@code ThemisCommit}
+   */
+  public static final class ThemisCommit extends
+      com.google.protobuf.GeneratedMessage
+      implements ThemisCommitOrBuilder {
+    // Use ThemisCommit.newBuilder() to construct.
+    private ThemisCommit(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ThemisCommit(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ThemisCommit defaultInstance;
+    public static ThemisCommit getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ThemisCommit getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ThemisCommit(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              row_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                mutations_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              mutations_.add(input.readMessage(org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              prewriteTs_ = input.readUInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              commitTs_ = input.readUInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              primaryIndex_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          mutations_ = java.util.Collections.unmodifiableList(mutations_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisCommit_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisCommit_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ThemisCommit> PARSER =
+        new com.google.protobuf.AbstractParser<ThemisCommit>() {
+      public ThemisCommit parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ThemisCommit(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ThemisCommit> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required bytes row = 1;
+    public static final int ROW_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString row_;
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    public boolean hasRow() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bytes row = 1;</code>
+     */
+    public com.google.protobuf.ByteString getRow() {
+      return row_;
+    }
+
+    // repeated .Cell mutations = 2;
+    public static final int MUTATIONS_FIELD_NUMBER = 2;
+    private java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> mutations_;
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    public java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> getMutationsList() {
+      return mutations_;
+    }
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
+        getMutationsOrBuilderList() {
+      return mutations_;
+    }
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    public int getMutationsCount() {
+      return mutations_.size();
+    }
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell getMutations(int index) {
+      return mutations_.get(index);
+    }
+    /**
+     * <code>repeated .Cell mutations = 2;</code>
+     */
+    public org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder getMutationsOrBuilder(
+        int index) {
+      return mutations_.get(index);
+    }
+
+    // required uint64 prewriteTs = 3;
+    public static final int PREWRITETS_FIELD_NUMBER = 3;
+    private long prewriteTs_;
+    /**
+     * <code>required uint64 prewriteTs = 3;</code>
+     */
+    public boolean hasPrewriteTs() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required uint64 prewriteTs = 3;</code>
+     */
+    public long getPrewriteTs() {
+      return prewriteTs_;
+    }
+
+    // required uint64 commitTs = 4;
+    public static final int COMMITTS_FIELD_NUMBER = 4;
+    private long commitTs_;
+    /**
+     * <code>required uint64 commitTs = 4;</code>
+     */
+    public boolean hasCommitTs() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint64 commitTs = 4;</code>
+     */
+    public long getCommitTs() {
+      return commitTs_;
+    }
+
+    // required int32 primaryIndex = 5;
+    public static final int PRIMARYINDEX_FIELD_NUMBER = 5;
+    private int primaryIndex_;
+    /**
+     * <code>required int32 primaryIndex = 5;</code>
+     */
+    public boolean hasPrimaryIndex() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 primaryIndex = 5;</code>
+     */
+    public int getPrimaryIndex() {
+      return primaryIndex_;
+    }
+
+    private void initFields() {
+      row_ = com.google.protobuf.ByteString.EMPTY;
+      mutations_ = java.util.Collections.emptyList();
+      prewriteTs_ = 0L;
+      commitTs_ = 0L;
+      primaryIndex_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasRow()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPrewriteTs()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCommitTs()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPrimaryIndex()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, row_);
+      }
+      for (int i = 0; i < mutations_.size(); i++) {
+        output.writeMessage(2, mutations_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt64(3, prewriteTs_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt64(4, commitTs_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, primaryIndex_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, row_);
+      }
+      for (int i = 0; i < mutations_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, mutations_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(3, prewriteTs_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(4, commitTs_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, primaryIndex_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit)) {
+        return super.equals(obj);
+      }
+      org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit other = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit) obj;
+
+      boolean result = true;
+      result = result && (hasRow() == other.hasRow());
+      if (hasRow()) {
+        result = result && getRow()
+            .equals(other.getRow());
+      }
+      result = result && getMutationsList()
+          .equals(other.getMutationsList());
+      result = result && (hasPrewriteTs() == other.hasPrewriteTs());
+      if (hasPrewriteTs()) {
+        result = result && (getPrewriteTs()
+            == other.getPrewriteTs());
+      }
+      result = result && (hasCommitTs() == other.hasCommitTs());
+      if (hasCommitTs()) {
+        result = result && (getCommitTs()
+            == other.getCommitTs());
+      }
+      result = result && (hasPrimaryIndex() == other.hasPrimaryIndex());
+      if (hasPrimaryIndex()) {
+        result = result && (getPrimaryIndex()
+            == other.getPrimaryIndex());
+      }
+      result = result &&
+          getUnknownFields().equals(other.getUnknownFields());
+      return result;
+    }
+
+    private int memoizedHashCode = 0;
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasRow()) {
+        hash = (37 * hash) + ROW_FIELD_NUMBER;
+        hash = (53 * hash) + getRow().hashCode();
+      }
+      if (getMutationsCount() > 0) {
+        hash = (37 * hash) + MUTATIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getMutationsList().hashCode();
+      }
+      if (hasPrewriteTs()) {
+        hash = (37 * hash) + PREWRITETS_FIELD_NUMBER;
+        hash = (53 * hash) + hashLong(getPrewriteTs());
+      }
+      if (hasCommitTs()) {
+        hash = (37 * hash) + COMMITTS_FIELD_NUMBER;
+        hash = (53 * hash) + hashLong(getCommitTs());
+      }
+      if (hasPrimaryIndex()) {
+        hash = (37 * hash) + PRIMARYINDEX_FIELD_NUMBER;
+        hash = (53 * hash) + getPrimaryIndex();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ThemisCommit}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisCommit_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisCommit_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.class, org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.Builder.class);
+      }
+
+      // Construct using org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMutationsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        row_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (mutationsBuilder_ == null) {
+          mutations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          mutationsBuilder_.clear();
+        }
+        prewriteTs_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        commitTs_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        primaryIndex_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.internal_static_ThemisCommit_descriptor;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit getDefaultInstanceForType() {
+        return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance();
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit build() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit buildPartial() {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit result = new org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.row_ = row_;
+        if (mutationsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            mutations_ = java.util.Collections.unmodifiableList(mutations_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.mutations_ = mutations_;
+        } else {
+          result.mutations_ = mutationsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.prewriteTs_ = prewriteTs_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.commitTs_ = commitTs_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.primaryIndex_ = primaryIndex_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit) {
+          return mergeFrom((org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit other) {
+        if (other == org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit.getDefaultInstance()) return this;
+        if (other.hasRow()) {
+          setRow(other.getRow());
+        }
+        if (mutationsBuilder_ == null) {
+          if (!other.mutations_.isEmpty()) {
+            if (mutations_.isEmpty()) {
+              mutations_ = other.mutations_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureMutationsIsMutable();
+              mutations_.addAll(other.mutations_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.mutations_.isEmpty()) {
+            if (mutationsBuilder_.isEmpty()) {
+              mutationsBuilder_.dispose();
+              mutationsBuilder_ = null;
+              mutations_ = other.mutations_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              mutationsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMutationsFieldBuilder() : null;
+            } else {
+              mutationsBuilder_.addAllMessages(other.mutations_);
+            }
+          }
+        }
+        if (other.hasPrewriteTs()) {
+          setPrewriteTs(other.getPrewriteTs());
+        }
+        if (other.hasCommitTs()) {
+          setCommitTs(other.getCommitTs());
+        }
+        if (other.hasPrimaryIndex()) {
+          setPrimaryIndex(other.getPrimaryIndex());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasRow()) {
+          
+          return false;
+        }
+        if (!hasPrewriteTs()) {
+          
+          return false;
+        }
+        if (!hasCommitTs()) {
+          
+          return false;
+        }
+        if (!hasPrimaryIndex()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommit) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required bytes row = 1;
+      private com.google.protobuf.ByteString row_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public boolean hasRow() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public com.google.protobuf.ByteString getRow() {
+        return row_;
+      }
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public Builder setRow(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        row_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes row = 1;</code>
+       */
+      public Builder clearRow() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        row_ = getDefaultInstance().getRow();
+        onChanged();
+        return this;
+      }
+
+      // repeated .Cell mutations = 2;
+      private java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> mutations_ =
+        java.util.Collections.emptyList();
+      private void ensureMutationsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          mutations_ = new java.util.ArrayList<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell>(mutations_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder, org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> mutationsBuilder_;
+
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> getMutationsList() {
+        if (mutationsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(mutations_);
+        } else {
+          return mutationsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public int getMutationsCount() {
+        if (mutationsBuilder_ == null) {
+          return mutations_.size();
+        } else {
+          return mutationsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell getMutations(int index) {
+        if (mutationsBuilder_ == null) {
+          return mutations_.get(index);
+        } else {
+          return mutationsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder setMutations(
+          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell value) {
+        if (mutationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMutationsIsMutable();
+          mutations_.set(index, value);
+          onChanged();
+        } else {
+          mutationsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder setMutations(
+          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder builderForValue) {
+        if (mutationsBuilder_ == null) {
+          ensureMutationsIsMutable();
+          mutations_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          mutationsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder addMutations(org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell value) {
+        if (mutationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMutationsIsMutable();
+          mutations_.add(value);
+          onChanged();
+        } else {
+          mutationsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder addMutations(
+          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell value) {
+        if (mutationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMutationsIsMutable();
+          mutations_.add(index, value);
+          onChanged();
+        } else {
+          mutationsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder addMutations(
+          org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder builderForValue) {
+        if (mutationsBuilder_ == null) {
+          ensureMutationsIsMutable();
+          mutations_.add(builderForValue.build());
+          onChanged();
+        } else {
+          mutationsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder addMutations(
+          int index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder builderForValue) {
+        if (mutationsBuilder_ == null) {
+          ensureMutationsIsMutable();
+          mutations_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          mutationsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder addAllMutations(
+          java.lang.Iterable<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell> values) {
+        if (mutationsBuilder_ == null) {
+          ensureMutationsIsMutable();
+          super.addAll(values, mutations_);
+          onChanged();
+        } else {
+          mutationsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder clearMutations() {
+        if (mutationsBuilder_ == null) {
+          mutations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          mutationsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public Builder removeMutations(int index) {
+        if (mutationsBuilder_ == null) {
+          ensureMutationsIsMutable();
+          mutations_.remove(index);
+          onChanged();
+        } else {
+          mutationsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder getMutationsBuilder(
+          int index) {
+        return getMutationsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder getMutationsOrBuilder(
+          int index) {
+        if (mutationsBuilder_ == null) {
+          return mutations_.get(index);  } else {
+          return mutationsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public java.util.List<? extends org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
+           getMutationsOrBuilderList() {
+        if (mutationsBuilder_ != null) {
+          return mutationsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(mutations_);
+        }
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder addMutationsBuilder() {
+        return getMutationsFieldBuilder().addBuilder(
+            org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder addMutationsBuilder(
+          int index) {
+        return getMutationsFieldBuilder().addBuilder(
+            index, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Cell mutations = 2;</code>
+       */
+      public java.util.List<org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder> 
+           getMutationsBuilderList() {
+        return getMutationsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder, org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder> 
+          getMutationsFieldBuilder() {
+        if (mutationsBuilder_ == null) {
+          mutationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell, org.apache.hadoop.hbase.protobuf.generated.CellProtos.Cell.Builder, org.apache.hadoop.hbase.protobuf.generated.CellProtos.CellOrBuilder>(
+                  mutations_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          mutations_ = null;
+        }
+        return mutationsBuilder_;
+      }
+
+      // required uint64 prewriteTs = 3;
+      private long prewriteTs_ ;
+      /**
+       * <code>required uint64 prewriteTs = 3;</code>
+       */
+      public boolean hasPrewriteTs() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint64 prewriteTs = 3;</code>
+       */
+      public long getPrewriteTs() {
+        return prewriteTs_;
+      }
+      /**
+       * <code>required uint64 prewriteTs = 3;</code>
+       */
+      public Builder setPrewriteTs(long value) {
+        bitField0_ |= 0x00000004;
+        prewriteTs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 prewriteTs = 3;</code>
+       */
+      public Builder clearPrewriteTs() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        prewriteTs_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required uint64 commitTs = 4;
+      private long commitTs_ ;
+      /**
+       * <code>required uint64 commitTs = 4;</code>
+       */
+      public boolean hasCommitTs() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required uint64 commitTs = 4;</code>
+       */
+      public long getCommitTs() {
+        return commitTs_;
+      }
+      /**
+       * <code>required uint64 commitTs = 4;</code>
+       */
+      public Builder setCommitTs(long value) {
+        bitField0_ |= 0x00000008;
+        commitTs_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint64 commitTs = 4;</code>
+       */
+      public Builder clearCommitTs() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        commitTs_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // required int32 primaryIndex = 5;
+      private int primaryIndex_ ;
+      /**
+       * <code>required int32 primaryIndex = 5;</code>
+       */
+      public boolean hasPrimaryIndex() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int32 primaryIndex = 5;</code>
+       */
+      public int getPrimaryIndex() {
+        return primaryIndex_;
+      }
+      /**
+       * <code>required int32 primaryIndex = 5;</code>
+       */
+      public Builder setPrimaryIndex(int value) {
+        bitField0_ |= 0x00000010;
+        primaryIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 primaryIndex = 5;</code>
+       */
+      public Builder clearPrimaryIndex() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        primaryIndex_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:ThemisCommit)
+    }
+
+    static {
+      defaultInstance = new ThemisCommit(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:ThemisCommit)
   }
 
   public interface EraseLockRequestOrBuilder
@@ -6097,6 +13441,14 @@ public final class ThemisProtos {
 
     public interface Interface {
       /**
+       * <code>rpc themisBatchGet(.ThemisBatchGetRequest) returns (.ThemisBatchGetResponse);</code>
+       */
+      public abstract void themisBatchGet(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest request,
+          com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse> done);
+
+      /**
        * <code>rpc themisGet(.ThemisGetRequest) returns (.Result);</code>
        */
       public abstract void themisGet(
@@ -6113,6 +13465,14 @@ public final class ThemisProtos {
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse> done);
 
       /**
+       * <code>rpc batchPrewriteSecondaryRows(.ThemisBatchPrewriteSecondaryRequest) returns (.ThemisBatchPrewriteSecondaryResponse);</code>
+       */
+      public abstract void batchPrewriteSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest request,
+          com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse> done);
+
+      /**
        * <code>rpc prewriteSingleRow(.ThemisPrewriteRequest) returns (.ThemisPrewriteResponse);</code>
        */
       public abstract void prewriteSingleRow(
@@ -6127,6 +13487,14 @@ public final class ThemisProtos {
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse> done);
+
+      /**
+       * <code>rpc batchCommitSecondaryRows(.ThemisBatchCommitSecondaryRequest) returns (.ThemisBatchCommitSecondaryResponse);</code>
+       */
+      public abstract void batchCommitSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest request,
+          com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse> done);
 
       /**
        * <code>rpc commitSingleRow(.ThemisCommitRequest) returns (.ThemisCommitResponse);</code>
@@ -6158,6 +13526,14 @@ public final class ThemisProtos {
         final Interface impl) {
       return new ThemisService() {
         @java.lang.Override
+        public  void themisBatchGet(
+            com.google.protobuf.RpcController controller,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest request,
+            com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse> done) {
+          impl.themisBatchGet(controller, request, done);
+        }
+
+        @java.lang.Override
         public  void themisGet(
             com.google.protobuf.RpcController controller,
             org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest request,
@@ -6174,6 +13550,14 @@ public final class ThemisProtos {
         }
 
         @java.lang.Override
+        public  void batchPrewriteSecondaryRows(
+            com.google.protobuf.RpcController controller,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest request,
+            com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse> done) {
+          impl.batchPrewriteSecondaryRows(controller, request, done);
+        }
+
+        @java.lang.Override
         public  void prewriteSingleRow(
             com.google.protobuf.RpcController controller,
             org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request,
@@ -6187,6 +13571,14 @@ public final class ThemisProtos {
             org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request,
             com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse> done) {
           impl.commitRow(controller, request, done);
+        }
+
+        @java.lang.Override
+        public  void batchCommitSecondaryRows(
+            com.google.protobuf.RpcController controller,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest request,
+            com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse> done) {
+          impl.batchCommitSecondaryRows(controller, request, done);
         }
 
         @java.lang.Override
@@ -6236,18 +13628,24 @@ public final class ThemisProtos {
           }
           switch(method.getIndex()) {
             case 0:
-              return impl.themisGet(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest)request);
+              return impl.themisBatchGet(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest)request);
             case 1:
-              return impl.prewriteRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)request);
+              return impl.themisGet(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest)request);
             case 2:
-              return impl.prewriteSingleRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)request);
+              return impl.prewriteRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)request);
             case 3:
-              return impl.commitRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest)request);
+              return impl.batchPrewriteSecondaryRows(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest)request);
             case 4:
-              return impl.commitSingleRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest)request);
+              return impl.prewriteSingleRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)request);
             case 5:
-              return impl.getLockAndErase(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest)request);
+              return impl.commitRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest)request);
             case 6:
+              return impl.batchCommitSecondaryRows(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest)request);
+            case 7:
+              return impl.commitSingleRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest)request);
+            case 8:
+              return impl.getLockAndErase(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest)request);
+            case 9:
               return impl.isLockExpired(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
@@ -6264,18 +13662,24 @@ public final class ThemisProtos {
           }
           switch(method.getIndex()) {
             case 0:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.getDefaultInstance();
             case 1:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest.getDefaultInstance();
             case 2:
               return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
             case 3:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.getDefaultInstance();
             case 4:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
             case 5:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
             case 6:
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.getDefaultInstance();
+            case 7:
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
+            case 8:
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest.getDefaultInstance();
+            case 9:
               return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
@@ -6292,18 +13696,24 @@ public final class ThemisProtos {
           }
           switch(method.getIndex()) {
             case 0:
-              return org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance();
             case 1:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance();
+              return org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance();
             case 2:
               return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance();
             case 3:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance();
             case 4:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance();
             case 5:
-              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse.getDefaultInstance();
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
             case 6:
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance();
+            case 7:
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
+            case 8:
+              return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse.getDefaultInstance();
+            case 9:
               return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
@@ -6312,6 +13722,14 @@ public final class ThemisProtos {
 
       };
     }
+
+    /**
+     * <code>rpc themisBatchGet(.ThemisBatchGetRequest) returns (.ThemisBatchGetResponse);</code>
+     */
+    public abstract void themisBatchGet(
+        com.google.protobuf.RpcController controller,
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest request,
+        com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse> done);
 
     /**
      * <code>rpc themisGet(.ThemisGetRequest) returns (.Result);</code>
@@ -6330,6 +13748,14 @@ public final class ThemisProtos {
         com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse> done);
 
     /**
+     * <code>rpc batchPrewriteSecondaryRows(.ThemisBatchPrewriteSecondaryRequest) returns (.ThemisBatchPrewriteSecondaryResponse);</code>
+     */
+    public abstract void batchPrewriteSecondaryRows(
+        com.google.protobuf.RpcController controller,
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest request,
+        com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse> done);
+
+    /**
      * <code>rpc prewriteSingleRow(.ThemisPrewriteRequest) returns (.ThemisPrewriteResponse);</code>
      */
     public abstract void prewriteSingleRow(
@@ -6344,6 +13770,14 @@ public final class ThemisProtos {
         com.google.protobuf.RpcController controller,
         org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request,
         com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse> done);
+
+    /**
+     * <code>rpc batchCommitSecondaryRows(.ThemisBatchCommitSecondaryRequest) returns (.ThemisBatchCommitSecondaryResponse);</code>
+     */
+    public abstract void batchCommitSecondaryRows(
+        com.google.protobuf.RpcController controller,
+        org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest request,
+        com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse> done);
 
     /**
      * <code>rpc commitSingleRow(.ThemisCommitRequest) returns (.ThemisCommitResponse);</code>
@@ -6392,36 +13826,51 @@ public final class ThemisProtos {
       }
       switch(method.getIndex()) {
         case 0:
+          this.themisBatchGet(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest)request,
+            com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse>specializeCallback(
+              done));
+          return;
+        case 1:
           this.themisGet(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result>specializeCallback(
               done));
           return;
-        case 1:
+        case 2:
           this.prewriteRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse>specializeCallback(
               done));
           return;
-        case 2:
+        case 3:
+          this.batchPrewriteSecondaryRows(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest)request,
+            com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse>specializeCallback(
+              done));
+          return;
+        case 4:
           this.prewriteSingleRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse>specializeCallback(
               done));
           return;
-        case 3:
+        case 5:
           this.commitRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse>specializeCallback(
               done));
           return;
-        case 4:
+        case 6:
+          this.batchCommitSecondaryRows(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest)request,
+            com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse>specializeCallback(
+              done));
+          return;
+        case 7:
           this.commitSingleRow(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse>specializeCallback(
               done));
           return;
-        case 5:
+        case 8:
           this.getLockAndErase(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse>specializeCallback(
               done));
           return;
-        case 6:
+        case 9:
           this.isLockExpired(controller, (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest)request,
             com.google.protobuf.RpcUtil.<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse>specializeCallback(
               done));
@@ -6441,18 +13890,24 @@ public final class ThemisProtos {
       }
       switch(method.getIndex()) {
         case 0:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest.getDefaultInstance();
         case 1:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest.getDefaultInstance();
         case 2:
           return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
         case 3:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest.getDefaultInstance();
         case 4:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest.getDefaultInstance();
         case 5:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
         case 6:
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest.getDefaultInstance();
+        case 7:
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest.getDefaultInstance();
+        case 8:
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest.getDefaultInstance();
+        case 9:
           return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
@@ -6469,18 +13924,24 @@ public final class ThemisProtos {
       }
       switch(method.getIndex()) {
         case 0:
-          return org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance();
         case 1:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance();
+          return org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance();
         case 2:
           return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance();
         case 3:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance();
         case 4:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance();
         case 5:
-          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse.getDefaultInstance();
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
         case 6:
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance();
+        case 7:
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance();
+        case 8:
+          return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse.getDefaultInstance();
+        case 9:
           return org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
@@ -6503,12 +13964,27 @@ public final class ThemisProtos {
         return channel;
       }
 
+      public  void themisBatchGet(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest request,
+          com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(0),
+          controller,
+          request,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.class,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance()));
+      }
+
       public  void themisGet(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(0),
+          getDescriptor().getMethods().get(1),
           controller,
           request,
           org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance(),
@@ -6523,7 +13999,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(1),
+          getDescriptor().getMethods().get(2),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance(),
@@ -6533,12 +14009,27 @@ public final class ThemisProtos {
             org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance()));
       }
 
+      public  void batchPrewriteSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest request,
+          com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(3),
+          controller,
+          request,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.class,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance()));
+      }
+
       public  void prewriteSingleRow(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(2),
+          getDescriptor().getMethods().get(4),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance(),
@@ -6553,7 +14044,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(3),
+          getDescriptor().getMethods().get(5),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance(),
@@ -6563,12 +14054,27 @@ public final class ThemisProtos {
             org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance()));
       }
 
+      public  void batchCommitSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest request,
+          com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(6),
+          controller,
+          request,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.class,
+            org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance()));
+      }
+
       public  void commitSingleRow(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(4),
+          getDescriptor().getMethods().get(7),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance(),
@@ -6583,7 +14089,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(5),
+          getDescriptor().getMethods().get(8),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse.getDefaultInstance(),
@@ -6598,7 +14104,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest request,
           com.google.protobuf.RpcCallback<org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse> done) {
         channel.callMethod(
-          getDescriptor().getMethods().get(6),
+          getDescriptor().getMethods().get(9),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse.getDefaultInstance(),
@@ -6615,6 +14121,11 @@ public final class ThemisProtos {
     }
 
     public interface BlockingInterface {
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse themisBatchGet(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest request)
+          throws com.google.protobuf.ServiceException;
+
       public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result themisGet(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest request)
@@ -6625,6 +14136,11 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request)
           throws com.google.protobuf.ServiceException;
 
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse batchPrewriteSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest request)
+          throws com.google.protobuf.ServiceException;
+
       public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse prewriteSingleRow(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request)
@@ -6633,6 +14149,11 @@ public final class ThemisProtos {
       public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse commitRow(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request)
+          throws com.google.protobuf.ServiceException;
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse batchCommitSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest request)
           throws com.google.protobuf.ServiceException;
 
       public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse commitSingleRow(
@@ -6658,12 +14179,24 @@ public final class ThemisProtos {
 
       private final com.google.protobuf.BlockingRpcChannel channel;
 
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse themisBatchGet(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest request)
+          throws com.google.protobuf.ServiceException {
+        return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(0),
+          controller,
+          request,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse.getDefaultInstance());
+      }
+
+
       public org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result themisGet(
           com.google.protobuf.RpcController controller,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisGetRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(0),
+          getDescriptor().getMethods().get(1),
           controller,
           request,
           org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result.getDefaultInstance());
@@ -6675,10 +14208,22 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(1),
+          getDescriptor().getMethods().get(2),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance());
+      }
+
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse batchPrewriteSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryRequest request)
+          throws com.google.protobuf.ServiceException {
+        return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(3),
+          controller,
+          request,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchPrewriteSecondaryResponse.getDefaultInstance());
       }
 
 
@@ -6687,7 +14232,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(2),
+          getDescriptor().getMethods().get(4),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisPrewriteResponse.getDefaultInstance());
@@ -6699,10 +14244,22 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(3),
+          getDescriptor().getMethods().get(5),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance());
+      }
+
+
+      public org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse batchCommitSecondaryRows(
+          com.google.protobuf.RpcController controller,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryRequest request)
+          throws com.google.protobuf.ServiceException {
+        return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(6),
+          controller,
+          request,
+          org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchCommitSecondaryResponse.getDefaultInstance());
       }
 
 
@@ -6711,7 +14268,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(4),
+          getDescriptor().getMethods().get(7),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisCommitResponse.getDefaultInstance());
@@ -6723,7 +14280,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(5),
+          getDescriptor().getMethods().get(8),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse.getDefaultInstance());
@@ -6735,7 +14292,7 @@ public final class ThemisProtos {
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(6),
+          getDescriptor().getMethods().get(9),
           controller,
           request,
           org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredResponse.getDefaultInstance());
@@ -6752,6 +14309,21 @@ public final class ThemisProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ThemisGetRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchGetRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchGetRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchGetResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchGetResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisPrewrite_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisPrewrite_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_ThemisPrewriteRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -6762,6 +14334,21 @@ public final class ThemisProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ThemisPrewriteResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchPrewriteSecondaryRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchPrewriteSecondaryRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchPrewriteSecondaryResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchPrewriteSecondaryResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisPrewriteResult_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisPrewriteResult_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_ThemisCommitRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -6771,6 +14358,26 @@ public final class ThemisProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_ThemisCommitResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchCommitSecondaryRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchCommitSecondaryRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchCommitSecondaryResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchCommitSecondaryResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisBatchCommitSecondaryResult_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisBatchCommitSecondaryResult_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_ThemisCommit_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_ThemisCommit_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_EraseLockRequest_descriptor;
   private static
@@ -6802,34 +14409,62 @@ public final class ThemisProtos {
     java.lang.String[] descriptorData = {
       "\n\014Themis.proto\032\014Client.proto\032\nCell.proto" +
       "\"J\n\020ThemisGetRequest\022\021\n\003get\030\001 \002(\0132\004.Get\022" +
-      "\017\n\007startTs\030\002 \002(\004\022\022\n\nignoreLock\030\003 \002(\010\"\224\001\n" +
-      "\025ThemisPrewriteRequest\022\013\n\003row\030\001 \002(\014\022\030\n\tm" +
-      "utations\030\002 \003(\0132\005.Cell\022\022\n\nprewriteTs\030\003 \002(" +
-      "\004\022\025\n\rsecondaryLock\030\004 \002(\014\022\023\n\013primaryLock\030" +
-      "\005 \002(\014\022\024\n\014primaryIndex\030\006 \002(\005\"(\n\026ThemisPre" +
-      "writeResponse\022\016\n\006result\030\001 \003(\014\"x\n\023ThemisC" +
-      "ommitRequest\022\013\n\003row\030\001 \002(\014\022\030\n\tmutations\030\002" +
-      " \003(\0132\005.Cell\022\022\n\nprewriteTs\030\003 \002(\004\022\020\n\010commi",
-      "tTs\030\004 \002(\004\022\024\n\014primaryIndex\030\005 \002(\005\"&\n\024Themi" +
-      "sCommitResponse\022\016\n\006result\030\001 \002(\010\"V\n\020Erase" +
-      "LockRequest\022\013\n\003row\030\001 \002(\014\022\016\n\006family\030\002 \002(\014" +
-      "\022\021\n\tqualifier\030\003 \002(\014\022\022\n\nprewriteTs\030\004 \002(\004\"" +
-      "!\n\021EraseLockResponse\022\014\n\004lock\030\001 \001(\014\"\'\n\022Lo" +
-      "ckExpiredRequest\022\021\n\ttimestamp\030\001 \002(\004\"&\n\023L" +
-      "ockExpiredResponse\022\017\n\007expired\030\001 \002(\0102\256\003\n\r" +
-      "ThemisService\022\'\n\tthemisGet\022\021.ThemisGetRe" +
-      "quest\032\007.Result\022>\n\013prewriteRow\022\026.ThemisPr" +
-      "ewriteRequest\032\027.ThemisPrewriteResponse\022D",
-      "\n\021prewriteSingleRow\022\026.ThemisPrewriteRequ" +
-      "est\032\027.ThemisPrewriteResponse\0228\n\tcommitRo" +
-      "w\022\024.ThemisCommitRequest\032\025.ThemisCommitRe" +
-      "sponse\022>\n\017commitSingleRow\022\024.ThemisCommit" +
-      "Request\032\025.ThemisCommitResponse\0228\n\017getLoc" +
-      "kAndErase\022\021.EraseLockRequest\032\022.EraseLock" +
-      "Response\022:\n\risLockExpired\022\023.LockExpiredR" +
-      "equest\032\024.LockExpiredResponseBC\n+org.apac" +
-      "he.hadoop.hbase.themis.cp.generatedB\014The" +
-      "misProtosH\001\210\001\001\240\001\001"
+      "\017\n\007startTs\030\002 \002(\004\022\022\n\nignoreLock\030\003 \002(\010\"P\n\025" +
+      "ThemisBatchGetRequest\022\022\n\004gets\030\001 \003(\0132\004.Ge" +
+      "t\022\017\n\007startTs\030\002 \002(\004\022\022\n\nignoreLock\030\003 \002(\010\"-" +
+      "\n\026ThemisBatchGetResponse\022\023\n\002rs\030\001 \003(\0132\007.R" +
+      "esult\"\215\001\n\016ThemisPrewrite\022\013\n\003row\030\001 \002(\014\022\030\n" +
+      "\tmutations\030\002 \003(\0132\005.Cell\022\022\n\nprewriteTs\030\003 " +
+      "\002(\004\022\025\n\rsecondaryLock\030\004 \002(\014\022\023\n\013primaryLoc" +
+      "k\030\005 \002(\014\022\024\n\014primaryIndex\030\006 \002(\005\"@\n\025ThemisP",
+      "rewriteRequest\022\'\n\016themisPrewrite\030\001 \002(\0132\017" +
+      ".ThemisPrewrite\"M\n\026ThemisPrewriteRespons" +
+      "e\0223\n\024themisPrewriteResult\030\001 \001(\0132\025.Themis" +
+      "PrewriteResult\"N\n#ThemisBatchPrewriteSec" +
+      "ondaryRequest\022\'\n\016themisPrewrite\030\001 \003(\0132\017." +
+      "ThemisPrewrite\"t\n$ThemisBatchPrewriteSec" +
+      "ondaryResponse\0223\n\024themisPrewriteResult\030\001" +
+      " \003(\0132\025.ThemisPrewriteResult\022\027\n\017rowsNotIn" +
+      "Region\030\002 \003(\014\"\204\001\n\024ThemisPrewriteResult\022\024\n" +
+      "\014newerWriteTs\030\001 \002(\014\022\021\n\texistLock\030\002 \002(\014\022\016",
+      "\n\006family\030\003 \002(\014\022\021\n\tqualifier\030\004 \002(\014\022\023\n\013loc" +
+      "kExpired\030\005 \002(\014\022\013\n\003row\030\006 \002(\014\":\n\023ThemisCom" +
+      "mitRequest\022#\n\014themisCommit\030\001 \002(\0132\r.Themi" +
+      "sCommit\"&\n\024ThemisCommitResponse\022\016\n\006resul" +
+      "t\030\001 \002(\010\"H\n!ThemisBatchCommitSecondaryReq" +
+      "uest\022#\n\014themisCommit\030\001 \003(\0132\r.ThemisCommi" +
+      "t\"k\n\"ThemisBatchCommitSecondaryResponse\022" +
+      "E\n\032batchCommitSecondaryResult\030\001 \003(\0132!.Th" +
+      "emisBatchCommitSecondaryResult\"@\n Themis" +
+      "BatchCommitSecondaryResult\022\013\n\003row\030\001 \002(\014\022",
+      "\017\n\007success\030\002 \002(\010\"q\n\014ThemisCommit\022\013\n\003row\030" +
+      "\001 \002(\014\022\030\n\tmutations\030\002 \003(\0132\005.Cell\022\022\n\nprewr" +
+      "iteTs\030\003 \002(\004\022\020\n\010commitTs\030\004 \002(\004\022\024\n\014primary" +
+      "Index\030\005 \002(\005\"V\n\020EraseLockRequest\022\013\n\003row\030\001" +
+      " \002(\014\022\016\n\006family\030\002 \002(\014\022\021\n\tqualifier\030\003 \002(\014\022" +
+      "\022\n\nprewriteTs\030\004 \002(\004\"!\n\021EraseLockResponse" +
+      "\022\014\n\004lock\030\001 \001(\014\"\'\n\022LockExpiredRequest\022\021\n\t" +
+      "timestamp\030\001 \002(\004\"&\n\023LockExpiredResponse\022\017" +
+      "\n\007expired\030\001 \002(\0102\301\005\n\rThemisService\022A\n\016the" +
+      "misBatchGet\022\026.ThemisBatchGetRequest\032\027.Th",
+      "emisBatchGetResponse\022\'\n\tthemisGet\022\021.Them" +
+      "isGetRequest\032\007.Result\022>\n\013prewriteRow\022\026.T" +
+      "hemisPrewriteRequest\032\027.ThemisPrewriteRes" +
+      "ponse\022i\n\032batchPrewriteSecondaryRows\022$.Th" +
+      "emisBatchPrewriteSecondaryRequest\032%.Them" +
+      "isBatchPrewriteSecondaryResponse\022D\n\021prew" +
+      "riteSingleRow\022\026.ThemisPrewriteRequest\032\027." +
+      "ThemisPrewriteResponse\0228\n\tcommitRow\022\024.Th" +
+      "emisCommitRequest\032\025.ThemisCommitResponse" +
+      "\022c\n\030batchCommitSecondaryRows\022\".ThemisBat",
+      "chCommitSecondaryRequest\032#.ThemisBatchCo" +
+      "mmitSecondaryResponse\022>\n\017commitSingleRow" +
+      "\022\024.ThemisCommitRequest\032\025.ThemisCommitRes" +
+      "ponse\0228\n\017getLockAndErase\022\021.EraseLockRequ" +
+      "est\032\022.EraseLockResponse\022:\n\risLockExpired" +
+      "\022\023.LockExpiredRequest\032\024.LockExpiredRespo" +
+      "nseBC\n+org.apache.hadoop.hbase.themis.cp" +
+      ".generatedB\014ThemisProtosH\001\210\001\001\240\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6842,50 +14477,110 @@ public final class ThemisProtos {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ThemisGetRequest_descriptor,
               new java.lang.String[] { "Get", "StartTs", "IgnoreLock", });
-          internal_static_ThemisPrewriteRequest_descriptor =
+          internal_static_ThemisBatchGetRequest_descriptor =
             getDescriptor().getMessageTypes().get(1);
+          internal_static_ThemisBatchGetRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchGetRequest_descriptor,
+              new java.lang.String[] { "Gets", "StartTs", "IgnoreLock", });
+          internal_static_ThemisBatchGetResponse_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_ThemisBatchGetResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchGetResponse_descriptor,
+              new java.lang.String[] { "Rs", });
+          internal_static_ThemisPrewrite_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_ThemisPrewrite_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisPrewrite_descriptor,
+              new java.lang.String[] { "Row", "Mutations", "PrewriteTs", "SecondaryLock", "PrimaryLock", "PrimaryIndex", });
+          internal_static_ThemisPrewriteRequest_descriptor =
+            getDescriptor().getMessageTypes().get(4);
           internal_static_ThemisPrewriteRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ThemisPrewriteRequest_descriptor,
-              new java.lang.String[] { "Row", "Mutations", "PrewriteTs", "SecondaryLock", "PrimaryLock", "PrimaryIndex", });
+              new java.lang.String[] { "ThemisPrewrite", });
           internal_static_ThemisPrewriteResponse_descriptor =
-            getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_ThemisPrewriteResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ThemisPrewriteResponse_descriptor,
-              new java.lang.String[] { "Result", });
+              new java.lang.String[] { "ThemisPrewriteResult", });
+          internal_static_ThemisBatchPrewriteSecondaryRequest_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_ThemisBatchPrewriteSecondaryRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchPrewriteSecondaryRequest_descriptor,
+              new java.lang.String[] { "ThemisPrewrite", });
+          internal_static_ThemisBatchPrewriteSecondaryResponse_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_ThemisBatchPrewriteSecondaryResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchPrewriteSecondaryResponse_descriptor,
+              new java.lang.String[] { "ThemisPrewriteResult", "RowsNotInRegion", });
+          internal_static_ThemisPrewriteResult_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+          internal_static_ThemisPrewriteResult_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisPrewriteResult_descriptor,
+              new java.lang.String[] { "NewerWriteTs", "ExistLock", "Family", "Qualifier", "LockExpired", "Row", });
           internal_static_ThemisCommitRequest_descriptor =
-            getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_ThemisCommitRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ThemisCommitRequest_descriptor,
-              new java.lang.String[] { "Row", "Mutations", "PrewriteTs", "CommitTs", "PrimaryIndex", });
+              new java.lang.String[] { "ThemisCommit", });
           internal_static_ThemisCommitResponse_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_ThemisCommitResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ThemisCommitResponse_descriptor,
               new java.lang.String[] { "Result", });
+          internal_static_ThemisBatchCommitSecondaryRequest_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_ThemisBatchCommitSecondaryRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchCommitSecondaryRequest_descriptor,
+              new java.lang.String[] { "ThemisCommit", });
+          internal_static_ThemisBatchCommitSecondaryResponse_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_ThemisBatchCommitSecondaryResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchCommitSecondaryResponse_descriptor,
+              new java.lang.String[] { "BatchCommitSecondaryResult", });
+          internal_static_ThemisBatchCommitSecondaryResult_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_ThemisBatchCommitSecondaryResult_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisBatchCommitSecondaryResult_descriptor,
+              new java.lang.String[] { "Row", "Success", });
+          internal_static_ThemisCommit_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_ThemisCommit_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_ThemisCommit_descriptor,
+              new java.lang.String[] { "Row", "Mutations", "PrewriteTs", "CommitTs", "PrimaryIndex", });
           internal_static_EraseLockRequest_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_EraseLockRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_EraseLockRequest_descriptor,
               new java.lang.String[] { "Row", "Family", "Qualifier", "PrewriteTs", });
           internal_static_EraseLockResponse_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_EraseLockResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_EraseLockResponse_descriptor,
               new java.lang.String[] { "Lock", });
           internal_static_LockExpiredRequest_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_LockExpiredRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LockExpiredRequest_descriptor,
               new java.lang.String[] { "Timestamp", });
           internal_static_LockExpiredResponse_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_LockExpiredResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LockExpiredResponse_descriptor,
