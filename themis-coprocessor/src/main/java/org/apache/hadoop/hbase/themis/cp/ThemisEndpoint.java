@@ -15,10 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.hadoop.hbase.Coprocessor;
-import org.apache.hadoop.hbase.CoprocessorEnvironment;
-import org.apache.hadoop.hbase.DoNotRetryIOException;
-import org.apache.hadoop.hbase.KeyValue;
+import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.KeyValue.Type;
 import org.apache.hadoop.hbase.client.Delete;
 import org.apache.hadoop.hbase.client.Get;
@@ -28,6 +25,7 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.coprocessor.CoprocessorException;
 import org.apache.hadoop.hbase.coprocessor.CoprocessorService;
 import org.apache.hadoop.hbase.coprocessor.RegionCoprocessorEnvironment;
+import org.apache.hadoop.hbase.exceptions.RegionMovedException;
 import org.apache.hadoop.hbase.master.ThemisMasterObserver;
 import org.apache.hadoop.hbase.protobuf.ProtobufUtil;
 import org.apache.hadoop.hbase.protobuf.ResponseConverter;
@@ -39,6 +37,9 @@ import org.apache.hadoop.hbase.regionserver.ThemisRegionObserver;
 import org.apache.hadoop.hbase.themis.columns.Column;
 import org.apache.hadoop.hbase.themis.columns.ColumnMutation;
 import org.apache.hadoop.hbase.themis.columns.ColumnUtil;
+import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos;
+import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse;
+import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest;
@@ -79,9 +80,20 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   private static final int DEFAULT_THREAD_COUNT = Runtime.getRuntime().availableProcessors() * 5;
   private static final int DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT = DEFAULT_THREAD_COUNT;
   private static final int DEFAULT_THEMIS_BATCH_COMMIT_SECONDARY_THREAD_COUNT = DEFAULT_THREAD_COUNT;
+  private static final int DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT = DEFAULT_THREAD_COUNT;
   private static volatile boolean hasConfigBatchThreadCount = false;
   
   private RegionCoprocessorEnvironment env;
+
+  private static ThreadPoolExecutor batchGetThreadPool = new ThreadPoolExecutor(
+          DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT, DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT, 10,
+          TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactory() {
+    public Thread newThread(Runnable r) {
+      Thread t = new Thread(r);
+      t.setName("themis-batch-get-thread-" + System.currentTimeMillis());
+      return t;
+    }
+  });
   private static ThreadPoolExecutor batchPrewriteSecPool = new ThreadPoolExecutor(
       DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT, DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT, 10,
       TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactory() {
@@ -104,6 +116,7 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   static {
     batchPrewriteSecPool.allowCoreThreadTimeOut(true);
     batchCommitSecPool.allowCoreThreadTimeOut(true);
+    batchGetThreadPool.allowCoreThreadTimeOut(true);
   }
   
   public void start(CoprocessorEnvironment env) throws IOException {
@@ -140,36 +153,43 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
     return this;
   }
 
+  public Result themisGet(Get get, long startTs, boolean ignoreLock) throws IOException {
+    HRegion region = env.getRegion();
+    ThemisCpUtil.prepareGet(get, region.getTableDesc().getFamilies());
+    checkFamily(get);
+    checkReadTTL(System.currentTimeMillis(), startTs, get.getRow());
+    Get lockAndWriteGet = ThemisCpUtil.constructLockAndWriteGet(get, startTs);
+    Result result = ThemisCpUtil.removeNotRequiredLockColumns(
+            get.getFamilyMap(),
+            getFromRegion(region, lockAndWriteGet,
+                    ThemisCpStatistics.getThemisCpStatistics().getLockAndWriteLatency));
+    Pair<List<KeyValue>, List<KeyValue>> lockAndWriteKvs = ThemisCpUtil
+            .seperateLockAndWriteKvs(result.list());
+    List<KeyValue> lockKvs = lockAndWriteKvs.getFirst();
+    if (!ignoreLock && lockKvs.size() != 0) {
+      // return lock columns when encounter conflict lock
+      return new Result(lockKvs);
+    }
+    List<KeyValue> putKvs = ThemisCpUtil.getPutKvs(lockAndWriteKvs.getSecond());
+    if (putKvs.size() != 0) {
+      Get dataGet = ThemisCpUtil.constructDataGetByPutKvs(putKvs, get.getFilter());
+      return getFromRegion(region, dataGet,
+              ThemisCpStatistics.getThemisCpStatistics().getDataLatency);
+    }
+    // no such version or no such row
+    return null;
+  }
+
   @Override
   public void themisGet(RpcController controller, ThemisGetRequest request,
       RpcCallback<org.apache.hadoop.hbase.protobuf.generated.ClientProtos.Result> callback) {
     // first get lock and write columns to check conflicted lock and get commitTs
     ClientProtos.Result clientResult = ProtobufUtil.toResult(new Result());
     try {
-      HRegion region = env.getRegion();
       Get clientGet = ProtobufUtil.toGet(request.getGet());
-      ThemisCpUtil.prepareGet(clientGet, region.getTableDesc().getFamilies());
-      checkFamily(clientGet);
-      checkReadTTL(System.currentTimeMillis(), request.getStartTs(), clientGet.getRow());
-      Get lockAndWriteGet = ThemisCpUtil.constructLockAndWriteGet(clientGet, request.getStartTs());
-      Result result = ThemisCpUtil.removeNotRequiredLockColumns(
-        clientGet.getFamilyMap(),
-        getFromRegion(region, lockAndWriteGet,
-          ThemisCpStatistics.getThemisCpStatistics().getLockAndWriteLatency));
-      Pair<List<KeyValue>, List<KeyValue>> lockAndWriteKvs = ThemisCpUtil
-          .seperateLockAndWriteKvs(result.list());
-      List<KeyValue> lockKvs = lockAndWriteKvs.getFirst();
-      if (!request.getIgnoreLock() && lockKvs.size() != 0) {
-        LOG.warn("encounter conflict lock in ThemisGet"); // need to log conflict kv?
-        // return lock columns when encounter conflict lock
-        clientResult = ProtobufUtil.toResult(new Result(lockKvs));
-      } else {
-        List<KeyValue> putKvs = ThemisCpUtil.getPutKvs(lockAndWriteKvs.getSecond());
-        if (putKvs.size() != 0) {
-          Get dataGet = ThemisCpUtil.constructDataGetByPutKvs(putKvs, clientGet.getFilter());
-          clientResult = ProtobufUtil.toResult(getFromRegion(region, dataGet,
-            ThemisCpStatistics.getThemisCpStatistics().getDataLatency));
-        }
+      Result result = themisGet(clientGet, request.getStartTs(), request.getIgnoreLock());
+      if (result != null) {
+        clientResult = ProtobufUtil.toResult(result);
       }
     } catch (IOException e) {
       LOG.error("themisGet fail", e);
@@ -686,6 +706,42 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   }
 
   @Override
+  public void themisBatchGet(RpcController controller, ThemisProtos.ThemisBatchGetRequest request, RpcCallback<ThemisProtos.ThemisBatchGetResponse> callback) {
+    LOG.warn("on themis batch get");
+    ThemisBatchGetResponse.Builder builder = ThemisBatchGetResponse.newBuilder();
+    try {
+      List<ClientProtos.Get> getList = request.getGetsList();
+      if (getList == null || getList.size() == 0) {
+        callback.run(builder.build());
+        return;
+      }
+      List<Future<Result>> list = new ArrayList<Future<Result>>();
+      for (ClientProtos.Get g : getList) {
+        Get clientGet = ProtobufUtil.toGet(g);
+        // send to thread pool
+        Future<Result> f = batchGetThreadPool.submit(new BatchGetTask(clientGet, request.getStartTs(), request.getIgnoreLock()));
+        list.add(f);
+      }
+
+      for (Future<Result> future : list ) {
+        try {
+          Result r = future.get();
+          // only return exists kvs
+          if (r != null) {
+            builder.addRs(ProtobufUtil.toResult(r));
+          }
+        } catch (Exception e) {
+          LOG.error("batch get error", e);
+          ResponseConverter.setControllerException(controller, new IOException(e));
+        }
+      }
+    } catch (IOException e) {
+      ResponseConverter.setControllerException(controller, e);
+    }
+    callback.run(builder.build());
+  }
+
+  @Override
   public void batchCommitSecondaryRows(RpcController controller, ThemisBatchCommitSecondaryRequest request,
       RpcCallback<ThemisBatchCommitSecondaryResponse> callback) {
     ThemisBatchCommitSecondaryResponse.Builder builder = ThemisBatchCommitSecondaryResponse.newBuilder();
@@ -738,6 +794,22 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
       result.setSuccess(success);
       result.setRow(commit.getRow());
       return result.build();
+    }
+  }
+
+  class BatchGetTask implements Callable<Result> {
+    private Get get;
+    private long startTs;
+    private boolean ignoreLock;
+
+    public BatchGetTask(Get get, long startTs, boolean ignoreLock) {
+      this.get = get;
+      this.startTs = startTs;
+      this.ignoreLock = ignoreLock;
+    }
+
+    public Result call() throws Exception {
+      return themisGet(get, startTs, ignoreLock);
     }
   }
 

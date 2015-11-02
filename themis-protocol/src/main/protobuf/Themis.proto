@@ -13,6 +13,16 @@ message ThemisGetRequest {
   required bool ignoreLock = 3;
 }
 
+message ThemisBatchGetRequest {
+  repeated Get gets = 1;
+  required uint64 startTs = 2;
+  required bool ignoreLock = 3;
+}
+
+message ThemisBatchGetResponse {
+  repeated Result rs = 1;
+}
+
 message ThemisPrewrite {
   required bytes row = 1;
   repeated Cell  mutations = 2;
@@ -97,6 +107,8 @@ message LockExpiredResponse {
 }
 
 service ThemisService {
+  rpc themisBatchGet(ThemisBatchGetRequest)
+    returns (ThemisBatchGetResponse);
   rpc themisGet(ThemisGetRequest)
     returns (Result);
   rpc prewriteRow(ThemisPrewriteRequest)

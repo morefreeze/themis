@@ -571,9 +571,7 @@ public class TransactionTestBase extends TestBase {
     }
 
     commitPrimaryRow();
-    if (isBatch) {
-
-    } else {
+    if (!isBatch) {
       commitSecondaryRow();
     }
   }
