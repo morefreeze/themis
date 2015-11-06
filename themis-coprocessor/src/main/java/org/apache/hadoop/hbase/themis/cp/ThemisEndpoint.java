@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +23,6 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.coprocessor.CoprocessorException;
 import org.apache.hadoop.hbase.coprocessor.CoprocessorService;
 import org.apache.hadoop.hbase.coprocessor.RegionCoprocessorEnvironment;
-import org.apache.hadoop.hbase.exceptions.RegionMovedException;
 import org.apache.hadoop.hbase.master.ThemisMasterObserver;
 import org.apache.hadoop.hbase.protobuf.ProtobufUtil;
 import org.apache.hadoop.hbase.protobuf.ResponseConverter;
@@ -39,7 +36,6 @@ import org.apache.hadoop.hbase.themis.columns.ColumnMutation;
 import org.apache.hadoop.hbase.themis.columns.ColumnUtil;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetResponse;
-import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.ThemisBatchGetRequest;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockRequest;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.EraseLockResponse;
 import org.apache.hadoop.hbase.themis.cp.generated.ThemisProtos.LockExpiredRequest;
@@ -62,7 +58,6 @@ import org.apache.hadoop.hbase.themis.exception.TransactionExpiredException;
 import org.apache.hadoop.hbase.themis.lock.ThemisLock;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.Pair;
-import org.apache.hadoop.hbase.util.Threads;
 import org.apache.hadoop.metrics.util.MetricsTimeVaryingRate;
 
 import com.google.common.collect.Lists;
@@ -71,6 +66,10 @@ import com.google.protobuf.HBaseZeroCopyByteString;
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.Service;
+import org.apache.hadoop.metrics2.MetricsSystem;
+import org.apache.hadoop.metrics2.annotation.Metric;
+import org.apache.hadoop.metrics2.annotation.Metrics;
+import org.apache.hadoop.metrics2.lib.*;
 
 public class ThemisEndpoint extends ThemisService implements CoprocessorService, Coprocessor {
   private static final Log LOG = LogFactory.getLog(ThemisEndpoint.class);
@@ -81,9 +80,22 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   private static final int DEFAULT_THEMIS_BATCH_PREWRITE_SECONDARY_THREAD_COUNT = DEFAULT_THREAD_COUNT;
   private static final int DEFAULT_THEMIS_BATCH_COMMIT_SECONDARY_THREAD_COUNT = DEFAULT_THREAD_COUNT;
   private static final int DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT = DEFAULT_THREAD_COUNT;
+
   private static volatile boolean hasConfigBatchThreadCount = false;
   
   private RegionCoprocessorEnvironment env;
+  private static final MyMetrics myMetrics = new MyMetrics().registerWith(DefaultMetricsSystem.instance());
+
+  // metrics2
+  @Metrics(context="pingcap")
+  public static class MyMetrics {
+    @Metric("An rate in ms")
+    protected MutableRate commitTotalMetrics;
+    // Recommended helper method
+    public MyMetrics registerWith(MetricsSystem ms) {
+      return ms.register("MyMetrics", "MyMetrics description", this);
+    }
+  }
 
   private static ThreadPoolExecutor batchGetThreadPool = new ThreadPoolExecutor(
           DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT, DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT, 10,
@@ -120,6 +132,7 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   }
   
   public void start(CoprocessorEnvironment env) throws IOException {
+    DefaultMetricsSystem.initialize("hbase");
     // super.start(env);
     if (!(env instanceof RegionCoprocessorEnvironment)) {
       throw new CoprocessorException("Must be loaded on a table region!");
@@ -614,6 +627,8 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
     } finally {
       ThemisCpStatistics.updateLatency(
         ThemisCpStatistics.getThemisCpStatistics().commitTotalLatency, beginTs, false);
+      //metrics2
+      ThemisCpStatistics.updateLatency(myMetrics.commitTotalMetrics, beginTs, "commitTotal");
     }
   }
   

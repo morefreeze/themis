@@ -5,6 +5,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.metrics.Updater;
 import org.apache.hadoop.metrics.util.MetricsTimeVaryingRate;
+import org.apache.hadoop.metrics2.MetricsSystem;
+import org.apache.hadoop.metrics2.annotation.Metric;
+import org.apache.hadoop.metrics2.annotation.Metrics;
+import org.apache.hadoop.metrics2.lib.*;
 
 public abstract class ThemisStatisticsBase implements Updater {
   private static final Log LOG = LogFactory.getLog(ThemisStatisticsBase.class);
@@ -12,7 +16,7 @@ public abstract class ThemisStatisticsBase implements Updater {
   public static final long DEFAULT_THEMIS_SLOW_OPERATION_CUTOFF = 100;
   protected static long slowCutoff = DEFAULT_THEMIS_SLOW_OPERATION_CUTOFF * 1000; // in us
   private static final String EmptySlowOperationMsg = "";
-  
+
   public static void init(Configuration conf) {
     slowCutoff = conf.getLong(ThemisCpStatistics.THEMIS_SLOW_OPERATION_CUTOFF_KEY,
       ThemisCpStatistics.DEFAULT_THEMIS_SLOW_OPERATION_CUTOFF) * 1000;
@@ -34,7 +38,12 @@ public abstract class ThemisStatisticsBase implements Updater {
       logSlowOperationInternal(metric.getName(), consumeInUs, message);
     }
   }
-  
+
+  public static void updateLatency(MutableStat metric, long beginTs,
+                                   String message) {
+    metric.add((System.nanoTime() - beginTs) / 1000);
+  }
+
   public static void logSlowOperation(String operation, long beginTs, String message) {
     logSlowOperationInternal(operation, (System.nanoTime() - beginTs) / 1000, message);
   }
