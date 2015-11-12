@@ -84,18 +84,7 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   private static volatile boolean hasConfigBatchThreadCount = false;
   
   private RegionCoprocessorEnvironment env;
-  private static final MyMetrics myMetrics = new MyMetrics().registerWith(DefaultMetricsSystem.instance());
-
-  // metrics2
-  @Metrics(context="pingcap")
-  public static class MyMetrics {
-    @Metric("An rate in ms")
-    protected MutableRate commitTotalMetrics;
-    // Recommended helper method
-    public MyMetrics registerWith(MetricsSystem ms) {
-      return ms.register("MyMetrics", "MyMetrics description", this);
-    }
-  }
+  private static final ThemisCpStatistics2 metrics2 = new ThemisCpStatistics2().registerWith(DefaultMetricsSystem.instance());
 
   private static ThreadPoolExecutor batchGetThreadPool = new ThreadPoolExecutor(
           DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT, DEFAULT_THEMIS_BATCH_GET_THREAD_COUNT, 10,
@@ -132,7 +121,6 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
   }
   
   public void start(CoprocessorEnvironment env) throws IOException {
-    DefaultMetricsSystem.initialize("hbase");
     // super.start(env);
     if (!(env instanceof RegionCoprocessorEnvironment)) {
       throw new CoprocessorException("Must be loaded on a table region!");
@@ -628,7 +616,7 @@ public class ThemisEndpoint extends ThemisService implements CoprocessorService,
       ThemisCpStatistics.updateLatency(
         ThemisCpStatistics.getThemisCpStatistics().commitTotalLatency, beginTs, false);
       //metrics2
-      ThemisCpStatistics.updateLatency(myMetrics.commitTotalMetrics, beginTs, "commitTotal");
+      ThemisCpStatistics2.updateLatency(metrics2.commitTotalMetrics, beginTs);
     }
   }
   

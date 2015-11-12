@@ -21,7 +21,7 @@ public abstract class ThemisStatisticsBase implements Updater {
     slowCutoff = conf.getLong(ThemisCpStatistics.THEMIS_SLOW_OPERATION_CUTOFF_KEY,
       ThemisCpStatistics.DEFAULT_THEMIS_SLOW_OPERATION_CUTOFF) * 1000;
   }
-  
+
   public static void updateLatency(MetricsTimeVaryingRate metric, long beginTs, String message) {
     updateLatency(metric, beginTs, true, message);
   }
@@ -37,11 +37,6 @@ public abstract class ThemisStatisticsBase implements Updater {
     if (logSlowOp) {
       logSlowOperationInternal(metric.getName(), consumeInUs, message);
     }
-  }
-
-  public static void updateLatency(MutableStat metric, long beginTs,
-                                   String message) {
-    metric.add((System.nanoTime() - beginTs) / 1000);
   }
 
   public static void logSlowOperation(String operation, long beginTs, String message) {
